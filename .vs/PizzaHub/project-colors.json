@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8bb67883-8f85-4039-ab2b-500046027dcb": {
+      "ProjectGuid": "8bb67883-8f85-4039-ab2b-500046027dcb",
+      "DisplayName": "PizzaHubWebApp",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
