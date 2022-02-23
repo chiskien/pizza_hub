@@ -19,7 +19,6 @@ namespace PizzaHubWebApp.Pages
 
         public void OnGet()
         {
-
         }
     }
 }
