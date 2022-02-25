@@ -45,7 +45,8 @@ City nvarchar(100) not null,
 Country nvarchar(100) not null,
 RankId int not null,
 Point float default 0,
-Voucher int
+Voucher int,
+Role bit default 0
 );
 go
 create table Vouchers (
@@ -70,6 +71,7 @@ RequiredDate date,
 ShippedDate date,
 Freight money,
 Address nvarchar(1000) not null,
+Status varchar(200) default 'Pending',
 Note nvarchar(1000),
 )
 
@@ -158,6 +160,7 @@ add constraint FK_MemberRank foreign key (RankId) references Ranks(RankId);
 alter table Size
     alter column Name char(25) not null
 go
+
 -----------------------------------------------Ranks----------------------------------------------
 INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Silver', N'ABC');
 INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Gold', N'ABC');
@@ -219,8 +222,8 @@ INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, 
 INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (3, N' Korean BBQ Spicy Beef Deluxe Pizza', N'bbq_beef.jpg', 2, N'Bò BBQ xốt cay Hàn Quốc', 1);
 
 -----------------------------------------------Orders----------------------------------------------
-INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Note) VALUES (1, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Broadway', N'More chillis and ketchup pls !');
-INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Note) VALUES (2, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Queen Road', N'No ketchup');
+INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Status,Note) VALUES (1, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Broadway','Pending' ,N'More chillis and ketchup pls !');
+INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Status,Note) VALUES (2, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Queen Road','Pending', N'No ketchup');
 
 -----------------------------------------------Pizza_Base----------------------------------------------
 
