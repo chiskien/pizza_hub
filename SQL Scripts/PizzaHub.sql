@@ -123,9 +123,10 @@ OrderId int not null foreign key references Orders(OrderId),
 PizzaId int foreign key references Pizzas(PizzaId),
 DrinkId int foreign key references Drinks(DrinkId),
 ExtraId int foreign key references Extras(ExtraId),
-Price money not null,
+Size nvarchar(20),
+Price money,
 Quantity int not null,
-Discount float not null
+Discount float
 )
 go
 create table Combo (
@@ -261,3 +262,8 @@ INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (2, 7, 209.0
 INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 5, 109.0000);
 INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 6, 169.0000);
 INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 7, 249.0000);
+
+-----------------------------------------------Order_Detail----------------------------------------------
+
+INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (1, 1, 1, null, N'Regular', 353.0000, 2, null);
+INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (2, 2, null, null, N'Large', 231.2000, 1, 0.2);
