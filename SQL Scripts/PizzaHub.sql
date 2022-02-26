@@ -214,7 +214,7 @@ INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Mi
 INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'7UP', N'7UP', N'7up.jpg', 1, 15.0000);
 
 -----------------------------------------------Pizzas----------------------------------------------
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (2, N'Pizza Pepperoni', N'pepperoni.jpg', 1, N' ', 1);
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (2, N'Pizza Pepperoni', N'pepperoni.jpg', 1, N'Pizza Pepperoni', 1);
 INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (1, N'Cheese Lovers Pizza', N'cheese_lover.jpg', 4, N' Phô mai cao cấp', 1);
 INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (5, N' Seafood Pesto Pizza', N'seafood_pesto.jpg', 3, N'Hải sản xốt pesto', 1);
 INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (5, N' Seafood BlackPepper Pizza', N'seafood_blackpepper.jpg', 5, N'Hải sản xốt tiêu đen', 1);
