@@ -6,7 +6,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">
-        building Web apps with ASP.NET Core
-    </a>.</p>
+    <table class="table table-borderless">
+        <tr>
+            <td>Pizza Id</td>
+            <td>Pizza Name</td>
+            <td>Sauce</td>
+            <td>Category</td>
+            <td>Image</td>
+            <td>Status</td>
+        </tr>
+        @foreach (var pizza in Model.Pizzas)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => pizza.PizzaId)</td>
+                <td>@Html.DisplayFor(model => pizza.Name)</td>
+                <td>@Html.DisplayFor(model => pizza.Category.Name)</td>
+                <td>@Html.DisplayFor(model => pizza.SauceId)</td>
+                <td>@Html.DisplayFor(model => pizza.Status)</td>
+                <td>
+                    <img src="@pizza.Image" alt="@pizza.Name">
+                </td>
+            </tr>
+        }
+    </table>
 </div>

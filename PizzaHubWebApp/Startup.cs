@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp
 {
@@ -24,6 +26,10 @@ namespace PizzaHubWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            var connectionString = Configuration.GetConnectionString("PizzaHub");
+            services.AddDbContext<PizzaHubContext>(
+                options => options.UseSqlServer(connectionString)
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,8 +38,7 @@ namespace PizzaHubWebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
+            } else
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -47,10 +52,7 @@ namespace PizzaHubWebApp
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
     }
 }
