@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp.DAO
@@ -14,10 +13,30 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext = pizzaHubContext;
         }
 
-        public async Task<IEnumerable<Pizza>> GetPizza()
+        public IEnumerable<Pizza> GetPizzaList()
         {
-            var pizzas = await _pizzaHubContext.Pizzas.ToListAsync();
-            return pizzas;
+            var pizzaList = _pizzaHubContext.Pizzas.ToList();
+            foreach (var pizza in pizzaList)
+            {
+                pizza.Category = GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = GetSauceById(pizza.SauceId);
+            }
+
+            return pizzaList;
+        }
+
+        public Category GetCategoryById(int categoryId)
+        {
+            var cat = _pizzaHubContext.Categories
+                .Single(c => c.CategoryId == categoryId);
+            return cat;
+        }
+
+        public Sauce GetSauceById(int? sauceId)
+        {
+            var cat = _pizzaHubContext.Sauces
+                .SingleOrDefault(c => c.SauceId == sauceId);
+            return cat;
         }
     }
 }

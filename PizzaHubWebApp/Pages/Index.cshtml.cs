@@ -1,45 +1,24 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly PizzaHubContext _context;
-
         public IEnumerable<Pizza> Pizzas { get; set; }
+        private PizzaDao _pizzaDao;
 
-        public IndexModel(PizzaHubContext context)
+        public IndexModel(PizzaHubContext pizzaHubContext)
         {
-            _context = context;
+            _pizzaDao = new PizzaDao(pizzaHubContext);
         }
 
-
-        public async void OnGetAsync()
+        public void OnGet()
         {
-            Pizzas = await _context.Pizzas.ToListAsync();
-            foreach (var pizza in Pizzas)
-            {
-                pizza.Category = await GetCategorybyId(pizza.CategoryId);
-                pizza.Sauce = await GetSaucebyId(pizza.SauceId);
-            }
-        }
-
-        public async Task<Category> GetCategorybyId(int categoryId)
-        {
-            var cat =
-                await _context.Categories
-                    .SingleOrDefaultAsync(cat => cat.CategoryId == categoryId);
-            return cat;
-        }
-
-        public async Task<Sauce> GetSaucebyId(int? sauceId)
-        {
-            var sauce = await _context.Sauces.SingleOrDefaultAsync(sau => sau.SauceId == sauceId);
-            return sauce;
+            Pizzas = _pizzaDao.GetPizzaList();
         }
     }
 }
