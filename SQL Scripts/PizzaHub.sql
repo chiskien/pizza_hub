@@ -270,3 +270,10 @@ INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 7, 249.0
 
 INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (1, 1, 1, null, N'Regular', 353.0000, 2, null);
 INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (2, 2, null, null, N'Large', 231.2000, 1, 0.2);
+
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 2, Name = N'Pizza Pepperoni', Image = N'pepperoni.svg', SauceId = 1, Description = N'Pizza Pepperoni', Status = 1 WHERE PizzaId = 1;
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 1, Name = N'Cheese Lovers Pizza', Image = N'cheese_lover.svg', SauceId = 4, Description = N' Phô mai cao cấp', Status = 1 WHERE PizzaId = 2;
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood Pesto Pizza', Image = N'seafood_pesto.svg', SauceId = 3, Description = N'Hải sản xốt pesto', Status = 1 WHERE PizzaId = 3;
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood BlackPepper Pizza', Image = N'seafood_blackpepper.svg', SauceId = 5, Description = N'Hải sản xốt tiêu đen', Status = 1 WHERE PizzaId = 4;
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 8, Name = N' Chicken Deluxe Pizza', Image = N'chicken_deluxe.svg', SauceId = 5, Description = N'Gà nướng nấm', Status = 1 WHERE PizzaId = 5;
+UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 3, Name = N' Korean BBQ Spicy Beef Deluxe Pizza', Image = N'bbq_beef.svg', SauceId = 2, Description = N'Bò BBQ xốt cay Hàn Quốc', Status = 1 WHERE PizzaId = 6;
