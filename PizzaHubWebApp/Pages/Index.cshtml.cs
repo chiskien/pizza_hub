@@ -8,8 +8,8 @@ namespace PizzaHubWebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<Pizza> Pizzas { get; set; }
-        private PizzaDao _pizzaDao;
+        public IEnumerable<Pizza> Pizzas { get; private set; }
+        private readonly PizzaDao _pizzaDao;
 
         public IndexModel(PizzaHubContext pizzaHubContext)
         {

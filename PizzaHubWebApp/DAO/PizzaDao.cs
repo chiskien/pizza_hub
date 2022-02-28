@@ -6,7 +6,7 @@ namespace PizzaHubWebApp.DAO
 {
     public class PizzaDao
     {
-        private PizzaHubContext _pizzaHubContext;
+        private readonly PizzaHubContext _pizzaHubContext;
 
         public PizzaDao(PizzaHubContext pizzaHubContext)
         {
@@ -25,18 +25,24 @@ namespace PizzaHubWebApp.DAO
             return pizzaList;
         }
 
-        public Category GetCategoryById(int categoryId)
+        private Category GetCategoryById(int categoryId)
         {
             var cat = _pizzaHubContext.Categories
                 .Single(c => c.CategoryId == categoryId);
             return cat;
         }
 
-        public Sauce GetSauceById(int? sauceId)
+        private Sauce GetSauceById(int? sauceId)
         {
             var cat = _pizzaHubContext.Sauces
                 .SingleOrDefault(c => c.SauceId == sauceId);
             return cat;
+        }
+
+        public Pizza GetPizzaById(int pizzaId)
+        {
+            var pizza = _pizzaHubContext.Pizzas.Single(p => p.PizzaId == pizzaId);
+            return pizza;
         }
     }
 }
