@@ -24,8 +24,27 @@
                 <td>@Html.DisplayFor(model => pizza.Sauce.Name)</td>
                 <td>@Html.DisplayFor(model => pizza.Status)</td>
                 <td>
-                    <img src="Assets/Images/Pizza/@pizza.Image" height="150" alt="@pizza.Name">
+                    <img src="Assets/Images/Pizza/@pizza.Image"
+                         height="150" alt="@pizza.Name">
                 </td>
+            </tr>
+        }
+    </table>
+    <h1 class="display-4">Categories</h1>
+    <table class="table table-borderless">
+        <tr>
+            <td>Category Id</td>
+            <td>Category Name</td>
+        </tr>
+        @foreach (var cate in Model.Categories)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => cate.Name)</td>
+                <td>@Html.DisplayFor(model => cate.Name)</td>
+                @* <td> *@
+                @*     <img src="Assets/Images/Pizza/@pizza.Image" *@
+                @*          height="150" alt="@pizza.Name"> *@
+                @* </td> *@
             </tr>
         }
     </table>

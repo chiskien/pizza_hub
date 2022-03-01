@@ -277,3 +277,8 @@ UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood Pesto Pizza', I
 UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood BlackPepper Pizza', Image = N'seafood_blackpepper.svg', SauceId = 5, Description = N'Hải sản xốt tiêu đen', Status = 1 WHERE PizzaId = 4;
 UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 8, Name = N' Chicken Deluxe Pizza', Image = N'chicken_deluxe.svg', SauceId = 5, Description = N'Gà nướng nấm', Status = 1 WHERE PizzaId = 5;
 UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 3, Name = N' Korean BBQ Spicy Beef Deluxe Pizza', Image = N'bbq_beef.svg', SauceId = 2, Description = N'Bò BBQ xốt cay Hàn Quốc', Status = 1 WHERE PizzaId = 6;
+
+alter table Category
+    add Image varchar(100)
+go
+

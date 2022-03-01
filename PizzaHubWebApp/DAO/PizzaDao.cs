@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp.DAO
@@ -13,35 +15,36 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext = pizzaHubContext;
         }
 
-        public IEnumerable<Pizza> GetPizzaList()
+        public async Task<IEnumerable<Pizza>> GetPizzaList()
         {
-            var pizzaList = _pizzaHubContext.Pizzas.ToList();
+            var pizzaList = await _pizzaHubContext.Pizzas.ToListAsync();
             foreach (var pizza in pizzaList)
             {
-                pizza.Category = GetCategoryById(pizza.CategoryId);
-                pizza.Sauce = GetSauceById(pizza.SauceId);
+                pizza.Category = await GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = await GetSauceById(pizza.SauceId);
             }
 
             return pizzaList;
         }
 
-        private Category GetCategoryById(int categoryId)
+        private async Task<Category> GetCategoryById(int categoryId)
         {
-            var cat = _pizzaHubContext.Categories
-                .Single(c => c.CategoryId == categoryId);
+            var cat = await _pizzaHubContext.Categories
+                .SingleAsync(c => c.CategoryId == categoryId);
             return cat;
         }
 
-        private Sauce GetSauceById(int? sauceId)
+        private async Task<Sauce> GetSauceById(int? sauceId)
         {
-            var cat = _pizzaHubContext.Sauces
-                .SingleOrDefault(c => c.SauceId == sauceId);
+            var cat = await _pizzaHubContext.Sauces
+                .SingleOrDefaultAsync(c => c.SauceId == sauceId);
             return cat;
         }
 
-        public Pizza GetPizzaById(int pizzaId)
+        public async Task<Pizza> GetPizzaById(int pizzaId)
         {
-            var pizza = _pizzaHubContext.Pizzas.Single(p => p.PizzaId == pizzaId);
+            var pizza = await _pizzaHubContext.Pizzas
+                .SingleAsync(p => p.PizzaId == pizzaId);
             return pizza;
         }
     }
