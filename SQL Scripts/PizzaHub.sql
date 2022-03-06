@@ -282,3 +282,11 @@ alter table Category
     add Image varchar(100)
 go
 
+UPDATE PizzaHub.dbo.Category SET Name = N'Cheese', Image = N'cheese.svg' WHERE CategoryId = 1;
+UPDATE PizzaHub.dbo.Category SET Name = N'Pepperoni', Image = N'pepperoni.svg' WHERE CategoryId = 2;
+UPDATE PizzaHub.dbo.Category SET Name = N'Meat', Image = N'meat.svg' WHERE CategoryId = 3;
+UPDATE PizzaHub.dbo.Category SET Name = N'Sausage', Image = N'sausage.svg' WHERE CategoryId = 4;
+UPDATE PizzaHub.dbo.Category SET Name = N'Seafood', Image = N'seafood.svg' WHERE CategoryId = 5;
+UPDATE PizzaHub.dbo.Category SET Name = N'Mushroom', Image = N'mushroom.svg' WHERE CategoryId = 6;
+UPDATE PizzaHub.dbo.Category SET Name = N'Chillis', Image = N'chillis.svg' WHERE CategoryId = 7;
+UPDATE PizzaHub.dbo.Category SET Name = N'Chicken', Image = N'chicken.svg' WHERE CategoryId = 8;
