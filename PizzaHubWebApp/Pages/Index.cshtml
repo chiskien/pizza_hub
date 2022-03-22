@@ -5,26 +5,27 @@
 }
 <div class="container-fluid">
     <div class="hero-section">
-        <div class="hero_section_left">
+        <div class="hero-section-left">
             <p>The World Best Pizza Brand</p>
-            <button class="cta_button btn btn-primary btn-ck">Order now</button>
+            <button class="cta-button btn btn-primary btn-ck">Order now</button>
         </div>
-        <div class="hero_section_right">
+        <div class="hero-section-right">
             <img src="Assets/Images/pizza chef.svg" alt="">
         </div>
     </div>
-
-    <div class="product-section">
-        <div class="categories-section">
-            <ul class="category-list">
-                @foreach (var item in Model.Categories)
-                {
-                    <li>@item.Name</li>
-                    <li>
-                        <img src="@item.Image" alt="@item.Name"/>
-                    </li>
-                }
-            </ul>
+    <div class="container">
+        <div class="product-section">
+            <div class="categories-section">
+                <ul class="category-list">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <li>@item.Name</li>
+                        <li>
+                            <img src="@item.Image" alt="@item.Name"/>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>

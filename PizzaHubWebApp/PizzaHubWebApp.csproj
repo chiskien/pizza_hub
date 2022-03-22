@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Shared" />
-    <Folder Include="Pages\Authorization" />
+    <Folder Include="wwwroot\Assets\Icons" />
   </ItemGroup>
 
 </Project>
