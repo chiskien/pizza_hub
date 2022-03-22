@@ -15,6 +15,7 @@ namespace PizzaHubWebApp.Models
 
         public int CategoryId { get; set; }
         public string Name { get; set; }
+        public string Image { get; set; }
 
         public virtual ICollection<Pizza> Pizzas { get; set; }
         public virtual ICollection<Topping> Toppings { get; set; }

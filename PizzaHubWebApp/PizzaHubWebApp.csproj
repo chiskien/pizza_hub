@@ -15,10 +15,14 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\HomePage\Home.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\User\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\User\Profile.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\User\Register.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Shared" />
+    <Folder Include="Pages\Authorization" />
   </ItemGroup>
 
 </Project>

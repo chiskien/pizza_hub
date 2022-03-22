@@ -15,9 +15,9 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext = pizzaHubContext;
         }
 
-        public async Task<IEnumerable<Category>> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
-            var categories = await _pizzaHubContext.Categories.ToListAsync();
+            var categories = _pizzaHubContext.Categories.ToList();
             return categories;
         }
     }

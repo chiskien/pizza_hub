@@ -7,6 +7,11 @@ namespace PizzaHubWebApp.Models
 {
     public partial class Member
     {
+        public Member()
+        {
+            Orders = new HashSet<Order>();
+        }
+
         public int MemberId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -22,5 +27,6 @@ namespace PizzaHubWebApp.Models
         public bool? Role { get; set; }
 
         public virtual Rank Rank { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

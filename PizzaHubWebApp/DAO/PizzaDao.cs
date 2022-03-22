@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PizzaHubWebApp.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace PizzaHubWebApp.DAO
 {
@@ -16,37 +15,45 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext = pizzaHubContext;
         }
 
-        public async Task<IEnumerable<Pizza>> GetPizzaList()
+        public IEnumerable<Pizza> GetPizzaList()
         {
-            var pizzaList = await _pizzaHubContext.Pizzas.ToListAsync();
+            var pizzaList = _pizzaHubContext.Pizzas.ToList();
             foreach (var pizza in pizzaList)
             {
-                pizza.Category = await GetCategoryById(pizza.CategoryId);
-                pizza.Sauce = await GetSauceById(pizza.SauceId);
+                pizza.Category = GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = GetSauceById(pizza.SauceId);
             }
 
             return pizzaList;
         }
 
-        private async Task<Category> GetCategoryById(int categoryId)
+        private Category GetCategoryById(int categoryId)
         {
-            var cat = await _pizzaHubContext.Categories
-                .SingleAsync(c => c.CategoryId == categoryId);
+            var cat = _pizzaHubContext.Categories
+                .Single(c => c.CategoryId == categoryId);
             return cat;
         }
 
-        private async Task<Sauce> GetSauceById(int? sauceId)
+        private Sauce GetSauceById(int? sauceId)
         {
-            var cat = await _pizzaHubContext.Sauces
-                .SingleOrDefaultAsync(c => c.SauceId == sauceId);
+            var cat = _pizzaHubContext.Sauces
+                .SingleOrDefault(c => c.SauceId == sauceId);
             return cat;
         }
 
-        public async Task<Pizza> GetPizzaById(int pizzaId)
+        public Pizza GetPizzaById(int pizzaId)
         {
-            var pizza = await _pizzaHubContext.Pizzas
-                .SingleAsync(p => p.PizzaId == pizzaId);
+            var pizza = _pizzaHubContext.Pizzas
+                .Single(p => p.PizzaId == pizzaId);
             return pizza;
+        }
+
+        public async Task<IEnumerable<Pizza>> GetPizzasbyCategory(int categoryId)
+        {
+            var pizzaByCategory = await _pizzaHubContext.Pizzas
+                .Where(x => x.CategoryId == categoryId)
+                .ToListAsync();
+            return pizzaByCategory;
         }
     }
 }

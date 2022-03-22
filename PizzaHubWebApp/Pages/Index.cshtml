@@ -13,4 +13,18 @@
             <img src="Assets/Images/pizza chef.svg" alt="">
         </div>
     </div>
+
+    <div class="product-section">
+        <div class="categories-section">
+            <ul class="category-list">
+                @foreach (var item in Model.Categories)
+                {
+                    <li>@item.Name</li>
+                    <li>
+                        <img src="@item.Image" alt="@item.Name"/>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PizzaHubWebApp.Pages
+namespace PizzaHubWebApp.Pages.User
 {
     public class Profile : PageModel
     {

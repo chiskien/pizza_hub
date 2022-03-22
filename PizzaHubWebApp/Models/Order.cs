@@ -16,5 +16,7 @@ namespace PizzaHubWebApp.Models
         public string Address { get; set; }
         public string Status { get; set; }
         public string Note { get; set; }
+
+        public virtual Member Member { get; set; }
     }
 }
