@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp.DAO
@@ -15,6 +13,7 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext = pizzaHubContext;
         }
 
+        //return all pizzas
         public IEnumerable<Pizza> GetPizzaList()
         {
             var pizzaList = _pizzaHubContext.Pizzas.ToList();
@@ -27,6 +26,13 @@ namespace PizzaHubWebApp.DAO
             return pizzaList;
         }
 
+        public Pizza GetPizzaById(int pizzaId)
+        {
+            var pizza = _pizzaHubContext.Pizzas
+                .Single(p => p.PizzaId == pizzaId);
+            return pizza;
+        }
+
         private Category GetCategoryById(int categoryId)
         {
             var cat = _pizzaHubContext.Categories
@@ -36,23 +42,16 @@ namespace PizzaHubWebApp.DAO
 
         private Sauce GetSauceById(int? sauceId)
         {
-            var cat = _pizzaHubContext.Sauces
+            var sauce = _pizzaHubContext.Sauces
                 .SingleOrDefault(c => c.SauceId == sauceId);
-            return cat;
+            return sauce;
         }
 
-        public Pizza GetPizzaById(int pizzaId)
+        public IEnumerable<Pizza> GetPizzasbyCategory(int categoryId)
         {
-            var pizza = _pizzaHubContext.Pizzas
-                .Single(p => p.PizzaId == pizzaId);
-            return pizza;
-        }
-
-        public async Task<IEnumerable<Pizza>> GetPizzasbyCategory(int categoryId)
-        {
-            var pizzaByCategory = await _pizzaHubContext.Pizzas
+            var pizzaByCategory = _pizzaHubContext.Pizzas
                 .Where(x => x.CategoryId == categoryId)
-                .ToListAsync();
+                .ToList();
             return pizzaByCategory;
         }
     }
