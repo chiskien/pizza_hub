@@ -21,6 +21,7 @@ namespace PizzaHubWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSession();
             var connectionString = Configuration.GetConnectionString("PizzaHub");
             services.AddDbContext<PizzaHubContext>(
                 options => options.UseSqlServer(connectionString)
@@ -40,6 +41,8 @@ namespace PizzaHubWebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
