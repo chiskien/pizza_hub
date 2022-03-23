@@ -321,4 +321,10 @@ go
 alter table Members
     alter column Role bit null
 go
+alter table Members
+    alter column Country nvarchar(100) null
+go
+alter table Members
+    alter column DOB nvarchar(100) null
+go
 
