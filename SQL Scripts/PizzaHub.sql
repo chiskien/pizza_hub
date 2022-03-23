@@ -290,3 +290,35 @@ UPDATE PizzaHub.dbo.Category SET Name = N'Seafood', Image = N'seafood.svg' WHERE
 UPDATE PizzaHub.dbo.Category SET Name = N'Mushroom', Image = N'mushroom.svg' WHERE CategoryId = 6;
 UPDATE PizzaHub.dbo.Category SET Name = N'Chillis', Image = N'chillis.svg' WHERE CategoryId = 7;
 UPDATE PizzaHub.dbo.Category SET Name = N'Chicken', Image = N'chicken.svg' WHERE CategoryId = 8;
+
+UPDATE PizzaHub.dbo.Members SET Email = N'chiskien03214@gmail.com', Password = N'chiskien', Avatar = N'ck.svg', DOB = N'2021-09-14', MobileNumber = N'0965591101', Address = N'Broadway', City = N'Hanoi', Country = N'VietNam', RankId = 4, Point = 0, Voucher = 0, Role = 1 WHERE MemberId = 1;
+UPDATE PizzaHub.dbo.Members SET Email = N'thehainguyen2233@gmail.com', Password = N'thehai', Avatar = N'th.svg', DOB = N'2022-02-17', MobileNumber = N'123456789', Address = N'Queens Road', City = N'London', Country = N'England', RankId = 4, Point = 0, Voucher = 0, Role = 1 WHERE MemberId = 2;
+
+alter table Members
+    alter column MobileNumber nvarchar(20) null
+go
+
+alter table Members
+    alter column Address nvarchar(1000) null
+go
+
+alter table Members
+    alter column RankId int null
+go
+
+alter table Members
+    add default 6 for RankId
+go
+
+alter table Members
+    alter column Point float null
+go
+
+alter table Members
+    alter column Voucher int null
+go
+
+alter table Members
+    alter column Role bit null
+go
+
