@@ -15,7 +15,10 @@ namespace PizzaHubWebApp.DAO
 
         public IEnumerable<Order> GetAllOrders()
         {
-            return _context.Orders.ToList();
+            var listOrder = _context.Orders.ToList();
+            var dao = new MemberDao(_context);
+            foreach (var order in listOrder) order.Member = dao.GetMemberById(order.MemberId);
+            return listOrder;
         }
 
         public Order GetOrderById(int id)

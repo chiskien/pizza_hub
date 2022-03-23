@@ -10,6 +10,7 @@ namespace PizzaHubWebApp.Pages.Admin.Member
     {
         private readonly MemberDao _memberDao;
 
+
         public MemberManagement(PizzaHubContext context)
         {
             _memberDao = new MemberDao(context);
@@ -17,6 +18,7 @@ namespace PizzaHubWebApp.Pages.Admin.Member
 
         public void OnGet()
         {
+            Members = _memberDao.GetAllMembers();
         }
 
         public IEnumerable<Models.Member> Members { get; set; }

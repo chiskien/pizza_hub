@@ -24,5 +24,10 @@ namespace PizzaHubWebApp.DAO
         {
             return _pizzaHubContext.Members.ToList();
         }
+
+        public Member GetMemberById(int id)
+        {
+            return _pizzaHubContext.Members.Single(m => m.MemberId == id);
+        }
     }
 }

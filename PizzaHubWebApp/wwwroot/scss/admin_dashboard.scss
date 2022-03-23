@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
-
+﻿
 * {
   box-sizing: border-box;
 }
@@ -45,8 +44,8 @@ body, html {
 }
 
 body {
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+  overflow: auto;
+  font-family: 'Montserrat', sans-serif;
   background-color: var(--app-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -477,9 +476,9 @@ body {
 
   .product-cell {
     flex: 1;
-    padding: 8px 16px;
+    padding: 8px;
     color: var(--app-content-main-color);
-    font-size: $font-small;
+    font-size: $font-medium;
     display: flex;
     align-items: center;
 
