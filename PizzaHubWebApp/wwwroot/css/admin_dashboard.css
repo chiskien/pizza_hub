@@ -427,36 +427,6 @@ body {
   border-radius: 6px;
   margin-right: 6px;
 }
-@media screen and (max-width: 780px) {
-  .tableView .product-cell {
-    font-size: 12px;
-  }
-  .tableView .product-cell.image span {
-    display: none;
-  }
-  .tableView .product-cell.image {
-    flex: 0.2;
-  }
-}
-@media screen and (max-width: 520px) {
-  .tableView .product-cell.category, .tableView .product-cell.sales {
-    display: none;
-  }
-  .tableView .product-cell.status-cell {
-    flex: 0.4;
-  }
-  .tableView .product-cell.stock, .tableView .product-cell.price {
-    flex: 0.2;
-  }
-}
-@media screen and (max-width: 480px) {
-  .tableView .product-cell.stock {
-    display: none;
-  }
-  .tableView .product-cell.price {
-    flex: 0.4;
-  }
-}
 .tableView .sort-button {
   padding: 0;
   background-color: transparent;
@@ -595,6 +565,22 @@ body {
 }
 .gridView .cell-label {
   opacity: 0.6;
+}
+
+.btn {
+  background-color: var(--action-color);
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  border: none;
+  border-radius: 4px;
+  height: 30px;
+  padding: 0 8px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: var(--action-color-hover);
 }
 
 /*# sourceMappingURL=admin_dashboard.css.map */
