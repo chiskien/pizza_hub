@@ -579,6 +579,10 @@ body {
   transition: 0.2s;
   cursor: pointer;
 }
+.btn-light {
+  background-color: #FFFFFF;
+  color: #1b1e21;
+}
 .btn:hover {
   background-color: var(--action-color-hover);
 }

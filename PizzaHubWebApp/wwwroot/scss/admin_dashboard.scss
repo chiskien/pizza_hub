@@ -666,6 +666,11 @@ body {
   transition: .2s;
   cursor: pointer;
 
+  &-light {
+    background-color: #FFFFFF;
+    color: #1b1e21;
+  }
+
   &:hover {
     background-color: var(--action-color-hover);
   }
