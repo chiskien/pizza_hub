@@ -22,7 +22,10 @@ namespace PizzaHubWebApp.DAO
 
         public IEnumerable<Member> GetAllMembers()
         {
-            return _pizzaHubContext.Members.ToList();
+            var rankDao = new RankDao(_pizzaHubContext);
+            var members = _pizzaHubContext.Members.ToList();
+            foreach (var member in members) member.Rank = rankDao.GetRankByRankId(member.RankId);
+            return members;
         }
 
         public Member GetMemberById(int id)
