@@ -16,12 +16,12 @@ namespace PizzaHubWebApp.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Avatar { get; set; }
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
         public string MobileNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public int RankId { get; set; }
+        public int? RankId { get; set; }
         public double? Point { get; set; }
         public int? Voucher { get; set; }
         public bool? Role { get; set; }

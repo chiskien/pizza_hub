@@ -54,7 +54,7 @@ body {
   max-height: 100%;
   display: flex;
   overflow: hidden;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   max-width: 2000px;
   margin: 0 auto;
 }
@@ -564,7 +564,6 @@ body {
   top: 16px;
   right: 16px;
   z-index: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
