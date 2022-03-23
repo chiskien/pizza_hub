@@ -20,8 +20,8 @@ namespace PizzaHubWebApp.Pages.Admin
             _memberDao = new MemberDao(context);
         }
 
-        public IEnumerable<Category> Categories { get; set; }
-        public IEnumerable<Pizza> Pizzas { get; set; }
+        public IEnumerable<Models.Category> Categories { get; set; }
+        public IEnumerable<Models.Pizza> Pizzas { get; set; }
 
         public void OnGet()
         {

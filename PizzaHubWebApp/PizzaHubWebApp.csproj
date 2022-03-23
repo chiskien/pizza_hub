@@ -18,6 +18,8 @@
     <_ContentIncludedByDefault Remove="Pages\User\Login.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\User\Profile.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\User\Register.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Order\EditOrder.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Order\OrderManagement.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
