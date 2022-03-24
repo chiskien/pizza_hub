@@ -22,26 +22,38 @@ namespace PizzaHubWebApp.Pages
             if (member != null){
                 //HttpContext.Session.SetInt32("member", member.MemberId);
                 ViewData["LoginMessage"] = "Login success";
-                Response.Redirect("Index");
+                if (member.Role == true)
+                {
+                    Response.Redirect("Admin/DashBoard");
+                }
+                else
+                {
+                    Response.Redirect("/Index");
+                }
             }
             else
             {
-                ViewData["LoginMessage"] = "Login failed: username or password is incorrect";
+                ViewData["LoginMessage"] = "Login failed: email or password is incorrect";
                 Response.Redirect("Login");
             }
         }
-        public void OnPostSignUp(string name, string email, string pass)
+        public void OnPostSignUp(string phone, string email, string pass)
         {
-            Member member = _memberDao.GetMemberLogin(email, pass);
-            if (member != null)
+            Member member = _memberDao.GetMemberByEmail(email);
+            if (member == null)
             {
                 //HttpContext.Session.SetInt32("member", member.MemberId);
-                ViewData["LoginMessage"] = "Login success";
+                Member m = new Member();
+                m.MobileNumber = phone;
+                m.Email = email;
+                m.Password = pass;
+                _memberDao.AddMember(m);
+                ViewData["LoginMessage"] = "Sign Up success";
                 Response.Redirect("Index");
             }
             else
             {
-                ViewData["LoginMessage"] = "Login failed: username or password is incorrect";
+                ViewData["LoginMessage"] = "Sign Up failed: email has been used";
                 Response.Redirect("Login");
             }
         }

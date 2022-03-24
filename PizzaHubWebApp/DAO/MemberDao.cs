@@ -16,5 +16,16 @@ namespace PizzaHubWebApp.DAO
             member = _pizzaHubContext.Members.FirstOrDefault(m => m.Email == email && m.Password == pass);
             return member;
         }
+        public Member GetMemberByEmail(string email)
+        {
+            Member member = null;
+            member = _pizzaHubContext.Members.FirstOrDefault(m => m.Email == email);
+            return member;
+        }
+        public void AddMember(Member member)
+        {
+            _pizzaHubContext.Members.Add(member);
+            _pizzaHubContext.SaveChanges();
+        }
     }
 }
