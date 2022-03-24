@@ -24,15 +24,18 @@ namespace PizzaHubWebApp.Pages.Admin.Pizza
 
         public IEnumerable<Models.Category> Categories { get; set; }
         public IEnumerable<Sauce> Sauces { get; set; }
-        public IEnumerable<Size> Sizes { get; set; }
-        public IEnumerable<Base> Bases { get; set; }
+        public List<PizzaSize> PizzaSizes { get; set; }
+        public List<PizzaBase> PizzaBases { get; set; }
 
         public void OnGet()
         {
             Categories = _categoryDao.GetCategories();
             Sauces = _sauceDao.GetAllSauces();
-            Sizes = _pizzaSizeDao.GetAllSize();
-            Bases = _pizzaBaseDao.GetAllBase();
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("/Admin/DashBoard");
         }
     }
 }

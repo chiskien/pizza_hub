@@ -30,5 +30,10 @@ namespace PizzaHubWebApp.DAO
         {
             return _context.Sizes.ToList();
         }
+
+        public void AddPizzaSizes(List<PizzaSize> pizzaSizes)
+        {
+            _context.PizzaSizes.AddRange(pizzaSizes);
+        }
     }
 }
