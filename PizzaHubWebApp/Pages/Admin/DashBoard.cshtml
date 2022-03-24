@@ -122,7 +122,7 @@
             </button>
             <div class="product-cell image">
                 <img src="~/Assets/Images/Pizza/@pizza.Image" alt="@pizza.Image">
-                <span class="cell-label">Title: </span><h4>@pizza.Name</h4>
+                <span class="cell-label">Title: </span><b>@pizza.Name</b>
             </div>
             <div class="product-cell cell-id">
                 <span class="cell-label">Pizza Id:</span>@pizza.PizzaId
@@ -147,19 +147,18 @@
             <div class="product-cell">
                 <a asp-page="/Admin/Pizza/Detail"
                    asp-route-id="@pizza.PizzaId"
-                   class="btn btn-light">
+                   class="btn">
                     Detail
                 </a>
                 <a asp-page="/Admin/Pizza/EditPizza"
                    asp-route-id="@pizza.PizzaId"
-                   class="btn btn-light">
+                   class="btn ">
                     Edit
                 </a>
-                <a asp-page="/Admin/Pizza/EditPizza"
-                   asp-route-id="@pizza.PizzaId"
-                   class="btn btn-light">
-                    Delete
-                </a>
+                <form style="display: inline-block" asp-page-handler="Delete" method="post">
+                    <input type="text" hidden value="@pizza.PizzaId">
+                    <input class="btn" type="submit" value="Delete">
+                </form>
             </div>
         </div>
     }

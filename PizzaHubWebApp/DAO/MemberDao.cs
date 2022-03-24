@@ -29,6 +29,7 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Members.Add(member);
             _pizzaHubContext.SaveChanges();
         }
+
         public IEnumerable<Member> GetAllMembers()
         {
             var rankDao = new RankDao(_pizzaHubContext);
