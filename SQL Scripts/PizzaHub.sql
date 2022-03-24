@@ -322,6 +322,9 @@ alter table Members
     alter column Role bit null
 go
 alter table Members
+    alter column City nvarchar(100) null
+go
+alter table Members
     alter column Country nvarchar(100) null
 go
 alter table Members

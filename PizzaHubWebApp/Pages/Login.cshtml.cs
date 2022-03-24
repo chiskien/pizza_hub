@@ -42,12 +42,12 @@ namespace PizzaHubWebApp.Pages
             Member member = _memberDao.GetMemberByEmail(email);
             if (member == null)
             {
-                //HttpContext.Session.SetInt32("member", member.MemberId);
                 Member m = new Member();
                 m.MobileNumber = phone;
                 m.Email = email;
                 m.Password = pass;
                 _memberDao.AddMember(m);
+                HttpContext.Session.SetInt32("member", _memberDao.GetMemberByEmail(email).MemberId);
                 ViewData["LoginMessage"] = "Sign Up success";
                 Response.Redirect("Index");
             }
