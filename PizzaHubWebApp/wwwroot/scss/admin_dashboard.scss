@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
-
+﻿
 * {
   box-sizing: border-box;
 }
@@ -45,8 +44,8 @@ body, html {
 }
 
 body {
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+  overflow: auto;
+  font-family: 'Montserrat', sans-serif;
   background-color: var(--app-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,7 +58,7 @@ body {
   max-height: 100%;
   display: flex;
   overflow: hidden;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   max-width: 2000px;
   margin: 0 auto;
 }
@@ -477,9 +476,9 @@ body {
 
   .product-cell {
     flex: 1;
-    padding: 8px 16px;
+    padding: 8px;
     color: var(--app-content-main-color);
-    font-size: $font-small;
+    font-size: $font-medium;
     display: flex;
     align-items: center;
 
@@ -488,48 +487,6 @@ body {
       height: 32px;
       border-radius: 6px;
       margin-right: 6px;
-    }
-
-    @media screen and (max-width: 780px) {
-      & {
-        font-size: 12px;
-
-        &.image span {
-          display: none;
-        }
-
-        &.image {
-          flex: 0.2;
-        }
-      }
-    }
-
-    @media screen and (max-width: 520px) {
-      & {
-        &.category, &.sales {
-          display: none;
-        }
-
-        &.status-cell {
-          flex: 0.4;
-        }
-
-        &.stock, &.price {
-          flex: 0.2;
-        }
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      & {
-        &.stock {
-          display: none;
-        }
-
-        &.price {
-          flex: 0.4;
-        }
-      }
     }
   }
 
@@ -656,7 +613,6 @@ body {
       top: 16px;
       right: 16px;
       z-index: 1;
-      display: flex;
       align-items: center;
       justify-content: center;
       width: 24px;
@@ -695,5 +651,29 @@ body {
 
   .cell-label {
     opacity: 0.6;
+  }
+}
+
+.btn {
+  background-color: var(--action-color);
+  color: #fff;
+  text-decoration: none;
+  font-size: $font-small;
+  line-height: 34px;
+  border: none;
+  border-radius: 5px;
+  height: 36px;
+  margin: 0 8px;
+  padding: 0 8px;
+  transition: .2s;
+  cursor: pointer;
+
+  &-light {
+    background-color: #FFFFFF;
+    color: #1b1e21;
+  }
+
+  &:hover {
+    background-color: var(--action-color-hover);
   }
 }

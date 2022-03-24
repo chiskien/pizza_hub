@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PizzaHubWebApp.Pages
+namespace PizzaHubWebApp.Pages.Admin.Pizza
 {
-    public class Profile : PageModel
+    public class Detail : PageModel
     {
         public void OnGet()
         {

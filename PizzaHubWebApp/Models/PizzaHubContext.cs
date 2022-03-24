@@ -37,7 +37,7 @@ namespace PizzaHubWebApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer("");
+            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -102,33 +102,25 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<Member>(entity =>
             {
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.Address).HasMaxLength(1000);
 
                 entity.Property(e => e.Avatar)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.City).HasMaxLength(100);
 
-                entity.Property(e => e.Country)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.Country).HasMaxLength(100);
 
                 entity.Property(e => e.Dob)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("DOB");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.MobileNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
+                entity.Property(e => e.MobileNumber).HasMaxLength(20);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
@@ -136,12 +128,13 @@ namespace PizzaHubWebApp.Models
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
+                entity.Property(e => e.RankId).HasDefaultValueSql("((6))");
+
                 entity.Property(e => e.Role).HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.Rank)
                     .WithMany(p => p.Members)
                     .HasForeignKey(d => d.RankId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MemberRank");
             });
 

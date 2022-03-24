@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 * {
   box-sizing: border-box;
 }
@@ -40,8 +39,8 @@ body, html {
 }
 
 body {
-  overflow: hidden;
-  font-family: "Poppins", sans-serif;
+  overflow: auto;
+  font-family: "Montserrat", sans-serif;
   background-color: var(--app-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -54,7 +53,7 @@ body {
   max-height: 100%;
   display: flex;
   overflow: hidden;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   max-width: 2000px;
   margin: 0 auto;
 }
@@ -416,9 +415,9 @@ body {
 }
 .tableView .product-cell {
   flex: 1;
-  padding: 8px 16px;
+  padding: 8px;
   color: var(--app-content-main-color);
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
 }
@@ -427,36 +426,6 @@ body {
   height: 32px;
   border-radius: 6px;
   margin-right: 6px;
-}
-@media screen and (max-width: 780px) {
-  .tableView .product-cell {
-    font-size: 12px;
-  }
-  .tableView .product-cell.image span {
-    display: none;
-  }
-  .tableView .product-cell.image {
-    flex: 0.2;
-  }
-}
-@media screen and (max-width: 520px) {
-  .tableView .product-cell.category, .tableView .product-cell.sales {
-    display: none;
-  }
-  .tableView .product-cell.status-cell {
-    flex: 0.4;
-  }
-  .tableView .product-cell.stock, .tableView .product-cell.price {
-    flex: 0.2;
-  }
-}
-@media screen and (max-width: 480px) {
-  .tableView .product-cell.stock {
-    display: none;
-  }
-  .tableView .product-cell.price {
-    flex: 0.4;
-  }
 }
 .tableView .sort-button {
   padding: 0;
@@ -564,7 +533,6 @@ body {
   top: 16px;
   right: 16px;
   z-index: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
@@ -597,6 +565,28 @@ body {
 }
 .gridView .cell-label {
   opacity: 0.6;
+}
+
+.btn {
+  background-color: var(--action-color);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 34px;
+  border: none;
+  border-radius: 5px;
+  height: 36px;
+  margin: 0 8px;
+  padding: 0 8px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.btn-light {
+  background-color: #FFFFFF;
+  color: #1b1e21;
+}
+.btn:hover {
+  background-color: var(--action-color-hover);
 }
 
 /*# sourceMappingURL=admin_dashboard.css.map */
