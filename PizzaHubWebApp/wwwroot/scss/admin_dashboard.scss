@@ -13,17 +13,17 @@
   --sidebar-link: #fff;
   --sidebar-active-link: #1d283c;
   --sidebar-hover-link: #1a2539;
-  --action-color: #2869ff;
-  --action-color-hover: #6291fd;
+  --action-color: #BF9270;
+  --action-color-hover: #603601;
   --app-content-secondary-color: #1d283c;
   --filter-reset: #2c394f;
   --filter-shadow: rgba(16, 24, 39, 0.8) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .light:root {
-  --app-bg: #fff;
-  --sidebar: #f3f6fd;
-  --app-content-secondary-color: #f3f6fd;
+  --app-bg: #F7F7F7;
+  --sidebar: #F9E4D4;
+  --app-content-secondary-color: #FFEDDB;
   --app-content-main-color: #1f1c2e;
   --sidebar-link: #1f1c2e;
   --sidebar-hover-link: rgba(195, 207, 244, 0.5);
@@ -34,7 +34,7 @@
 
 $font-small: 14px;
 $font-medium: 16px;
-$font-large: 24px;
+$font-large: 32px;
 
 body, html {
   margin: 0;
@@ -677,11 +677,6 @@ body {
   padding: 0 8px;
   transition: .2s;
   cursor: pointer;
-
-  &-light {
-    background-color: #FFFFFF;
-    color: #1b1e21;
-  }
 
   &:hover {
     background-color: var(--action-color-hover);
