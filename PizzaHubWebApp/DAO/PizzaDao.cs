@@ -60,5 +60,16 @@ namespace PizzaHubWebApp.DAO
 
             return pizzaByCategory;
         }
+
+        public void AddPizza(Pizza newPizza)
+        {
+            Pizza existedPizza = _pizzaHubContext.Pizzas
+                .SingleOrDefault(p => p.PizzaId == newPizza.PizzaId);
+            if (existedPizza == null)
+            {
+                _pizzaHubContext.Pizzas.Add(newPizza);
+                _pizzaHubContext.SaveChanges();
+            }
+        }
     }
 }
