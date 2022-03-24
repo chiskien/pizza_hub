@@ -4,29 +4,45 @@
 @{
     Layout = "Shared/_Layout";
 }
-<div class="app-content-header">
-    <h1 class="app-content-headerText">Create Pizza</h1>
-</div>
-<div class="form-product-wrapper">
-    <form method="post">
-        <div class="form-group row">
+<h1 class="app-content-headerText text-center">Create Pizza</h1>
+<div class="product-wrapper">
+    <form method="post" style="height: -webkit-fill-available">
+        <div class="form-group">
             <label asp-for="PizzaModel.Name">Pizza Name: </label>
-            <input required asp-for="PizzaModel.Name" type="text">
+            <input class="form-control" required asp-for="PizzaModel.Name" type="text">
+
         </div>
-        <div class="form-group row">
-            <label for=""></label>
-            <select name="" id="">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group row">
-            <select name="" id="">
-                <option value=""></option>
+        <div class="form-group">
+            <label asp-for="PizzaModel.CategoryId">
+                Category
+            </label>
+            <select class="form-control" asp-for="PizzaModel.CategoryId">
+                @foreach (var cate in Model.Categories)
+                {
+                    <option value="@cate.CategoryId">@cate.Name</option>
+                }
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="PizzaModel.Name"></label>
-            <textarea required asp-for="PizzaModel.Description" type="textarea">
+            <label asp-for="PizzaModel.SauceId">Sauce</label>
+            <select class="form-control" asp-for="PizzaModel.SauceId">
+                @foreach (var sauce in Model.Sauces)
+                {
+                    <option value="@sauce.SauceId">@sauce.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="PizzaModel.Image">Image</label>
+            <input asp-for="PizzaModel.Image" type="file" class="form-control-file">
+        </div>
+        <div class="form-group">
+            <label asp-for="PizzaModel.Image">Image</label>
+            <input asp-for="PizzaModel.Image" type="file" class="form-control-file">
+        </div>
+        <div class="form-group">
+            <label asp-for="PizzaModel.Description">Description</label>
+            <textarea required asp-for="PizzaModel.Description" class="form-control" type="textarea">
         </textarea>
         </div>
         <fieldset class="checkbox-group">
@@ -172,5 +188,6 @@
                 </label>
             </div>
         </fieldset>
+        <button type="submit">Create Pizza</button>
     </form>
 </div>
