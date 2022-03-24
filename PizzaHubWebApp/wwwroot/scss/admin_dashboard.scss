@@ -449,7 +449,7 @@ body {
   padding: 0 4px;
 }
 
-.form-product-wrapper {
+.product-wrapper {
   width: 100%;
   max-height: 100%;
   overflow: auto;
@@ -457,6 +457,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &-form {
+
+  }
 }
 
 .tableView {
@@ -683,6 +687,7 @@ body {
   }
 }
 
+/* check box custom */
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
@@ -697,7 +702,6 @@ body {
     margin: .5rem 0.5rem;
   }
 }
-
 
 .checkbox-group-legend {
   font-size: 1.5rem;
