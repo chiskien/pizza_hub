@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using System;
 
 namespace PizzaHubWebApp.Pages
 {
@@ -37,17 +39,21 @@ namespace PizzaHubWebApp.Pages
                 Response.Redirect("Login");
             }
         }
-        public void OnPostSignUp(string phone, string email, string pass)
+        public void OnPostSignUp(string email, string pass)
         {
             Member member = _memberDao.GetMemberByEmail(email);
             if (member == null)
             {
                 Member m = new Member();
-                m.MobileNumber = phone;
                 m.Email = email;
                 m.Password = pass;
                 _memberDao.AddMember(m);
                 HttpContext.Session.SetInt32("member", _memberDao.GetMemberByEmail(email).MemberId);
+                
+                DirectoryInfo d = new DirectoryInfo(System.IO.Path.GetPathRoot(@"..\..\..\")+ "PizzaHubWebApp\\wwwroot\\Assets\\Avatar\\Bust\\");
+                FileInfo[] Files = d.GetFiles("*.svg");
+                Random r = new Random();
+                m.Avatar = Files[r.Next(0, Files.Length)].Name;
                 ViewData["LoginMessage"] = "Sign Up success";
                 Response.Redirect("Index");
             }
