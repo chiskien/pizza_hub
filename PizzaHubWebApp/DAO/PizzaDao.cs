@@ -52,6 +52,12 @@ namespace PizzaHubWebApp.DAO
             var pizzaByCategory = _pizzaHubContext.Pizzas
                 .Where(x => x.CategoryId == categoryId)
                 .ToList();
+            foreach (var pizza in pizzaByCategory)
+            {
+                pizza.Category = GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = GetSauceById(pizza.SauceId);
+            }
+
             return pizzaByCategory;
         }
     }

@@ -6,7 +6,7 @@
 }
 
 :root {
-  --app-bg: #101827;
+  --app-bg: #fff;
   --sidebar: rgba(21, 30, 47, 1);
   --sidebar-main-color: #fff;
   --table-border: #1a2131;
@@ -23,7 +23,7 @@
 }
 
 .light:root {
-  --app-bg: #F7F7F7;
+  --app-bg: #fff;
   --sidebar: #F9E4D4;
   --app-content-secondary-color: #FFEDDB;
   --app-content-main-color: #1f1c2e;
@@ -224,8 +224,8 @@ body {
   &-headerButton {
     background-color: var(--action-color);
     color: #fff;
+    text-decoration: none;
     font-size: $font-small;
-    line-height: 24px;
     border: none;
     border-radius: 4px;
     height: 32px;
@@ -315,6 +315,7 @@ body {
   background-color: var(--app-content-secondary-color);
   border: 1px solid var(--app-content-secondary-color);
   display: flex;
+  padding: 8px 16px;
   align-items: center;
   color: var(--app-content-main-color);
   font-size: $font-small;
