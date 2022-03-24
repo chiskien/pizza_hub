@@ -31,6 +31,7 @@ namespace PizzaHubWebApp.DAO
         {
             _pizzaHubContext.Members.Add(member);
             _pizzaHubContext.SaveChanges();
+        }
 
         public IEnumerable<Member> GetAllMembers()
         {

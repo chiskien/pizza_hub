@@ -669,17 +669,17 @@ body {
   color: #fff;
   text-decoration: none;
   font-size: $font-small;
-  line-height: 34px;
   border: none;
   border-radius: 5px;
   height: 36px;
-  margin: 0 8px;
-  padding: 0 8px;
+  margin: 6px;
+  padding: 8px 12px;
   transition: .2s;
   cursor: pointer;
 
   &:hover {
     background-color: var(--action-color-hover);
+    color: #FFFFFF;
   }
 }
 
