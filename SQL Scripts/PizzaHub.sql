@@ -1,363 +1,326 @@
-use PizzaHub
+use master
 go
-create table Pizzas (
-PizzaId int not null primary key IDENTITY,
-CategoryId int not null,
-Name nvarchar(200) not null,
-Image varchar(200),
-SauceId int,
-Description nvarchar(1000),
-Status bit not null,
-);
+create database PizzaHub
 go
-create table Toppings (
-ToppingId int not null primary key IDENTITY,
-ToppingName nvarchar(200) not null,
-CategoryId int not null,
-Image varchar(200),
-Quantity bit not null,
-UnitPrice money not null,
-);
-go
-create table ToppingDetails (
-PizzaId int not null foreign key references Pizzas(PizzaId),
-ToppingId int not null foreign key references Toppings(ToppingId)
-);
-go
-create table Drinks (
-DrinkId int not null primary key IDENTITY,
-Name nvarchar(200) not null,
-Brand  nvarchar(200),
-Image varchar(200),
-Price money,
-);
-go
-create table Members (
-MemberId int not null primary key IDENTITY,
-Email nvarchar(200) not null,
-Password nvarchar(200) not null,
-Avatar varchar(200),
-DOB date not null,
-MobileNumber nvarchar(20) not null,
-Address nvarchar(1000) not null,
-City nvarchar(100) not null,
-Country nvarchar(100) not null,
-RankId int not null,
-Point float default 0,
-Voucher int,
-Role bit default 0
-);
-go
-create table Vouchers (
-VoucherId int not null primary key IDENTITY,
-VoucherCode nvarchar(100) not null,
-Description nvarchar(1000),
-Discount int not null,
-Quantity int not null
-)
-go
-create table MemberVouchers (
-VoucherId int not null foreign key references Vouchers(VoucherID),
-MemberId int not null foreign key references Members(MemberId),
-Quantity int not null
-)
-go
-create table Orders (
-OrderId int not null primary key IDENTITY,
-MemberId int not null,
-OrderDate date not null,
-RequiredDate date,
-ShippedDate date,
-Freight money,
-Address nvarchar(1000) not null,
-Status varchar(200) default 'Pending',
-Note nvarchar(1000),
-)
-
-go
-create table Category (
-CategoryId int not null primary key IDENTITY,
-Name nvarchar(200) not null,
-)
-go
-create table Pizza_Size (
-SizeId int not null primary key IDENTITY,
-Name char(50) not null,
-)
-create table Drink_Size (
-    SizeId int not null primary key IDENTITY,
-    Name char(5) not null
-)
-go
-create table Base (
-BaseId int not null primary key IDENTITY,
-Name nvarchar(200) not null,
-)
-go
-create table Extras (
-    ExtraId int IDENTITY not null primary key ,
-    ExtraName nvarchar(200) not null,
-    Image varchar(200),
-    Price money not null
-)
-go
-create table Sauce (
-SauceId int not null primary key IDENTITY,
-Name nvarchar(200) not null,
-)
-go
-create table Ranks (
-RankId int not null primary key IDENTITY,
-Name nvarchar(200) not null,
-Description nvarchar(1000),
-)
-go
-create table OrderDetail (
-OrderId int not null foreign key references Orders(OrderId),
-PizzaId int foreign key references Pizzas(PizzaId),
-DrinkId int foreign key references Drinks(DrinkId),
-ExtraId int foreign key references Extras(ExtraId),
-PizzaSize int foreign key references PizzaSize(SizeId),
-Price money,
-Quantity int not null,
-Discount float
-)
-go
-create table Combo (
-    ComboId int primary key IDENTITY not null ,
-    ComboName varchar(20) not null,
-    PizzaId int foreign key references Pizzas(PizzaId),
-    DrinkId int foreign key references Drinks(DrinkId),
-    ExtraId int foreign key references Extras(ExtraId),
-    Price money
-)
-
-alter table  Pizzas
-add constraint FK_PizzaSauce foreign key (SauceId) references Sauce(SauceId);
-go
-alter table  Pizzas
-add constraint FK_PizzaCategory foreign key (CategoryId) references Category(CategoryId);
-go
-alter table Orders
-add constraint FK_OrdersMember foreign key (MemberId) references Members(MemberId);
-go
-alter table Toppings
-add constraint FK_ToppingCategory foreign key (CategoryId) references Category(CategoryId)
-go
-alter table Drinks
-add constraint FK_DrinkSize foreign key (SizeId) references Size(SizeId)
-go
-alter table Members
-add constraint FK_MemberRank foreign key (RankId) references Ranks(RankId);
-alter table Size
-    alter column Name char(25) not null
-go
-
------------------------------------------------Ranks----------------------------------------------
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Silver', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Gold', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Platinum', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Diamond', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'GodKiller', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Jeus', N'ABC');
-INSERT INTO PizzaHub.dbo.Ranks (Name, Description) VALUES (N'Cosmic', N'ABC');
-
------------------------------------------------Category----------------------------------------------
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Cheese');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Pepperoni');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Meat');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Sausage');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Seafood');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Mushroom');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Chillis');
-INSERT INTO PizzaHub.dbo.Category (Name) VALUES (N'Chicken');
------------------------------------------------Members----------------------------------------------
-INSERT INTO PizzaHub.dbo.Members (Email, Password, Avatar, DOB, MobileNumber, Address, City, Country, RankId, Point, Voucher) VALUES (N'chiskien03214@gmail.com', N'chiskien', N'ck.svg', N'2021-09-14', N'0965591101', N'Broadway', N'Hanoi', N'VietNam', 4, 0, 0);
-INSERT INTO PizzaHub.dbo.Members (Email, Password, Avatar, DOB, MobileNumber, Address, City, Country, RankId, Point, Voucher) VALUES (N'thehainguyen2233@gmail.com', N'thehai', N'th.svg', N'2022-02-17', N'123456789', N'Queens Road', N'London', N'England', 4, 0, 0);
-
------------------------------------------------PizzaBase----------------------------------------------
-INSERT INTO PizzaHub.dbo.Base (Name) VALUES (N'Thin');
-INSERT INTO PizzaHub.dbo.Base (Name) VALUES (N'Medium');
-INSERT INTO PizzaHub.dbo.Base (Name) VALUES (N'Thick');
-
------------------------------------------------Sauce----------------------------------------------
-INSERT INTO PizzaHub.dbo.Sauce (Name) VALUES (N'Ketchup');
-INSERT INTO PizzaHub.dbo.Sauce (Name) VALUES (N'Hot Sauce');
-INSERT INTO PizzaHub.dbo.Sauce (Name) VALUES (N'Pesto');
-INSERT INTO PizzaHub.dbo.Sauce (Name) VALUES (N'Cheesy Mayo');
-INSERT INTO PizzaHub.dbo.Sauce (Name) VALUES (N'Black Pepper');
-
------------------------------------------------Size----------------------------------------------
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'S');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'M');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'L');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'XL');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'Personal');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'Regular');
-INSERT INTO PizzaHub.dbo.Size (Name) VALUES (N'Large');
-
-
------------------------------------------------Drinks----------------------------------------------
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Pepsi', N'Pepsi', N'pepsi_can.jpg', 1, 15.0000);
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Pepsi', N'Pepsi', N'pepsi_bottle.jpg', 2, 20.0000);
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Pepsi', N'Pepsi', N'pepsi_large_bottle.jpg', 3, 30.0000);
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Mirinda Orange', N'Mirinda', N'mirinda_orange.jpg', 1, 15.0000);
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'Mirinda Cream', N'Mirinda', N'mirinda_cream.jpg', 1, 15.0000);
-INSERT INTO PizzaHub.dbo.Drinks (Name, Brand, Image, SizeId, Price) VALUES (N'7UP', N'7UP', N'7up.jpg', 1, 15.0000);
-
------------------------------------------------Pizzas----------------------------------------------
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (2, N'Pizza Pepperoni', N'pepperoni.jpg', 1, N'Pizza Pepperoni', 1);
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (1, N'Cheese Lovers Pizza', N'cheese_lover.jpg', 4, N' Phô mai cao cấp', 1);
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (5, N' Seafood Pesto Pizza', N'seafood_pesto.jpg', 3, N'Hải sản xốt pesto', 1);
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (5, N' Seafood BlackPepper Pizza', N'seafood_blackpepper.jpg', 5, N'Hải sản xốt tiêu đen', 1);
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (8, N' Chicken Deluxe Pizza', N'chicken_deluxe.jpg', 5, N'Gà nướng nấm', 1);
-INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, Name, Image, SauceId, Description, Status) VALUES (3, N' Korean BBQ Spicy Beef Deluxe Pizza', N'bbq_beef.jpg', 2, N'Bò BBQ xốt cay Hàn Quốc', 1);
-
------------------------------------------------Orders----------------------------------------------
-INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Status,Note) VALUES (1, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Broadway','Pending' ,N'More chillis and ketchup pls !');
-INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, RequiredDate, ShippedDate, Freight, Address, Status,Note) VALUES (2, N'2022-02-16', N'2022-02-16', N'2022-02-16', 10.0000, N'Queen Road','Pending', N'No ketchup');
-
------------------------------------------------Pizza_Base----------------------------------------------
-
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (1, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (1, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (1, 3);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (2, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (2, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (2, 3);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (3, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (3, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (3, 3);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (4, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (4, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (4, 3);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (5, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (5, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (5, 3);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (6, 1);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (6, 2);
-INSERT INTO PizzaHub.dbo.Pizza_Base (PizzaId, BaseId) VALUES (6, 3);
-
------------------------------------------------Pizza_Size----------------------------------------------
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (6, 5, 109.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (6, 6, 169.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (6, 7, 249.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (5, 5, 109.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (5, 6, 169.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (5, 7, 249.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (4, 5, 129.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (4, 6, 199.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (4, 7, 289.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (3, 5, 129.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (3, 6, 219.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (3, 7, 289.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (2, 5, 79.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (2, 6, 138.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (2, 7, 209.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 5, 109.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 6, 169.0000);
-INSERT INTO PizzaHub.dbo.Pizza_Size (PizzaId, SizeId, Price) VALUES (1, 7, 249.0000);
-
------------------------------------------------Order_Detail----------------------------------------------
-
-INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (1, 1, 1, null, N'Regular', 353.0000, 2, null);
-INSERT INTO PizzaHub.dbo.OrderDetail (OrderId, PizzaId, DrinkId, ExtraId, Size, Price, Quantity, Discount) VALUES (2, 2, null, null, N'Large', 231.2000, 1, 0.2);
-
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 2, Name = N'Pizza Pepperoni', Image = N'pepperoni.svg', SauceId = 1, Description = N'Pizza Pepperoni', Status = 1 WHERE PizzaId = 1;
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 1, Name = N'Cheese Lovers Pizza', Image = N'cheese_lover.svg', SauceId = 4, Description = N' Phô mai cao cấp', Status = 1 WHERE PizzaId = 2;
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood Pesto Pizza', Image = N'seafood_pesto.svg', SauceId = 3, Description = N'Hải sản xốt pesto', Status = 1 WHERE PizzaId = 3;
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 5, Name = N' Seafood BlackPepper Pizza', Image = N'seafood_blackpepper.svg', SauceId = 5, Description = N'Hải sản xốt tiêu đen', Status = 1 WHERE PizzaId = 4;
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 8, Name = N' Chicken Deluxe Pizza', Image = N'chicken_deluxe.svg', SauceId = 5, Description = N'Gà nướng nấm', Status = 1 WHERE PizzaId = 5;
-UPDATE PizzaHub.dbo.Pizzas SET CategoryId = 3, Name = N' Korean BBQ Spicy Beef Deluxe Pizza', Image = N'bbq_beef.svg', SauceId = 2, Description = N'Bò BBQ xốt cay Hàn Quốc', Status = 1 WHERE PizzaId = 6;
-
-alter table Category
-    add Image varchar(100)
-go
-
-UPDATE PizzaHub.dbo.Category SET Name = N'Cheese', Image = N'cheese.svg' WHERE CategoryId = 1;
-UPDATE PizzaHub.dbo.Category SET Name = N'Pepperoni', Image = N'pepperoni.svg' WHERE CategoryId = 2;
-UPDATE PizzaHub.dbo.Category SET Name = N'Meat', Image = N'meat.svg' WHERE CategoryId = 3;
-UPDATE PizzaHub.dbo.Category SET Name = N'Sausage', Image = N'sausage.svg' WHERE CategoryId = 4;
-UPDATE PizzaHub.dbo.Category SET Name = N'Seafood', Image = N'seafood.svg' WHERE CategoryId = 5;
-UPDATE PizzaHub.dbo.Category SET Name = N'Mushroom', Image = N'mushroom.svg' WHERE CategoryId = 6;
-UPDATE PizzaHub.dbo.Category SET Name = N'Chillis', Image = N'chillis.svg' WHERE CategoryId = 7;
-UPDATE PizzaHub.dbo.Category SET Name = N'Chicken', Image = N'chicken.svg' WHERE CategoryId = 8;
-
-UPDATE PizzaHub.dbo.Members SET Email = N'chiskien03214@gmail.com', Password = N'chiskien', Avatar = N'ck.svg', DOB = N'2021-09-14', MobileNumber = N'0965591101', Address = N'Broadway', City = N'Hanoi', Country = N'VietNam', RankId = 4, Point = 0, Voucher = 0, Role = 1 WHERE MemberId = 1;
-UPDATE PizzaHub.dbo.Members SET Email = N'thehainguyen2233@gmail.com', Password = N'thehai', Avatar = N'th.svg', DOB = N'2022-02-17', MobileNumber = N'123456789', Address = N'Queens Road', City = N'London', Country = N'England', RankId = 4, Point = 0, Voucher = 0, Role = 1 WHERE MemberId = 2;
-
-alter table Members
-    alter column MobileNumber nvarchar(20) null
-go
-
-alter table Members
-    alter column Address nvarchar(1000) null
-go
-
-alter table Members
-    alter column RankId int null
-go
-
-alter table Members
-    add default 6 for RankId
-go
-
-alter table Members
-    alter column Point float null
-go
-
-alter table Members
-    alter column Voucher int null
-go
-
-alter table Members
-    alter column Role bit null
-go
-alter table Members
-    alter column City nvarchar(100) null
-go
-alter table Members
-    alter column Country nvarchar(100) null
-go
-alter table Members
-    alter column DOB datetime null
-go
-
-alter table Size
-    add Price money
-go
-
-create table PizzaSize
+create table dbo.Categories
 (
-    SizeId int identity
-        constraint PizzaSize_pk
-            primary key,
-    Name   nvarchar(10) not null
+    CategoryId   int identity,
+    CategoryName nvarchar(50) not null,
+    Image        varchar(255),
+    constraint Categories_pk
+        primary key (CategoryId)
 )
 go
-exec sp_rename 'Size', DrinkSize, 'OBJECT'
-go
-alter table PizzaSize
-    add Price money not null default 0
-go
-UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Personal', Price = 109.0000 WHERE SizeId = 1;
-UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Regular', Price = 169.0000 WHERE SizeId = 2;
-UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Large', Price = 249.0000 WHERE SizeId = 3;
 
-
-alter table OrderDetail
-    add constraint OrderDetail___fk_PizzaSize
-        foreign key (PizzaSize) references PizzaSize
-            on delete set null
-go
-alter table OrderDetail
-    add constraint OrderDetail___fk_DrinkSize
-        foreign key (DrinkSize) references DrinkSize
-            on delete set null
+create table dbo.Drinks
+(
+    DrinkId   int identity,
+    DrinkName nvarchar(255) not null,
+    Brand     nvarchar(200),
+    Image     varchar(255),
+    constraint Drinks_pk
+        primary key (DrinkId)
+)
 go
 
-alter table OrderDetail
-    add constraint OrderDetail_Base_BaseId_fk
-        foreign key (BaseId) references Base
-            on delete set null
+create table dbo.PizzaBases
+(
+    BaseId int identity,
+    Base   nvarchar(25) not null,
+    constraint PizzaBases_pk
+        primary key (BaseId)
+)
 go
+
+create table dbo.Ranks
+(
+    RankId      int identity,
+    Rank        nvarchar(255) not null,
+    Description nvarchar(255),
+    MinPoint    int,
+    constraint Ranks_pk
+        primary key (RankId)
+)
+go
+
+create table dbo.Members
+(
+    MemberId    int identity,
+    Email       varchar(255)  not null,
+    Password    varchar(255)  not null,
+    Avatar      varchar(255),
+    DOB         datetime,
+    PhoneNumber nvarchar(255) not null,
+    Address     nvarchar(255),
+    City        nvarchar(255),
+    Country     nvarchar(255),
+    Role        bit default 0,
+    Point       int default 0,
+    RankId      int default 1,
+    constraint Members_pk
+        primary key (MemberId),
+    constraint Members_Ranks_RankId_fk
+        foreign key (RankId) references dbo.Ranks
+            on delete set default
+)
+go
+
+alter table dbo.Members
+    add constraint DF__Members__Point__48CFD27E default 0 for Point
+go
+
+alter table dbo.Members
+    add constraint DF__Members__RankId__49C3F6B7 default 1 for RankId
+go
+
+alter table dbo.Members
+    add constraint DF__Members__Role__47DBAE45 default 0 for Role
+go
+
+create table dbo.Sauces
+(
+    SauceId   int identity,
+    SauceName nvarchar(50),
+    constraint Sauce_pk
+        primary key (SauceId)
+)
+go
+
+create table dbo.Sizes
+(
+    SizeId int identity,
+    Size   nvarchar(20) not null,
+    constraint Sizes_pk
+        primary key (SizeId)
+)
+go
+
+create table dbo.Status
+(
+    StatusId int identity,
+    Status   nvarchar(255) not null,
+    constraint Status_pk
+        primary key (StatusId)
+)
+go
+
+create table dbo.Orders
+(
+    OrderId      int identity,
+    MemberId     int,
+    OrderDate    datetime      not null,
+    Address      nvarchar(255),
+    StatusId     int default 1 not null,
+    Freight      money,
+    RequiredDate datetime,
+    ShippedDate  datetime,
+    Note         nvarchar(255),
+    constraint Orders_pk
+        primary key (OrderId),
+    constraint Orders_Members_MemberId_fk
+        foreign key (MemberId) references dbo.Members
+            on delete cascade,
+    constraint Orders_Status_StatusId_fk
+        foreign key (StatusId) references dbo.Status
+            on delete set default
+)
+go
+
+alter table dbo.Orders
+    add constraint DF__Orders__StatusId__4CA06362 default 1 for StatusId
+go
+
+create table dbo.Pizzas
+(
+    PizzaId     int identity,
+    CategoryId  int,
+    SauceId     int,
+    Image       varchar(255),
+    Description nvarchar(255),
+    StatusId    int,
+    Price       money         not null,
+    PizzaName   nvarchar(200) not null,
+    constraint Pizzas_pk
+        primary key (PizzaId),
+    constraint Pizzas_Categories_CategoryId_fk
+        foreign key (CategoryId) references dbo.Categories,
+    constraint Pizzas_Sauces_SauceId_fk
+        foreign key (SauceId) references dbo.Sauces,
+    constraint Pizzas_Status_StatusId_fk
+        foreign key (StatusId) references dbo.Status
+)
+go
+
+create table dbo.OrdersDetail
+(
+    OrderId    int   not null,
+    PizzaId    int   not null,
+    DrinkId    int,
+    SizeId     int,
+    BaseId     int,
+    Quantity   int default 1,
+    Discount   float,
+    TotalPrice money not null,
+    constraint OrdersDetail_Drinks_DrinkId_fk
+        foreign key (DrinkId) references dbo.Drinks
+            on delete set null,
+    constraint OrdersDetail_Orders_OrderId_fk
+        foreign key (OrderId) references dbo.Orders
+            on delete cascade,
+    constraint OrdersDetail_PizzaBases_BaseId_fk
+        foreign key (BaseId) references dbo.PizzaBases
+            on delete set default,
+    constraint OrdersDetail_Pizzas_PizzaId_fk
+        foreign key (PizzaId) references dbo.Pizzas
+            on delete cascade,
+    constraint OrdersDetail_Sizes_SizeId_fk
+        foreign key (SizeId) references dbo.Sizes
+            on delete cascade
+)
+go
+
+alter table dbo.OrdersDetail
+    add constraint DF__OrdersDet__Quant__4E88ABD4 default 1 for Quantity
+go
+
+create table dbo.Toppings
+(
+    ToppingId   int identity,
+    ToppingName nvarchar(200) not null,
+    CategoryId  int,
+    Image       varchar(255),
+    UnitPrice   money,
+    constraint Toppings_pk
+        primary key (ToppingId)
+)
+go
+
+create table dbo.Pizza_Topping_Detail
+(
+    PizzaId   int not null,
+    ToppingId int not null,
+    constraint Pizza_Topping_Detail_Pizzas_PizzaId_fk
+        foreign key (PizzaId) references dbo.Pizzas
+            on delete cascade,
+    constraint Pizza_Topping_Detail_Toppings_ToppingId_fk
+        foreign key (ToppingId) references dbo.Toppings
+            on delete cascade
+)
+go
+----------------------------------------------Category----------------------------------------
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Cheese', N'cheese.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Pepperoni', N'pepperoni.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Meat', N'meat.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Sausage', N'sausage.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Seafood', N'seafood.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Mushroom', N'mushroom.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Chillis', N'chillis.svg');
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Chicken', N'chicken.svg');
+-------------------------------------------Drinks--------------------------------------
+INSERT INTO PizzaHub.dbo.Drinks (DrinkName, Brand, Image)
+VALUES (N'Pepsi', N'Pepsi', N'pepsi_can.svg');
+INSERT INTO PizzaHub.dbo.Drinks (DrinkName, Brand, Image)
+VALUES (N'Mirinda Orange', N'Mirinda', N'mirinda_orange.svg');
+INSERT INTO PizzaHub.dbo.Drinks (DrinkName, Brand, Image)
+VALUES (N'Mirinda Cream', N'Mirinda', N'mirinda_cream.svg');
+INSERT INTO PizzaHub.dbo.Drinks (DrinkName, Brand, Image)
+VALUES (N'7UP', N'7UP', N'7up.svg');
+INSERT INTO PizzaHub.dbo.Drinks (DrinkName, Brand, Image)
+VALUES (N'MountainDew', N'MountainDew', N'MountainDew.svg');
+---------------------------------------Status---------------------------------------------
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'Available');
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'Out of Stock');
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'Pending');
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'Approved');
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'Canceled');
+INSERT INTO PizzaHub.dbo.Status (Status)
+VALUES (N'On Sale');
+--------------------------------------Size------------------------------------------------
+INSERT INTO PizzaHub.dbo.Sizes (Size)
+VALUES (N'Personal');
+INSERT INTO PizzaHub.dbo.Sizes (Size)
+VALUES (N'Regular');
+INSERT INTO PizzaHub.dbo.Sizes (Size)
+VALUES (N'Large');
+----------------------------------Base----------------------------------------------------------
+INSERT INTO PizzaHub.dbo.PizzaBases (Base)
+VALUES (N'Thin');
+INSERT INTO PizzaHub.dbo.PizzaBases (Base)
+VALUES (N'Medium');
+INSERT INTO PizzaHub.dbo.PizzaBases (Base)
+VALUES (N'Thick');
+----------------------------------------------------Rank----------------------------------
+INSERT INTO PizzaHub.dbo.Ranks (Rank, Description, MinPoint)
+VALUES (N'Silver', N'A', 0);
+INSERT INTO PizzaHub.dbo.Ranks (Rank, Description, MinPoint)
+VALUES (N'Gold', N'A', 30);
+INSERT INTO PizzaHub.dbo.Ranks (Rank, Description, MinPoint)
+VALUES (N'Platinum', N'A', 70);
+INSERT INTO PizzaHub.dbo.Ranks (Rank, Description, MinPoint)
+VALUES (N'Diamond', N'A', 120);
+INSERT INTO PizzaHub.dbo.Ranks (Rank, Description, MinPoint)
+VALUES (N'Jeus', N'A', 200);
+------------------------------------Sauces-----------------------------------
+INSERT INTO PizzaHub.dbo.Sauces (SauceName)
+VALUES (N'Ketchup');
+INSERT INTO PizzaHub.dbo.Sauces (SauceName)
+VALUES (N'Hot Sauce');
+INSERT INTO PizzaHub.dbo.Sauces (SauceName)
+VALUES (N'Pesto');
+INSERT INTO PizzaHub.dbo.Sauces (SauceName)
+VALUES (N'Cheesy Mayo');
+INSERT INTO PizzaHub.dbo.Sauces (SauceName)
+VALUES (N'Black Pepper');
+------------------------------Members-------------------------------------
+INSERT INTO PizzaHub.dbo.Members (Email, Password, Avatar, DOB, PhoneNumber, Address, City, Country, Role, Point,
+                                   RankId)
+VALUES (N'chiskien@gmail.com', N'123', N'peep-14.svg', N'2022-03-26 00:16:01.000', N'0965591101', N'14 QueenRoad',
+        N'London', N'England', 1, 150, 4);
+INSERT INTO PizzaHub.dbo.Members (Email, Password, Avatar, DOB, PhoneNumber, Address, City, Country, Role, Point,
+                                   RankId)
+VALUES (N'thehai@gmail.com', N'234', N'peep-25.svg', N'2022-03-26 00:18:28.000', N'12345689', N'Hoa Lac', N'Hanoi',
+        N'VietNam', 1, 170, 4);
+INSERT INTO PizzaHub.dbo.Members (Email, Password, Avatar, DOB, PhoneNumber, Address, City, Country, Role, Point,
+                                   RankId)
+VALUES (N'guest@gmail.com', N'456', N'peep-1.svg', N'2022-03-26 00:20:19.000', N'123456789', N'SomeStreet', N'SomeCity',
+        N'SomeCountry', 0, 0, 1);
+----------------------------------------------Pizzas--------------------------------------
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (2, 1, N'pepperoni.svg', N'Pizza Pepperoni', 1, 89.0000, N'Pizza Pepperoni');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (1, 4, N'cheese_lover.svg', N' Phô mai cao cấp', 1, 109.0000, N'Cheese Lovers Pizza');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (5, 3, N'seafood_pesto.svg', N'Hải sản xốt pesto', 1, 109.0000, N' Seafood Pesto Pizza');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (5, 5, N'seafood_blackpepper.svg', N'Hải sản xốt tiêu đen', 1, 129.0000, N' Seafood BlackPepper Pizza');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (8, 5, N'chicken_deluxe.svg', N'Gà nướng nấm', 1, 129.0000, N' Chicken Deluxe Pizza');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (3, 2, N'bbq_beef.svg', N'Bò BBQ xốt cay Hàn Quốc', 1, 109.0000, N' Korean BBQ Spicy Beef Deluxe Pizza');
+--------------------------------------------Orders--------------------------------------------
+INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, Address, StatusId, Freight, RequiredDate, ShippedDate, Note)
+VALUES (1, N'2022-03-26 00:29:36.000', N'HaNoi', 3, 10.0000, null, null, N'More sauce');
+INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, Address, StatusId, Freight, RequiredDate, ShippedDate, Note)
+VALUES (1, N'2022-03-01 00:30:34.000', N'HoaLac', 4, 10.0000, N'2022-03-26 00:30:58.000', N'2022-03-26 00:30:59.000',
+        N'No chillis');
+INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, Address, StatusId, Freight, RequiredDate, ShippedDate, Note)
+VALUES (2, N'2022-03-26 00:31:29.000', N'HoaLac', 5, 10.0000, N'2022-03-26 00:31:44.000', N'2022-03-26 00:31:50.000',
+        N'Guest canceled');
+-------------------------------------OrderDetail-----------------------------------------
+INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
+VALUES (1, 3, 4, 2, 1, 3, null, 500.0000);
+INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
+VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
