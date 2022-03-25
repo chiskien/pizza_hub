@@ -1,6 +1,5 @@
-﻿@page
+﻿@page "{id}"
 @model PizzaHubWebApp.Pages.Admin.Member.EditMember
-
 @{
     Layout = null;
 }
@@ -12,8 +11,24 @@
     <title></title>
 </head>
 <body>
-<div>
-    
-</div>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+    <form method="post" asp-page-handler="Edit" enctype="multipart/form-data">
+        <input type="text" name="id" value=@Model.Member.MemberId hidden/>
+        Email* <input type="email" name="email" value=@Model.Member.Email required />
+        Password* <input type="password" name="pass" value=@Model.Member.Password required />
+        Date Of Birth <input type="date" name="dob" value=@Model.Member.Dob.Value.ToString("yyyy-MM-dd") />
+        Phone <input type="number" name="phone" value=@Model.Member.MobileNumber />
+        Address <input type="text" name="address" value=@Model.Member.Address />
+        City <input type="text" name="city" value=@Model.Member.City/>
+        Country <input type="text" name="country" value=@Model.Member.Country />
+        Avatar <input type="file" name="ava"/>
+        <input type="submit" />
+    </form>
 </body>
 </html>
