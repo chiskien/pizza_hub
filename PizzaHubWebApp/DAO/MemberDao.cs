@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PizzaHubWebApp.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PizzaHubWebApp.DAO
 {
@@ -29,6 +30,11 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Members.Add(member);
             _pizzaHubContext.SaveChanges();
         }
+        public void EditMember(Member member)
+        {
+            _pizzaHubContext.Entry<Member>(member).State = EntityState.Modified;
+            _pizzaHubContext.SaveChanges();
+        }
 
         public IEnumerable<Member> GetAllMembers()
         {
@@ -39,7 +45,10 @@ namespace PizzaHubWebApp.DAO
         }
         public Member GetMemberById(int id)
         {
-            return _pizzaHubContext.Members.Single(m => m.MemberId == id);
+            Member member = null;
+            member = _pizzaHubContext.Members.FirstOrDefault(m => m.MemberId == id);
+            return member;
+            //return _pizzaHubContext.Members.Single(m => m.MemberId == id);
         }
     }
 }
