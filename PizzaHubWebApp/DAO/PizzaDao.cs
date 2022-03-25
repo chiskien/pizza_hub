@@ -52,7 +52,24 @@ namespace PizzaHubWebApp.DAO
             var pizzaByCategory = _pizzaHubContext.Pizzas
                 .Where(x => x.CategoryId == categoryId)
                 .ToList();
+            foreach (var pizza in pizzaByCategory)
+            {
+                pizza.Category = GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = GetSauceById(pizza.SauceId);
+            }
+
             return pizzaByCategory;
+        }
+
+        public void AddPizza(Pizza newPizza)
+        {
+            Pizza existedPizza = _pizzaHubContext.Pizzas
+                .SingleOrDefault(p => p.PizzaId == newPizza.PizzaId);
+            if (existedPizza == null)
+            {
+                _pizzaHubContext.Pizzas.Add(newPizza);
+                _pizzaHubContext.SaveChanges();
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ namespace PizzaHubWebApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer();
+            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer("");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,6 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -20,7 +22,7 @@
 }
 
 .light:root {
-    --app-bg: #F7F7F7;
+    --app-bg: #fff;
     --sidebar: #F9E4D4;
     --app-content-secondary-color: #FFEDDB;
     --app-content-main-color: #1f1c2e;
@@ -218,8 +220,8 @@ body {
 .app-content-headerButton {
     background-color: var(--action-color);
     color: #fff;
+    text-decoration: none;
     font-size: 14px;
-    line-height: 24px;
     border: none;
     border-radius: 4px;
     height: 32px;
@@ -304,6 +306,7 @@ body {
     background-color: var(--app-content-secondary-color);
     border: 1px solid var(--app-content-secondary-color);
     display: flex;
+    padding: 8px 16px;
     align-items: center;
     color: var(--app-content-main-color);
     font-size: 14px;
@@ -434,8 +437,7 @@ body {
     padding: 0 4px;
 }
 
-.form-product-wrapper {
-    margin: 20px;
+.product-wrapper {
     width: 100%;
     max-height: 100%;
     overflow: auto;
@@ -660,6 +662,7 @@ body {
     padding: 8px 12px;
     transition: 0.2s;
     cursor: pointer;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
@@ -667,6 +670,7 @@ body {
     color: #FFFFFF;
 }
 
+/* check box custom */
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
@@ -781,6 +785,11 @@ body {
 .checkbox-icon svg {
     width: 3rem;
     height: 3rem;
+}
+
+.checkbox-icon img {
+    width: 2rem;
+    height: 2rem;
 }
 
 .checkbox-label {

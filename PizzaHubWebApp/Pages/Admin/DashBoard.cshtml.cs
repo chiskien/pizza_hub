@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
@@ -11,6 +12,9 @@ namespace PizzaHubWebApp.Pages.Admin
         private readonly CategoryDao _categoryDao;
         private readonly MemberDao _memberDao;
         private readonly DrinkDao _drinkDao;
+
+        [BindProperty] public int CategoryId { get; set; }
+        public bool Status { get; set; }
 
         public DashBoard(PizzaHubContext context)
         {
@@ -27,6 +31,15 @@ namespace PizzaHubWebApp.Pages.Admin
         {
             Categories = _categoryDao.GetCategories();
             Pizzas = _pizzaDao.GetPizzaList();
+        }
+
+        public void OnPost()
+        {
+            if (CategoryId != 0)
+                Pizzas = _pizzaDao.GetPizzasbyCategory(CategoryId);
+            else
+                Pizzas = _pizzaDao.GetPizzaList();
+            Categories = _categoryDao.GetCategories();
         }
     }
 }

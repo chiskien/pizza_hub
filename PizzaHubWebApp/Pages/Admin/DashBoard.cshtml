@@ -12,10 +12,10 @@
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
     </button>
-    <button class="app-content-headerButton"
-            onclick="location.href='/Admin/Pizza/CreatePizza'">
+    <a class="app-content-headerButton btn"
+       asp-page="/Admin/Pizza/CreatePizza">
         Add new Pizza
-    </button>
+    </a>
 </div>
 <div class="app-content-actions">
     <input class="search-bar" placeholder="Search..." type="text">
@@ -29,28 +29,31 @@
             </button>
             <div class="filter-menu">
                 <label>Category</label>
-                <select>
-                    @foreach (var item in Model.Categories)
-                    {
-                        <option value="@item.CategoryId">
-                            @item.Name
-                        </option>
-                    }
-                </select>
-                <label>Status</label>
-                <select>
-                    <option>All Status</option>
-                    <option>Active</option>
-                    <option>Disabled</option>
-                </select>
-                <div class="filter-menu-buttons">
-                    <button class="filter-button reset">
-                        Reset
-                    </button>
-                    <button class="filter-button apply">
-                        Apply
-                    </button>
-                </div>
+                <form method="post">
+                    <select asp-for="CategoryId">
+                        <option value="0">All Categories</option>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option value="@item.CategoryId">
+                                @item.Name
+                            </option>
+                        }
+                    </select>
+                    <label>Status</label>
+                    <select>
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Disabled</option>
+                    </select>
+                    <div class="filter-menu-buttons">
+                        <button class="filter-button reset" type="button">
+                            Reset
+                        </button>
+                        <button class="filter-button apply" type="submit">
+                            Apply
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <button class="action-button list active" title="List View">

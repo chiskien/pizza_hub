@@ -1,10 +1,12 @@
 ﻿
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  --app-bg: #101827;
+  --app-bg: #fff;
   --sidebar: rgba(21, 30, 47, 1);
   --sidebar-main-color: #fff;
   --table-border: #1a2131;
@@ -21,7 +23,7 @@
 }
 
 .light:root {
-  --app-bg: #F7F7F7;
+  --app-bg: #fff;
   --sidebar: #F9E4D4;
   --app-content-secondary-color: #FFEDDB;
   --app-content-main-color: #1f1c2e;
@@ -222,8 +224,8 @@ body {
   &-headerButton {
     background-color: var(--action-color);
     color: #fff;
+    text-decoration: none;
     font-size: $font-small;
-    line-height: 24px;
     border: none;
     border-radius: 4px;
     height: 32px;
@@ -313,6 +315,7 @@ body {
   background-color: var(--app-content-secondary-color);
   border: 1px solid var(--app-content-secondary-color);
   display: flex;
+  padding: 8px 16px;
   align-items: center;
   color: var(--app-content-main-color);
   font-size: $font-small;
@@ -449,7 +452,7 @@ body {
   padding: 0 4px;
 }
 
-.form-product-wrapper {
+.product-wrapper {
   width: 100%;
   max-height: 100%;
   overflow: auto;
@@ -457,6 +460,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &-form {
+
+  }
 }
 
 .tableView {
@@ -676,6 +683,7 @@ body {
   padding: 8px 12px;
   transition: .2s;
   cursor: pointer;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 
   &:hover {
     background-color: var(--action-color-hover);
@@ -683,6 +691,7 @@ body {
   }
 }
 
+/* check box custom */
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
@@ -697,7 +706,6 @@ body {
     margin: .5rem 0.5rem;
   }
 }
-
 
 .checkbox-group-legend {
   font-size: 1.5rem;
@@ -798,6 +806,11 @@ body {
   svg {
     width: 3rem;
     height: 3rem;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
   }
 }
 
