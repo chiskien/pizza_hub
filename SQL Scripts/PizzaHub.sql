@@ -29,8 +29,7 @@ DrinkId int not null primary key IDENTITY,
 Name nvarchar(200) not null,
 Brand  nvarchar(200),
 Image varchar(200),
-SizeId int not null,
-Price money not null,
+Price money,
 );
 go
 create table Members (
@@ -81,25 +80,18 @@ CategoryId int not null primary key IDENTITY,
 Name nvarchar(200) not null,
 )
 go
-create table Size (
-SizeId int not null primary key IDENTITY,
-Name char(5) not null,
-)
-go
 create table Pizza_Size (
-    PizzaId int not null foreign key references Pizzas(PizzaId),
-    SizeId int not null foreign key references Size(SizeId),
-    Price money not null,
+SizeId int not null primary key IDENTITY,
+Name char(50) not null,
+)
+create table Drink_Size (
+    SizeId int not null primary key IDENTITY,
+    Name char(5) not null
 )
 go
 create table Base (
 BaseId int not null primary key IDENTITY,
 Name nvarchar(200) not null,
-)
-go
-create table Pizza_Base (
-    PizzaId int not null foreign key references Pizzas(PizzaId),
-    BaseId int not null foreign key references Base(BaseId),
 )
 go
 create table Extras (
@@ -125,7 +117,7 @@ OrderId int not null foreign key references Orders(OrderId),
 PizzaId int foreign key references Pizzas(PizzaId),
 DrinkId int foreign key references Drinks(DrinkId),
 ExtraId int foreign key references Extras(ExtraId),
-Size nvarchar(20),
+PizzaSize int foreign key references PizzaSize(SizeId),
 Price money,
 Quantity int not null,
 Discount float

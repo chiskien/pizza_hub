@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
@@ -11,21 +13,17 @@ namespace PizzaHubWebApp.Pages.Admin.Pizza
         [BindProperty] public Models.Pizza PizzaModel { get; set; }
         private readonly CategoryDao _categoryDao;
         private readonly SauceDao _sauceDao;
-        private readonly PizzaSizeDao _pizzaSizeDao;
-        private readonly PizzaBaseDao _pizzaBaseDao;
+        private readonly PizzaDao _pizzaDao;
 
         public CreatePizza(PizzaHubContext context)
         {
+            _pizzaDao = new PizzaDao(context);
             _sauceDao = new SauceDao(context);
             _categoryDao = new CategoryDao(context);
-            _pizzaBaseDao = new PizzaBaseDao(context);
-            _pizzaSizeDao = new PizzaSizeDao(context);
         }
 
         public IEnumerable<Models.Category> Categories { get; set; }
         public IEnumerable<Sauce> Sauces { get; set; }
-        public List<PizzaSize> PizzaSizes { get; set; }
-        public List<PizzaBase> PizzaBases { get; set; }
 
         public void OnGet()
         {
@@ -33,8 +31,14 @@ namespace PizzaHubWebApp.Pages.Admin.Pizza
             Sauces = _sauceDao.GetAllSauces();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile pizzaImg)
         {
+            if (!ModelState.IsValid) return Page();
+            pizzaImg.CopyTo(new FileStream(
+                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
+                FileMode.Create));
+            PizzaModel.Image = pizzaImg.FileName;
+            _pizzaDao.AddPizza(PizzaModel);
             return RedirectToPage("/Admin/DashBoard");
         }
     }

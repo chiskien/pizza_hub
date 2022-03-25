@@ -14,19 +14,23 @@ namespace PizzaHubWebApp.Pages.Admin.Member
     public class CreateMember : PageModel
     {
         private readonly MemberDao _memberDao;
+
         public CreateMember(PizzaHubContext pizzaHubContext)
         {
             _memberDao = new MemberDao(pizzaHubContext);
         }
+
         public void OnGet()
         {
         }
-        public void OnPost(string email, string pass, DateTime dob, string phone, string address, string city, string country, IFormFile ava)
+
+        public void OnPost(string email, string pass, DateTime dob, string phone, string address, string city,
+            string country, IFormFile ava)
         {
-            Models.Member member = _memberDao.GetMemberByEmail(email);
+            var member = _memberDao.GetMemberByEmail(email);
             if (member == null)
             {
-                Models.Member m = new Models.Member();
+                var m = new Models.Member();
                 m.Email = email;
                 m.Password = pass;
                 m.Dob = dob;
@@ -34,18 +38,21 @@ namespace PizzaHubWebApp.Pages.Admin.Member
                 m.Address = address;
                 m.City = city;
                 m.Country = country;
-                if(ava != null)
+                if (ava != null)
                 {
-                    ava.CopyTo(new FileStream(System.IO.Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\"+ ava.FileName, FileMode.Create));
+                    ava.CopyTo(new FileStream(
+                        Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\" + ava.FileName,
+                        FileMode.Create));
                     m.Avatar = ava.FileName;
                 }
                 else
                 {
-                    DirectoryInfo d = new DirectoryInfo(System.IO.Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust");
-                    FileInfo[] Files = d.GetFiles("*.svg");
-                    Random r = new Random();
+                    var d = new DirectoryInfo(Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust");
+                    var Files = d.GetFiles("*.svg");
+                    var r = new Random();
                     m.Avatar = Files[r.Next(0, Files.Length)].Name;
                 }
+
                 _memberDao.AddMember(m);
                 ViewData["AddMessage"] = "Add success";
                 Response.Redirect("/Admin/Member/MemberManagement");

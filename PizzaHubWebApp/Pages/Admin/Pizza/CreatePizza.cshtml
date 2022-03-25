@@ -6,7 +6,7 @@
 }
 <h1 class=" text-center">Create Pizza</h1>
 <div class="product-wrapper">
-    <form method="post" style="height: -webkit-fill-available">
+    <form method="post" style="height: -webkit-fill-available" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="PizzaModel.Name">Pizza Name: </label>
             <input class="form-control" required asp-for="PizzaModel.Name" type="text">
@@ -32,8 +32,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="PizzaModel.Image">Image</label>
-            <input asp-for="PizzaModel.Image" type="file" class="form-control-file">
+            <label for="pizzaImg">Image</label>
+            <input name="pizzaImg" id="pizzaImg" type="file" class="form-control-file">
         </div>
         <div class="form-group">
             <label asp-for="PizzaModel.Description">Description</label>

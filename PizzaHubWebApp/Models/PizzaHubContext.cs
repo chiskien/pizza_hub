@@ -20,17 +20,16 @@ namespace PizzaHubWebApp.Models
         public virtual DbSet<Base> Bases { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Drink> Drinks { get; set; }
+        public virtual DbSet<DrinkSize> DrinkSizes { get; set; }
         public virtual DbSet<Extra> Extras { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MemberVoucher> MemberVouchers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Pizza> Pizzas { get; set; }
-        public virtual DbSet<PizzaBase> PizzaBases { get; set; }
         public virtual DbSet<PizzaSize> PizzaSizes { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Sauce> Sauces { get; set; }
-        public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Topping> Toppings { get; set; }
         public virtual DbSet<ToppingDetail> ToppingDetails { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
@@ -85,6 +84,22 @@ namespace PizzaHubWebApp.Models
                     .HasForeignKey(d => d.SizeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DrinkSize");
+            });
+
+            modelBuilder.Entity<DrinkSize>(entity =>
+            {
+                entity.HasKey(e => e.SizeId)
+                    .HasName("PK__Size__83BD097A511183E5");
+
+                entity.ToTable("DrinkSize");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Price).HasColumnType("money");
             });
 
             modelBuilder.Entity<Extra>(entity =>
@@ -191,12 +206,22 @@ namespace PizzaHubWebApp.Models
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
-                entity.Property(e => e.Size).HasMaxLength(20);
+                entity.HasOne(d => d.Base)
+                    .WithMany()
+                    .HasForeignKey(d => d.BaseId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_Base_BaseId_fk");
 
                 entity.HasOne(d => d.Drink)
                     .WithMany()
                     .HasForeignKey(d => d.DrinkId)
                     .HasConstraintName("FK__OrderDeta__Drink__7B5B524B");
+
+                entity.HasOne(d => d.DrinkSizeNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.DrinkSize)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail___fk_DrinkSize");
 
                 entity.HasOne(d => d.Extra)
                     .WithMany()
@@ -213,6 +238,12 @@ namespace PizzaHubWebApp.Models
                     .WithMany()
                     .HasForeignKey(d => d.PizzaId)
                     .HasConstraintName("FK__OrderDeta__Pizza__7A672E12");
+
+                entity.HasOne(d => d.PizzaSizeNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.PizzaSize)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail___fk_PizzaSize");
             });
 
             modelBuilder.Entity<Pizza>(entity =>
@@ -239,44 +270,18 @@ namespace PizzaHubWebApp.Models
                     .HasConstraintName("FK_PizzaSauce");
             });
 
-            modelBuilder.Entity<PizzaBase>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Pizza_Base");
-
-                entity.HasOne(d => d.Base)
-                    .WithMany()
-                    .HasForeignKey(d => d.BaseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Pizza_Bas__BaseI__5165187F");
-
-                entity.HasOne(d => d.Pizza)
-                    .WithMany()
-                    .HasForeignKey(d => d.PizzaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Pizza_Bas__Pizza__5070F446");
-            });
-
             modelBuilder.Entity<PizzaSize>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.SizeId)
+                    .HasName("PizzaSize_pk");
 
-                entity.ToTable("Pizza_Size");
+                entity.ToTable("PizzaSize");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(10);
 
                 entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.HasOne(d => d.Pizza)
-                    .WithMany()
-                    .HasForeignKey(d => d.PizzaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Pizza_Siz__Pizza__4BAC3F29");
-
-                entity.HasOne(d => d.Size)
-                    .WithMany()
-                    .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Pizza_Siz__SizeI__4CA06362");
             });
 
             modelBuilder.Entity<Rank>(entity =>
@@ -295,17 +300,6 @@ namespace PizzaHubWebApp.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(200);
-            });
-
-            modelBuilder.Entity<Size>(entity =>
-            {
-                entity.ToTable("Size");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Topping>(entity =>

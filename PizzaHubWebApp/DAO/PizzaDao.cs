@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaHubWebApp.Models;
 
 namespace PizzaHubWebApp.DAO
@@ -63,12 +65,29 @@ namespace PizzaHubWebApp.DAO
 
         public void AddPizza(Pizza newPizza)
         {
-            Pizza existedPizza = _pizzaHubContext.Pizzas
-                .SingleOrDefault(p => p.PizzaId == newPizza.PizzaId);
+            var existedPizza = GetPizzaById(newPizza.PizzaId);
             if (existedPizza == null)
             {
                 _pizzaHubContext.Pizzas.Add(newPizza);
                 _pizzaHubContext.SaveChanges();
+            }
+        }
+
+        public void EditPizza(Pizza pizza)
+        {
+            try
+            {
+                var existedPizza = GetPizzaById(pizza.PizzaId);
+                if (existedPizza != null)
+                {
+                    _pizzaHubContext.Entry(pizza).State = EntityState.Modified;
+                    _pizzaHubContext.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }

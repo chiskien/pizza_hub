@@ -14,6 +14,6 @@ namespace PizzaHubWebApp.Models
         public int SizeId { get; set; }
         public decimal Price { get; set; }
 
-        public virtual Size Size { get; set; }
+        public virtual DrinkSize Size { get; set; }
     }
 }

@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
@@ -27,8 +28,15 @@ namespace PizzaHubWebApp.Pages.Admin.Pizza
             Sauces = _sauceDao.GetAllSauces();
         }
 
-        public void OnPost()
+        public IActionResult OnPost(IFormFile pizzaImg)
         {
+            if (!ModelState.IsValid) return Page();
+            pizzaImg.CopyTo(new FileStream(
+                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
+                FileMode.Create));
+            PizzaModel.Image = pizzaImg.FileName;
+            _pizzaDao.EditPizza(PizzaModel);
+            return RedirectToPage("/Admin/DashBoard");
         }
 
         [BindProperty] public Models.Pizza PizzaModel { get; set; }
