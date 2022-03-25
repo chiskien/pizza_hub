@@ -331,3 +331,41 @@ alter table Members
     alter column DOB datetime null
 go
 
+alter table Size
+    add Price money
+go
+
+create table PizzaSize
+(
+    SizeId int identity
+        constraint PizzaSize_pk
+            primary key,
+    Name   nvarchar(10) not null
+)
+go
+exec sp_rename 'Size', DrinkSize, 'OBJECT'
+go
+alter table PizzaSize
+    add Price money not null default 0
+go
+UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Personal', Price = 109.0000 WHERE SizeId = 1;
+UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Regular', Price = 169.0000 WHERE SizeId = 2;
+UPDATE PizzaHub.dbo.PizzaSize SET Name = N'Large', Price = 249.0000 WHERE SizeId = 3;
+
+
+alter table OrderDetail
+    add constraint OrderDetail___fk_PizzaSize
+        foreign key (PizzaSize) references PizzaSize
+            on delete set null
+go
+alter table OrderDetail
+    add constraint OrderDetail___fk_DrinkSize
+        foreign key (DrinkSize) references DrinkSize
+            on delete set null
+go
+
+alter table OrderDetail
+    add constraint OrderDetail_Base_BaseId_fk
+        foreign key (BaseId) references Base
+            on delete set null
+go
