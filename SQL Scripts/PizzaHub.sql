@@ -351,4 +351,8 @@ VALUES (2, N'2022-03-26 00:31:29.000', N'HoaLac', 5, 10.0000, N'2022-03-26 00:31
 INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
 VALUES (1, 3, 4, 2, 1, 3, null, 500.0000);
 INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
+<<<<<<< HEAD
 VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
+=======
+VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
+

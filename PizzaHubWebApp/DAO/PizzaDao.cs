@@ -85,5 +85,23 @@ namespace PizzaHubWebApp.DAO
                 throw;
             }
         }
+
+        public void DeletePizza(Pizza pizza)
+        {
+            try
+            {
+                var existedPizza = GetPizzaById(pizza.PizzaId);
+                if (existedPizza != null)
+                {
+                    _pizzaHubContext.Pizzas.Remove(pizza);
+                    _pizzaHubContext.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

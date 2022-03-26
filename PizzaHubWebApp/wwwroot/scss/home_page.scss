@@ -1,7 +1,11 @@
 ﻿@import "variable";
 
 body {
-  background-color: $back-ground-color;
+  background-color: #FAF2F2;
+}
+
+.navbar {
+  font-size: $font-semi-medium;
 }
 
 .hero-section {
@@ -10,11 +14,11 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 3vh 0 13vh 0;
 
   &-left {
     width: 50%;
-    height: 100%;
-    padding: 8px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,12 +26,19 @@ body {
 
   &-right {
     width: 50%;
-    height: 100%;
-    padding: 8px;
+    height: 500px;
+
+    &:first-child {
+      margin-left: 20px;
+    }
   }
 
   .slogan-section {
     text-align: center;
+
+    &-text {
+      margin-bottom: 40px;
+    }
   }
 }
 
@@ -46,6 +57,18 @@ body {
   &:hover {
     background-image: $button-gradient-reverse;
   }
+
+  &-category {
+    background-color: $secondary-color;
+  }
 }
 
+.product-section {
+  margin: 40px 0;
+}
 
+.category-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

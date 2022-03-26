@@ -1,13 +1,20 @@
 ﻿@page
 @model IndexModel
-@{
 
-}
 <div class="container-fluid">
     <section class="hero-section">
         <div class="hero-section-left">
             <div class="slogan-section">
-                <h3>The Best Pizza Brand in The World</h3>
+                <h2 class="slogan-section-text">
+                    The Best Pizza Brand in The World
+                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/ocvcrrch.json"
+                        trigger="loop"
+                        colors="primary:#f4a09c"
+                        style="width:40px;height:40px">
+                    </lord-icon>
+                </h2>
                 <button class="btn btn-primary">Order now</button>
             </div>
         </div>
@@ -15,19 +22,43 @@
             <img src="~/Assets/Images/pizza chef.svg" alt="">
         </div>
     </section>
-    <div class="container">
-        <div class="product-section">
-            <div class="categories-section">
-                <ul class="category-list">
+    <div class="product-section-wrapper">
+        <div class="product-section-container">
+            <section class="categories-section">
+                <h3 class="text-center mb-3">Categories</h3>
+                <div class="category-list">
                     @foreach (var item in Model.Categories)
                     {
-                        <li>@item.CategoryName</li>
-                        <li>
-                            <img src="@item.Image" alt="@item.Image"/>
-                        </li>
+                        <a class="btn btn-light btn-primary-category">
+                            <img height="32x"
+                                 src="~/Assets/Images/Category/@item.Image" alt="@item.Image"/>
+                            @item.CategoryName
+                        </a>
                     }
-                </ul>
-            </div>
+                </div>
+            </section>
+            <section class="product-section">
+                <h3 class="text-center mb-3">Pizzas</h3>
+                <div class="row">
+                    @foreach (var pizza in Model.Pizzas)
+                    {
+                        <div class="col-lg-3">
+                            <div class="card box-shadow border-bottom border-light mb-3 text-center">
+                                <img class="card-img-top"
+                                     style="border-bottom: 0.5 solid grey"
+                                     src="~/Assets/Images/Pizza/@pizza.Image"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">@pizza.PizzaName</h4>
+                                    <p class="card-text">@pizza.Price</p>
+                                    <button class="btn btn-primary">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
         </div>
+
     </div>
 </div>
