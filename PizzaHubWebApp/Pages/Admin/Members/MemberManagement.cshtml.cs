@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 
-namespace PizzaHubWebApp.Pages.Admin.Member
+namespace PizzaHubWebApp.Pages.Admin.Members
 {
     public class MemberManagement : PageModel
     {
@@ -21,6 +20,6 @@ namespace PizzaHubWebApp.Pages.Admin.Member
             Members = _memberDao.GetAllMembers();
         }
 
-        public IEnumerable<Models.Member> Members { get; set; }
+        public IEnumerable<Member> Members { get; set; }
     }
 }

@@ -1,20 +1,21 @@
 ﻿@page
-@model PizzaHubWebApp.Pages.Admin.DashBoard
+@model PizzaHubWebApp.Pages.Admin.Categories.CategoryManagement
 
 @{
     Layout = "Shared/_Layout";
 }
+
 <div class="app-content-header">
-    <h1 class="app-content-headerText">Pizza Detail</h1>
+    <h1 class="app-content-headerText">Category</h1>
     <button class="mode-switch" title="Switch Theme">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
             <defs></defs>
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
     </button>
-    <a class="app-content-headerButton btn"
-       asp-page="/Admin/Pizzas/CreatePizza">
-        Add new Pizza
+    <a class="app-content-headerButton"
+       asp-page="/Admin/Category/CreateCategory">
+        Add new Categories
     </a>
 </div>
 <div class="app-content-actions">
@@ -29,31 +30,28 @@
             </button>
             <div class="filter-menu">
                 <label>Category</label>
-                <form method="post">
-                    <select asp-for="CategoryId">
-                        <option value="0">All Categories</option>
-                        @foreach (var item in Model.Categories)
-                        {
-                            <option value="@item.CategoryId">
-                                @item.CategoryName
-                            </option>
-                        }
-                    </select>
-                    <label>Status</label>
-                    <select>
-                        <option>All Status</option>
-                        <option>Active</option>
-                        <option>Disabled</option>
-                    </select>
-                    <div class="filter-menu-buttons">
-                        <button class="filter-button reset" type="button">
-                            Reset
-                        </button>
-                        <button class="filter-button apply" type="submit">
-                            Apply
-                        </button>
-                    </div>
-                </form>
+                <select>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.CategoryId">
+                            @item.CategoryName
+                        </option>
+                    }
+                </select>
+                <label>Status</label>
+                <select>
+                    <option>All Status</option>
+                    <option>Active</option>
+                    <option>Disabled</option>
+                </select>
+                <div class="filter-menu-buttons">
+                    <button class="filter-button reset">
+                        Reset
+                    </button>
+                    <button class="filter-button apply">
+                        Apply
+                    </button>
+                </div>
             </div>
         </div>
         <button class="action-button list active" title="List View">
@@ -68,17 +66,10 @@
         </button>
     </div>
 </div>
-<div class="products-area-wrapper  tableView">
+
+<div class="products-area-wrapper tableView">
     <div class="products-header">
-        <div class="product-cell image">
-            Pizza
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell cell-id">
+        <div class="product-cell id">
             ID
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
@@ -86,8 +77,8 @@
                 </svg>
             </button>
         </div>
-        <div class="product-cell category">
-            Category
+        <div class="product-cell image">
+            Image
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                     <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
@@ -95,7 +86,7 @@
             </button>
         </div>
         <div class="product-cell category">
-            Sauce
+            Category Name
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                     <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
@@ -103,66 +94,37 @@
             </button>
         </div>
         <div class="product-cell category">
-            Price
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell status-cell">
-            Status
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell">
             Action
+            <button class="sort-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
+                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                </svg>
+            </button>
         </div>
 
     </div>
-    @foreach (var pizza in Model.Pizzas)
+    @foreach (var category in Model.Categories)
     {
         <div class="products-row">
-            <div class="product-cell image">
-                <img src="~/Assets/Images/Pizza/@pizza.Image" alt="@pizza.Image">
-                <span class="cell-label">Title: </span><b>@pizza.PizzaName</b>
-            </div>
-            <div class="product-cell cell-id">
-                <span class="cell-label">Pizza Id:</span>@pizza.PizzaId
-            </div>
             <div class="product-cell category">
-                <span class="cell-label">Category:</span>@pizza.Category.CategoryName
+                <span class="cell-label">Pizza Id:</span>@category.CategoryId
             </div>
-            <div class="product-cell sauce">
-                <span class="cell-label">Sauce:</span>@pizza.Sauce.SauceName
-            </div>
-            <div class="product-cell sauce">
-                <span class="cell-label">Price: </span>@pizza.Price
-            </div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                @if (pizza.StatusId == 1)
-                {
-                    <span class="status active">@pizza.Status.Status1</span>
-                }
-                else
-                {
-                    <span class="status disabled">Out of Stock</span>
-                }
+            <div class="product-cell image">
+                <img src="~/Assets/Images/Pizza/@category.Image" alt="@category.Image">
             </div>
             <div class="product-cell">
-                <a asp-page="/Admin/Pizza/EditPizza"
-                   asp-route-id="@pizza.PizzaId"
-                   class="btn ">
-                    Edit
-                </a>
-                <form style="display: inline-block" asp-page-handler="Delete" method="post">
-                    <input type="text" hidden value="@pizza.PizzaId">
-                    <input class="btn" type="submit" value="Delete">
-                </form>
+                <b>@category.CategoryName</b>
+            </div>
+            <div class="product-cell">
+                <div class="">
+                    <a asp-page="/Admin/Pizza/Detail" class="btn">Detail</a>
+                    <a asp-page="/Admin/Pizza/EditPizza" class="btn">Edit</a>
+                    <form asp-page-handler="Delete" method="post"
+                          style="display: inline-block;">
+                        <input type="text" hidden value="@category.CategoryId">
+                        <input type="submit" value="Delete" class="btn">
+                    </form>
+                </div>
             </div>
         </div>
     }

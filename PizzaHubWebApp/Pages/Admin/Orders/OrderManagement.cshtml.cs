@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 
-namespace PizzaHubWebApp.Pages.Admin.Order
+namespace PizzaHubWebApp.Pages.Admin.Orders
 {
     public class OrderManagement : PageModel
     {
@@ -14,7 +14,7 @@ namespace PizzaHubWebApp.Pages.Admin.Order
             _orderDao = new OrderDao(context);
         }
 
-        public IEnumerable<Models.Order> Orders { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
 
         public void OnGet()
         {

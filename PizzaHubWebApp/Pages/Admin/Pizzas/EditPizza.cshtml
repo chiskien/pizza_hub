@@ -1,5 +1,5 @@
 ﻿@page "{id:int}"
-@model PizzaHubWebApp.Pages.Admin.Pizza.EditPizza
+@model PizzaHubWebApp.Pages.Admin.Pizzas.EditPizza
 
 @{
     Layout = "Shared/_Layout";
@@ -17,7 +17,7 @@
         <div class="form-group">
             <label asp-for="PizzaModel.PizzaName">Pizza Name: </label>
             <input class="form-control" required asp-for="PizzaModel.PizzaName"
-                   value="@Model.PizzaModel."
+                   value="@Model.PizzaModel.PizzaName"
                    type="text">
         </div>
         <div class="form-group">
@@ -50,7 +50,12 @@
         </div>
         <div class="form-group">
             <label asp-for="PizzaModel.Status"></label>
-            <select asp-for="PizzaModel.Status"></select>
+            <select asp-for="PizzaModel.Status">
+                @foreach (var status in Model.Statuses)
+                {
+                    <option value="@status.StatusId">@status.Status1</option>
+                }
+            </select>
         </div>
         <div class="form-group">
             <label asp-for="PizzaModel.Description">Description</label>

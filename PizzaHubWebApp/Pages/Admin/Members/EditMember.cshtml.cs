@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
-using System;
-using System.IO;
 
-namespace PizzaHubWebApp.Pages.Admin.Member
+namespace PizzaHubWebApp.Pages.Admin.Members
 {
     public class EditMember : PageModel
     {
-        public Models.Member Member { get; set; }
+        public Member Member { get; set; }
         private readonly MemberDao _memberDao;
 
         public EditMember(PizzaHubContext pizzaHubContext)
@@ -63,6 +63,7 @@ namespace PizzaHubWebApp.Pages.Admin.Member
                         }
                         catch (Exception)
                         {
+                            // ignored
                         }
 
                     _memberDao.EditMember(member);

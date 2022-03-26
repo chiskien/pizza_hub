@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 
-namespace PizzaHubWebApp.Pages.Admin.Member
+namespace PizzaHubWebApp.Pages.Admin.Members
 {
     public class CreateMember : PageModel
     {
@@ -30,7 +26,7 @@ namespace PizzaHubWebApp.Pages.Admin.Member
             var member = _memberDao.GetMemberByEmail(email);
             if (member == null)
             {
-                var m = new Models.Member();
+                var m = new Member();
                 m.Email = email;
                 m.Password = pass;
                 m.Dob = dob;

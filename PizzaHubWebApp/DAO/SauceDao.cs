@@ -17,5 +17,12 @@ namespace PizzaHubWebApp.DAO
         {
             return _context.Sauces.ToList();
         }
+
+        public Sauce GetSauceById(int? sauceId)
+        {
+            var sauce = _context.Sauces
+                .SingleOrDefault(c => c.SauceId == sauceId);
+            return sauce;
+        }
     }
 }

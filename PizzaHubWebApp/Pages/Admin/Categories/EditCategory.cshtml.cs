@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PizzaHubWebApp.Pages.Admin.Order
+namespace PizzaHubWebApp.Pages.Admin.Categories
 {
-    public class OrderDetail : PageModel
+    public class EditCategory : PageModel
     {
         public void OnGet()
         {

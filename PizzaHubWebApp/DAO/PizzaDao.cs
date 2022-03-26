@@ -9,10 +9,16 @@ namespace PizzaHubWebApp.DAO
     public class PizzaDao
     {
         private readonly PizzaHubContext _pizzaHubContext;
+        private readonly CategoryDao _categoryDao;
+        private readonly SauceDao _sauceDao;
+        private readonly StatusDao _statusDao;
 
         public PizzaDao(PizzaHubContext pizzaHubContext)
         {
             _pizzaHubContext = pizzaHubContext;
+            _statusDao = new StatusDao(pizzaHubContext);
+            _sauceDao = new SauceDao(pizzaHubContext);
+            _categoryDao = new CategoryDao(pizzaHubContext);
         }
 
         //return all pizzas
@@ -21,8 +27,9 @@ namespace PizzaHubWebApp.DAO
             var pizzaList = _pizzaHubContext.Pizzas.ToList();
             foreach (var pizza in pizzaList)
             {
-                pizza.Category = GetCategoryById(pizza.CategoryId);
-                pizza.Sauce = GetSauceById(pizza.SauceId);
+                pizza.Category = _categoryDao.GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = _sauceDao.GetSauceById(pizza.SauceId);
+                pizza.Status = _statusDao.GetStatusById(pizza.StatusId);
             }
 
             return pizzaList;
@@ -35,19 +42,6 @@ namespace PizzaHubWebApp.DAO
             return pizza;
         }
 
-        private Category GetCategoryById(int categoryId)
-        {
-            var cat = _pizzaHubContext.Categories
-                .Single(c => c.CategoryId == categoryId);
-            return cat;
-        }
-
-        private Sauce GetSauceById(int? sauceId)
-        {
-            var sauce = _pizzaHubContext.Sauces
-                .SingleOrDefault(c => c.SauceId == sauceId);
-            return sauce;
-        }
 
         public IEnumerable<Pizza> GetPizzasbyCategory(int categoryId)
         {
@@ -56,8 +50,9 @@ namespace PizzaHubWebApp.DAO
                 .ToList();
             foreach (var pizza in pizzaByCategory)
             {
-                pizza.Category = GetCategoryById(pizza.CategoryId);
-                pizza.Sauce = GetSauceById(pizza.SauceId);
+                pizza.Category = _categoryDao.GetCategoryById(pizza.CategoryId);
+                pizza.Sauce = _sauceDao.GetSauceById(pizza.SauceId);
+                pizza.Status = _statusDao.GetStatusById(pizza.StatusId);
             }
 
             return pizzaByCategory;

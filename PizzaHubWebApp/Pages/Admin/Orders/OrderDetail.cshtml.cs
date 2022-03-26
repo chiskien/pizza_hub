@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PizzaHubWebApp.Pages.Admin.Category
+namespace PizzaHubWebApp.Pages.Admin.Orders
 {
-    public class CreateCategory : PageModel
+    public class OrderDetail : PageModel
     {
         public void OnGet()
         {
+            
         }
     }
 }

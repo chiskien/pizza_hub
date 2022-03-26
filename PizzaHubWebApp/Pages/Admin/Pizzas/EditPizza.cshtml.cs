@@ -6,29 +6,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 
-namespace PizzaHubWebApp.Pages.Admin.Pizza
+namespace PizzaHubWebApp.Pages.Admin.Pizzas
 {
-    public class CreatePizza : PageModel
+    public class EditPizza : PageModel
     {
-        [BindProperty] public Models.Pizza PizzaModel { get; set; }
+        private readonly PizzaDao _pizzaDao;
         private readonly CategoryDao _categoryDao;
         private readonly SauceDao _sauceDao;
-        private readonly PizzaDao _pizzaDao;
+        private readonly StatusDao _statusDao;
 
-        public CreatePizza(PizzaHubContext context)
+        public EditPizza(PizzaHubContext context)
         {
-            _pizzaDao = new PizzaDao(context);
+            _statusDao = new StatusDao(context);
             _sauceDao = new SauceDao(context);
             _categoryDao = new CategoryDao(context);
+            _pizzaDao = new PizzaDao(context);
         }
 
-        public IEnumerable<Models.Category> Categories { get; set; }
-        public IEnumerable<Sauce> Sauces { get; set; }
-
-        public void OnGet()
+        public void OnGet(int id)
         {
+            PizzaModel = _pizzaDao.GetPizzaById(id);
             Categories = _categoryDao.GetCategories();
             Sauces = _sauceDao.GetAllSauces();
+            Statuses = _statusDao.GetAllStatus();
         }
 
         public IActionResult OnPost(IFormFile pizzaImg)
@@ -38,8 +38,13 @@ namespace PizzaHubWebApp.Pages.Admin.Pizza
                 Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
                 FileMode.Create));
             PizzaModel.Image = pizzaImg.FileName;
-            _pizzaDao.AddPizza(PizzaModel);
+            _pizzaDao.EditPizza(PizzaModel);
             return RedirectToPage("/Admin/DashBoard");
         }
+
+        [BindProperty] public Pizza PizzaModel { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Sauce> Sauces { get; set; }
+        public IEnumerable<Status> Statuses { get; set; }
     }
 }

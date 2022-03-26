@@ -20,5 +20,12 @@ namespace PizzaHubWebApp.DAO
             var categories = _pizzaHubContext.Categories.ToList();
             return categories;
         }
+
+        public Category GetCategoryById(int categoryId)
+        {
+            var cat = _pizzaHubContext.Categories
+                .Single(c => c.CategoryId == categoryId);
+            return cat;
+        }
     }
 }

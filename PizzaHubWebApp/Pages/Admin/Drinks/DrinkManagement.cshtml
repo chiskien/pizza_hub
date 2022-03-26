@@ -1,12 +1,11 @@
 ﻿@page
-@model PizzaHubWebApp.Pages.Admin.Member.MemberManagement
+@model PizzaHubWebApp.Pages.Admin.Drinks.DrinkManagement
 
 @{
     Layout = "Shared/_Layout";
 }
-
 <div class="app-content-header">
-    <h1 class="app-content-headerText">Pizza Detail</h1>
+    <h1 class="app-content-headerText">Drink Management</h1>
     <button class="mode-switch" title="Switch Theme">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
             <defs></defs>
@@ -15,7 +14,7 @@
     </button>
     <button class="app-content-headerButton"
             onclick="location.href='/Admin/Member/CreateMember'">
-        Add new Member
+        Add new Drink
     </button>
 </div>
 <div class="app-content-actions">
@@ -65,7 +64,7 @@
     <div class="products-header">
 
         <div class="product-cell image">
-            Member
+            Image
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                     <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
@@ -82,7 +81,7 @@
             </button>
         </div>
         <div class="product-cell category">
-            DateOfBirth
+            Drink Name
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                     <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
@@ -90,31 +89,7 @@
             </button>
         </div>
         <div class="product-cell status-cell">
-            PhoneNumber
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell sales">
-            Address
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell stock">
-            Point
-            <button class="sort-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                    <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="product-cell price">
-            Rank
+            Brand
             <button class="sort-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                     <path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
@@ -130,7 +105,7 @@
             </button>
         </div>
     </div>
-    @foreach (var pizza in Model.Members)
+    @foreach (var pizza in Model.Drinks)
     {
         <div class="products-row">
             <button class="cell-more-button">
@@ -139,23 +114,16 @@
                 </svg>
             </button>
             <div class="product-cell image">
-                <img src="~/Assets/Avatar/Bust/@pizza.Avatar" alt="@pizza.MemberId">
-                <b>@pizza.Email</b>
+                <img src="~/Assets/Avatar/Bust/@pizza.Image" alt="@pizza.DrinkId">
             </div>
             <div class="product-cell category">
-                <span class="cell-label">Member Id:</span>@pizza.MemberId
+                <span class="cell-label">Member Id:</span>@pizza.DrinkId
             </div>
             <div class="product-cell category">
-                <span class="cell-label">Date of Birth:</span>@pizza.Dob?.ToShortDateString()
-            </div>
-            <div class="product-cell sauce">
-                <span class="cell-label">Phone Number:</span>@pizza.PhoneNumber
+                <span class="cell-label">Drink Name:</span> <b>@pizza.DrinkName</b>
             </div>
             <div class="product-cell price">
-                <span class="cell-label">Address:</span>@pizza.Address
-            </div>
-            <div class="product-cell price">
-                <span class="cell-label">Point:</span>@pizza.Point
+                <span class="cell-label">Point:</span>@pizza.Brand
             </div>
             @* <div class="product-cell status-cell"> *@
             @*     <span class="cell-label">Status:</span> *@
@@ -168,12 +136,8 @@
             @*         <span class="status disabled">Out of Stock</span> *@
             @*     } *@
             @* </div> *@
-            <div class="product-cell stock">
-                <span class="cell-label">Rank:</span>@pizza.Rank.Rank1
-            </div>
             <div class="product-cell price">
-                <a href="" class="btn">Detail</a>
-                <a href="/Admin/Member/EditMember/@pizza.MemberId" class="btn">Edit</a>
+                <a href="" class="btn">Edit</a>
                 <a href="" class="btn">Delete</a>
             </div>
 
