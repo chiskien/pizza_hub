@@ -34,8 +34,8 @@
   --filter-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-$font-small: 14px;
-$font-medium: 16px;
+$font-small: 16px;
+$font-medium: 18px;
 $font-large: 32px;
 
 body, html {
@@ -47,7 +47,7 @@ body, html {
 
 body {
   overflow: hidden;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Sniglet, cursive, sans-serif;
   background-color: var(--app-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,10 +92,10 @@ body {
         display: flex;
         align-items: center;
         width: 100%;
-        padding: 10px 16px;
+        padding: 8px 12px;
         color: var(--sidebar-link);
         text-decoration: none;
-        font-size: $font-small;
+        font-size: $font-medium;
         line-height: 24px;
       }
 

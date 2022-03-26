@@ -1,5 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+* {
+    font-family: Sniglet, cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 a.navbar-brand {
     white-space: normal;
@@ -43,7 +49,7 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 @media (min-width: 768px) {
@@ -89,6 +95,3 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-* {
-    font-family: Sniglet, cursive;
-}

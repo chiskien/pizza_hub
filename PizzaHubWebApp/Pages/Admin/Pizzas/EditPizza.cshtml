@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label asp-for="PizzaModel.Status"></label>
-            <select asp-for="PizzaModel.Status">
+            <select asp-for="PizzaModel.Status" class="form-control">
                 @foreach (var status in Model.Statuses)
                 {
                     <option value="@status.StatusId">@status.Status1</option>

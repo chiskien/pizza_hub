@@ -51,12 +51,12 @@ namespace PizzaHubWebApp.Pages.Admin.Members
 
                 _memberDao.AddMember(m);
                 ViewData["AddMessage"] = "Add success";
-                Response.Redirect("/Admin/Member/MemberManagement");
+                Response.Redirect("/Admin/Members/MemberManagement");
             }
             else
             {
                 ViewData["AddMessage"] = "Add failed: email has been used";
-                Response.Redirect("/Admin/Member/MemberManagement");
+                Response.Redirect("/Admin/Members/MemberManagement");
             }
         }
     }

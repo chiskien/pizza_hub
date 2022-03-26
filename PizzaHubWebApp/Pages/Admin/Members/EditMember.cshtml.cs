@@ -27,7 +27,7 @@ namespace PizzaHubWebApp.Pages.Admin.Members
             }
             catch (Exception)
             {
-                Response.Redirect("/Admin/Member/MemberManagement");
+                Response.Redirect("/Admin/Members/MemberManagement");
             }
         }
 
@@ -68,17 +68,17 @@ namespace PizzaHubWebApp.Pages.Admin.Members
 
                     _memberDao.EditMember(member);
                     ViewData["AddMessage"] = "Add success";
-                    return Redirect("/Admin/Member/MemberManagement");
+                    return Redirect("/Admin/Members/MemberManagement");
                 }
                 else
                 {
                     ViewData["AddMessage"] = "Add failed: email has been used";
-                    return Redirect("/Admin/Member/MemberManagement");
+                    return Redirect("/Admin/Members/MemberManagement");
                 }
             }
             catch (Exception)
             {
-                return Redirect("/Admin/Member/MemberManagement");
+                return Redirect("/Admin/Members/MemberManagement");
             }
         }
     }
