@@ -13,20 +13,4 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
     </ItemGroup>
 
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Pages\HomePage\Home.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\User\Login.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\User\Profile.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\User\Register.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Order\EditOrder.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Order\OrderManagement.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Category\b.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Category\CategoryManagment.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Pages\Admin\Shared" />
-        <Folder Include="wwwroot\Assets\Icons" />
-    </ItemGroup>
-
 </Project>

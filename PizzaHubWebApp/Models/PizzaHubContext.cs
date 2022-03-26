@@ -17,22 +17,19 @@ namespace PizzaHubWebApp.Models
         {
         }
 
-        public virtual DbSet<Base> Bases { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Drink> Drinks { get; set; }
-        public virtual DbSet<DrinkSize> DrinkSizes { get; set; }
-        public virtual DbSet<Extra> Extras { get; set; }
         public virtual DbSet<Member> Members { get; set; }
-        public virtual DbSet<MemberVoucher> MemberVouchers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrdersDetail> OrdersDetails { get; set; }
         public virtual DbSet<Pizza> Pizzas { get; set; }
-        public virtual DbSet<PizzaSize> PizzaSizes { get; set; }
+        public virtual DbSet<PizzaBasis> PizzaBases { get; set; }
+        public virtual DbSet<PizzaToppingDetail> PizzaToppingDetails { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Sauce> Sauces { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Topping> Toppings { get; set; }
-        public virtual DbSet<ToppingDetail> ToppingDetails { get; set; }
-        public virtual DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,89 +40,41 @@ namespace PizzaHubWebApp.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<Base>(entity =>
-            {
-                entity.ToTable("Base");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
-            });
-
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.ToTable("Category");
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(100)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<Drink>(entity =>
             {
                 entity.Property(e => e.Brand).HasMaxLength(200);
 
-                entity.Property(e => e.Image)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
+                entity.Property(e => e.DrinkName)
                     .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.HasOne(d => d.Size)
-                    .WithMany(p => p.Drinks)
-                    .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DrinkSize");
-            });
-
-            modelBuilder.Entity<DrinkSize>(entity =>
-            {
-                entity.HasKey(e => e.SizeId)
-                    .HasName("PK__Size__83BD097A511183E5");
-
-                entity.ToTable("DrinkSize");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.Price).HasColumnType("money");
-            });
-
-            modelBuilder.Entity<Extra>(entity =>
-            {
-                entity.Property(e => e.ExtraName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(200)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Price).HasColumnType("money");
             });
 
             modelBuilder.Entity<Member>(entity =>
             {
-                entity.Property(e => e.Address).HasMaxLength(1000);
+                entity.Property(e => e.Address).HasMaxLength(255);
 
                 entity.Property(e => e.Avatar)
-                    .HasMaxLength(200)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.City).HasMaxLength(100);
+                entity.Property(e => e.City).HasMaxLength(255);
 
-                entity.Property(e => e.Country).HasMaxLength(100);
+                entity.Property(e => e.Country).HasMaxLength(255);
 
                 entity.Property(e => e.Dob)
                     .HasColumnType("datetime")
@@ -133,179 +82,188 @@ namespace PizzaHubWebApp.Models
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.MobileNumber).HasMaxLength(20);
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.RankId).HasDefaultValueSql("((6))");
+                entity.Property(e => e.RankId).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Role).HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.Rank)
                     .WithMany(p => p.Members)
                     .HasForeignKey(d => d.RankId)
-                    .HasConstraintName("FK_MemberRank");
-            });
-
-            modelBuilder.Entity<MemberVoucher>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.HasOne(d => d.Member)
-                    .WithMany()
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__MemberVou__Membe__440B1D61");
-
-                entity.HasOne(d => d.Voucher)
-                    .WithMany()
-                    .HasForeignKey(d => d.VoucherId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__MemberVou__Vouch__4316F928");
+                    .HasConstraintName("Members_Ranks_RankId_fk");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.Address).HasMaxLength(255);
 
                 entity.Property(e => e.Freight).HasColumnType("money");
 
-                entity.Property(e => e.Note).HasMaxLength(1000);
+                entity.Property(e => e.Note).HasMaxLength(255);
 
-                entity.Property(e => e.OrderDate).HasColumnType("date");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
-                entity.Property(e => e.RequiredDate).HasColumnType("date");
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ShippedDate).HasColumnType("date");
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Status)
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('Pending')");
+                entity.Property(e => e.StatusId).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.Member)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.MemberId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Orders_Members_MemberId_fk");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrdersMember");
+                    .HasConstraintName("Orders_Status_StatusId_fk");
             });
 
-            modelBuilder.Entity<OrderDetail>(entity =>
+            modelBuilder.Entity<OrdersDetail>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("OrderDetail");
+                entity.ToTable("OrdersDetail");
 
-                entity.Property(e => e.Price).HasColumnType("money");
+                entity.Property(e => e.Quantity).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TotalPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Base)
                     .WithMany()
                     .HasForeignKey(d => d.BaseId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("OrderDetail_Base_BaseId_fk");
+                    .HasConstraintName("OrdersDetail_PizzaBases_BaseId_fk");
 
                 entity.HasOne(d => d.Drink)
                     .WithMany()
                     .HasForeignKey(d => d.DrinkId)
-                    .HasConstraintName("FK__OrderDeta__Drink__7B5B524B");
-
-                entity.HasOne(d => d.DrinkSizeNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.DrinkSize)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("OrderDetail___fk_DrinkSize");
-
-                entity.HasOne(d => d.Extra)
-                    .WithMany()
-                    .HasForeignKey(d => d.ExtraId)
-                    .HasConstraintName("FK__OrderDeta__Extra__7C4F7684");
+                    .HasConstraintName("OrdersDetail_Drinks_DrinkId_fk");
 
                 entity.HasOne(d => d.Order)
                     .WithMany()
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Order__797309D9");
+                    .HasConstraintName("OrdersDetail_Orders_OrderId_fk");
 
                 entity.HasOne(d => d.Pizza)
                     .WithMany()
                     .HasForeignKey(d => d.PizzaId)
-                    .HasConstraintName("FK__OrderDeta__Pizza__7A672E12");
+                    .HasConstraintName("OrdersDetail_Pizzas_PizzaId_fk");
 
-                entity.HasOne(d => d.PizzaSizeNavigation)
+                entity.HasOne(d => d.Size)
                     .WithMany()
-                    .HasForeignKey(d => d.PizzaSize)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("OrderDetail___fk_PizzaSize");
+                    .HasForeignKey(d => d.SizeId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("OrdersDetail_Sizes_SizeId_fk");
             });
 
             modelBuilder.Entity<Pizza>(entity =>
             {
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(255);
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(200)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.PizzaName)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Pizzas)
                     .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PizzaCategory");
+                    .HasConstraintName("Pizzas_Categories_CategoryId_fk");
 
                 entity.HasOne(d => d.Sauce)
                     .WithMany(p => p.Pizzas)
                     .HasForeignKey(d => d.SauceId)
-                    .HasConstraintName("FK_PizzaSauce");
+                    .HasConstraintName("Pizzas_Sauces_SauceId_fk");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Pizzas)
+                    .HasForeignKey(d => d.StatusId)
+                    .HasConstraintName("Pizzas_Status_StatusId_fk");
             });
 
-            modelBuilder.Entity<PizzaSize>(entity =>
+            modelBuilder.Entity<PizzaBasis>(entity =>
             {
-                entity.HasKey(e => e.SizeId)
-                    .HasName("PizzaSize_pk");
+                entity.HasKey(e => e.BaseId)
+                    .HasName("PizzaBases_pk");
 
-                entity.ToTable("PizzaSize");
-
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Base)
                     .IsRequired()
-                    .HasMaxLength(10);
+                    .HasMaxLength(25);
+            });
 
-                entity.Property(e => e.Price).HasColumnType("money");
+            modelBuilder.Entity<PizzaToppingDetail>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Pizza_Topping_Detail");
+
+                entity.HasOne(d => d.Pizza)
+                    .WithMany()
+                    .HasForeignKey(d => d.PizzaId)
+                    .HasConstraintName("Pizza_Topping_Detail_Pizzas_PizzaId_fk");
+
+                entity.HasOne(d => d.Topping)
+                    .WithMany()
+                    .HasForeignKey(d => d.ToppingId)
+                    .HasConstraintName("Pizza_Topping_Detail_Toppings_ToppingId_fk");
             });
 
             modelBuilder.Entity<Rank>(entity =>
             {
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(255);
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Rank1)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(255)
+                    .HasColumnName("Rank");
             });
 
-            modelBuilder.Entity<Sauce>(entity =>
-            {
-                entity.ToTable("Sauce");
+            modelBuilder.Entity<Sauce>(entity => { entity.Property(e => e.SauceName).HasMaxLength(50); });
 
-                entity.Property(e => e.Name)
+            modelBuilder.Entity<Size>(entity =>
+            {
+                entity.Property(e => e.Size1)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(20)
+                    .HasColumnName("Size");
+            });
+
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.ToTable("Status");
+
+                entity.Property(e => e.Status1)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .HasColumnName("Status");
             });
 
             modelBuilder.Entity<Topping>(entity =>
             {
                 entity.Property(e => e.Image)
-                    .HasMaxLength(200)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ToppingName)
@@ -313,38 +271,6 @@ namespace PizzaHubWebApp.Models
                     .HasMaxLength(200);
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
-
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Toppings)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ToppingCategory");
-            });
-
-            modelBuilder.Entity<ToppingDetail>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.HasOne(d => d.Pizza)
-                    .WithMany()
-                    .HasForeignKey(d => d.PizzaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ToppingDe__Pizza__398D8EEE");
-
-                entity.HasOne(d => d.Topping)
-                    .WithMany()
-                    .HasForeignKey(d => d.ToppingId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ToppingDe__Toppi__3A81B327");
-            });
-
-            modelBuilder.Entity<Voucher>(entity =>
-            {
-                entity.Property(e => e.Description).HasMaxLength(1000);
-
-                entity.Property(e => e.VoucherCode)
-                    .IsRequired()
-                    .HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);

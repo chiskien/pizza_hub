@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace PizzaHubWebApp.Models
 {
-    public partial class PizzaBase
+    public partial class PizzaToppingDetail
     {
         public int PizzaId { get; set; }
-        public int BaseId { get; set; }
+        public int ToppingId { get; set; }
 
-        public virtual Base Base { get; set; }
         public virtual Pizza Pizza { get; set; }
+        public virtual Topping Topping { get; set; }
     }
 }

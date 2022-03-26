@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace PizzaHubWebApp.Models
 {
-    public partial class Base
+    public partial class PizzaBasis
     {
         public int BaseId { get; set; }
-        public string Name { get; set; }
+        public string Base { get; set; }
     }
 }

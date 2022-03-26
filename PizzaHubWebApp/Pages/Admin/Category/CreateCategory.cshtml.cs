@@ -6,7 +6,6 @@ namespace PizzaHubWebApp.Pages.Admin.Category
     {
         public void OnGet()
         {
-            
         }
     }
 }

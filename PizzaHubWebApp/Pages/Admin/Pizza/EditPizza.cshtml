@@ -15,9 +15,9 @@
                    type="text">
         </div>
         <div class="form-group">
-            <label asp-for="PizzaModel.Name">Pizza Name: </label>
-            <input class="form-control" required asp-for="PizzaModel.Name"
-                   value="@Model.PizzaModel.Name"
+            <label asp-for="PizzaModel.PizzaName">Pizza Name: </label>
+            <input class="form-control" required asp-for="PizzaModel.PizzaName"
+                   value="@Model.PizzaModel."
                    type="text">
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
             <select class="form-control" asp-for="PizzaModel.CategoryId">
                 @foreach (var cate in Model.Categories)
                 {
-                    <option value="@cate.CategoryId">@cate.Name</option>
+                    <option value="@cate.CategoryId">@cate.CategoryName</option>
                 }
             </select>
         </div>
@@ -36,7 +36,7 @@
             <select class="form-control" asp-for="PizzaModel.SauceId">
                 @foreach (var sauce in Model.Sauces)
                 {
-                    <option value="@sauce.SauceId">@sauce.Name</option>
+                    <option value="@sauce.SauceId">@sauce.SauceName</option>
                 }
             </select>
         </div>

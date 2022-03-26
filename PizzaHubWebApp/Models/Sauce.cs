@@ -13,7 +13,7 @@ namespace PizzaHubWebApp.Models
         }
 
         public int SauceId { get; set; }
-        public string Name { get; set; }
+        public string SauceName { get; set; }
 
         public virtual ICollection<Pizza> Pizzas { get; set; }
     }

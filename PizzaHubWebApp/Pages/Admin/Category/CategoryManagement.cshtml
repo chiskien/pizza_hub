@@ -34,7 +34,7 @@
                     @foreach (var item in Model.Categories)
                     {
                         <option value="@item.CategoryId">
-                            @item.Name
+                            @item.CategoryName
                         </option>
                     }
                 </select>
@@ -113,7 +113,7 @@
                 <img src="~/Assets/Images/Pizza/@category.Image" alt="@category.Image">
             </div>
             <div class="product-cell">
-                <h4>@category.Name</h4>
+                <h4>@category.CategoryName</h4>
             </div>
             <div class="product-cell">
                 <div class="">

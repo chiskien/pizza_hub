@@ -12,15 +12,17 @@ namespace PizzaHubWebApp.Pages.Admin.Member
     {
         public Models.Member Member { get; set; }
         private readonly MemberDao _memberDao;
+
         public EditMember(PizzaHubContext pizzaHubContext)
         {
             _memberDao = new MemberDao(pizzaHubContext);
         }
+
         public void OnGet(string id)
         {
             try
             {
-                int memberId = int.Parse(id);
+                var memberId = int.Parse(id);
                 Member = _memberDao.GetMemberById(memberId);
             }
             catch (Exception)
@@ -28,37 +30,41 @@ namespace PizzaHubWebApp.Pages.Admin.Member
                 Response.Redirect("/Admin/Member/MemberManagement");
             }
         }
-        public IActionResult OnPostEdit(int id, string email, string pass, DateTime dob, string phone, string address, string city, string country, IFormFile ava)
+
+        public IActionResult OnPostEdit(int id, string email, string pass, DateTime dob, string phone, string address,
+            string city, string country, IFormFile ava)
         {
             try
             {
-                Models.Member member = _memberDao.GetMemberById(id);
+                var member = _memberDao.GetMemberById(id);
                 if (member != null)
                 {
-                    if(email.Trim() != member.Email.Trim())
+                    if (email.Trim() != member.Email.Trim())
                     {
-                        if(_memberDao.GetMemberByEmail(email.Trim()) != null)
-                        {
-                            throw new Exception("trung email");
-                        }
+                        if (_memberDao.GetMemberByEmail(email.Trim()) != null) throw new Exception("trung email");
                         member.Email = email;
                     }
+
                     member.Password = pass;
                     member.Dob = dob;
-                    member.MobileNumber = phone;
+                    member.PhoneNumber = phone;
                     member.Address = address;
                     member.City = city;
                     member.Country = country;
                     if (ava != null)
-                    {
                         try
                         {
-                            System.IO.File.Delete(Path.Combine(System.IO.Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\", member.Avatar));
-                            ava.CopyTo(new FileStream(System.IO.Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\" + ava.FileName, FileMode.Create));
+                            System.IO.File.Delete(Path.Combine(
+                                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\", member.Avatar));
+                            ava.CopyTo(new FileStream(
+                                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\" + ava.FileName,
+                                FileMode.Create));
                             member.Avatar = ava.FileName;
                         }
-                        catch (Exception) { }
-                    }
+                        catch (Exception)
+                        {
+                        }
+
                     _memberDao.EditMember(member);
                     ViewData["AddMessage"] = "Add success";
                     return Redirect("/Admin/Member/MemberManagement");
@@ -69,8 +75,9 @@ namespace PizzaHubWebApp.Pages.Admin.Member
                     return Redirect("/Admin/Member/MemberManagement");
                 }
             }
-            catch (Exception) {
-                    return Redirect("/Admin/Member/MemberManagement");
+            catch (Exception)
+            {
+                return Redirect("/Admin/Member/MemberManagement");
             }
         }
     }

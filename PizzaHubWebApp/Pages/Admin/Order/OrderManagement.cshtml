@@ -117,7 +117,7 @@
                 <span>@pizza.OrderDate.ToShortDateString()</span>
             </div>
             <div class="product-cell status-cell">
-                @switch (pizza.Status)
+                @switch (pizza.Status.Status1)
                 {
                     case "Reject":
                         <span class="status disable">@pizza.Status</span>

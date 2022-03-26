@@ -34,7 +34,7 @@ namespace PizzaHubWebApp.Pages.Admin.Member
                 m.Email = email;
                 m.Password = pass;
                 m.Dob = dob;
-                m.MobileNumber = phone;
+                m.PhoneNumber = phone;
                 m.Address = address;
                 m.City = city;
                 m.Country = country;

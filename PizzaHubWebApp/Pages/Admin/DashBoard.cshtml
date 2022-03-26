@@ -13,7 +13,7 @@
         </svg>
     </button>
     <a class="app-content-headerButton btn"
-       asp-page="/Admin/Pizza/CreatePizza">
+       asp-page="/Admin/Pizzas/CreatePizza">
         Add new Pizza
     </a>
 </div>
@@ -35,7 +35,7 @@
                         @foreach (var item in Model.Categories)
                         {
                             <option value="@item.CategoryId">
-                                @item.Name
+                                @item.CategoryName
                             </option>
                         }
                     </select>
@@ -125,22 +125,22 @@
             </button>
             <div class="product-cell image">
                 <img src="~/Assets/Images/Pizza/@pizza.Image" alt="@pizza.Image">
-                <span class="cell-label">Title: </span><b>@pizza.Name</b>
+                <span class="cell-label">Title: </span><b>@pizza.PizzaName</b>
             </div>
             <div class="product-cell cell-id">
                 <span class="cell-label">Pizza Id:</span>@pizza.PizzaId
             </div>
             <div class="product-cell category">
-                <span class="cell-label">Category:</span>@pizza.Category.Name
+                <span class="cell-label">Category:</span>@pizza.Category.CategoryName
             </div>
             <div class="product-cell sauce">
-                <span class="cell-label">Sauce:</span>@pizza.Sauce.Name
+                <span class="cell-label">Sauce:</span>@pizza.Sauce.SauceName
             </div>
             <div class="product-cell status-cell">
                 <span class="cell-label">Status:</span>
-                @if (pizza.Status)
+                @if (pizza.Status.Status1.Equals("Availiable"))
                 {
-                    <span class="status active">In Stock</span>
+                    <span class="status active">@pizza.Status.Status1</span>
                 }
                 else
                 {

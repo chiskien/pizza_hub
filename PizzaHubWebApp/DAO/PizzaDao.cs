@@ -28,7 +28,7 @@ namespace PizzaHubWebApp.DAO
             return pizzaList;
         }
 
-        public Pizza GetPizzaById(int pizzaId)
+        public Pizza GetPizzaById(int? pizzaId)
         {
             var pizza = _pizzaHubContext.Pizzas
                 .Single(p => p.PizzaId == pizzaId);
