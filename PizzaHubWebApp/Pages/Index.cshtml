@@ -24,7 +24,7 @@
     </section>
     <div class="product-section-wrapper">
         <div class="product-section-container">
-            <div class="categories-section">
+            <section class="categories-section">
                 <h3 class="text-center mb-3">Categories</h3>
                 <div class="category-list">
                     @foreach (var item in Model.Categories)
@@ -36,8 +36,8 @@
                         </a>
                     }
                 </div>
-            </div>
-            <div class="product-section">
+            </section>
+            <section class="product-section">
                 <h3 class="text-center mb-3">Pizzas</h3>
                 <div class="row">
                     @foreach (var pizza in Model.Pizzas)
@@ -57,7 +57,7 @@
                         </div>
                     }
                 </div>
-            </div>
+            </section>
         </div>
 
     </div>
