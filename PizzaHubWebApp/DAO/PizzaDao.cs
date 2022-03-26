@@ -100,5 +100,15 @@ namespace PizzaHubWebApp.DAO
                 throw;
             }
         }
+
+        public IEnumerable<Size> GetAllSize()
+        {
+            return _pizzaHubContext.Sizes.ToList();
+        }
+
+        public IEnumerable<PizzaBasis> GetAllBase()
+        {
+            return _pizzaHubContext.PizzaBases.ToList();
+        }
     }
 }
