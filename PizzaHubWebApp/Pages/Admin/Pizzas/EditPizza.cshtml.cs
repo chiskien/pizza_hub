@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +36,14 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
         {
             if (pizzaImg != null)
             {
+                pizzaImg.CopyTo(new FileStream(
+                    Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
+                    FileMode.Create));
+                PizzaModel.Image = pizzaImg.FileName;
             }
 
             _pizzaDao.EditPizza(PizzaModel);
+
             return RedirectToPage("/Admin/DashBoard");
         }
 
