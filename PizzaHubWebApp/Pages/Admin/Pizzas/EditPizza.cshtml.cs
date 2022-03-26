@@ -33,11 +33,10 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
 
         public IActionResult OnPost(IFormFile pizzaImg)
         {
-            if (!ModelState.IsValid) return Page();
-            pizzaImg.CopyTo(new FileStream(
-                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
-                FileMode.Create));
-            PizzaModel.Image = pizzaImg.FileName;
+            if (pizzaImg != null)
+            {
+            }
+
             _pizzaDao.EditPizza(PizzaModel);
             return RedirectToPage("/Admin/DashBoard");
         }

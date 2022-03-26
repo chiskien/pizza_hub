@@ -144,13 +144,23 @@
             </div>
             <div class="product-cell status-cell">
                 <span class="cell-label">Status:</span>
-                @if (pizza.StatusId == 1)
+                @switch (@pizza.Status.Status1)
                 {
-                    <span class="status active">@pizza.Status.Status1</span>
-                }
-                else
-                {
-                    <span class="status disabled">Out of Stock</span>
+                    case "Pending":
+                        <span class="status disabled">@pizza.Status.Status1</span>
+                        break;
+                    case "Out of Stock":
+                        <span class="status disabled">@pizza.Status.Status1</span>
+                        break;
+                    case "Canceled":
+                        <span class="status disabled">@pizza.Status.Status1</span>
+                        break;
+                    case "Approved":
+                        <span class="status active">@pizza.Status.Status1</span>
+                        break;
+                    case "Available":
+                        <span class="status active">@pizza.Status.Status1</span>
+                        break;
                 }
             </div>
             <div class="product-cell">
