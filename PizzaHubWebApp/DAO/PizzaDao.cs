@@ -35,9 +35,10 @@ namespace PizzaHubWebApp.DAO
             return pizzaList;
         }
 
-        public Pizza GetPizzaById(int? pizzaId)
+        public Pizza GetPizzaById(int pizzaId)
         {
             var pizza = _pizzaHubContext.Pizzas
+                .AsNoTracking()
                 .Single(p => p.PizzaId == pizzaId);
             return pizza;
         }
@@ -60,12 +61,8 @@ namespace PizzaHubWebApp.DAO
 
         public void AddPizza(Pizza newPizza)
         {
-            var existedPizza = GetPizzaById(newPizza.PizzaId);
-            if (existedPizza == null)
-            {
-                _pizzaHubContext.Pizzas.Add(newPizza);
-                _pizzaHubContext.SaveChanges();
-            }
+            _pizzaHubContext.Pizzas.Add(newPizza);
+            _pizzaHubContext.SaveChanges();
         }
 
         public void EditPizza(Pizza pizza)
