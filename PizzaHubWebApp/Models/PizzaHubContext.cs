@@ -17,6 +17,7 @@ namespace PizzaHubWebApp.Models
         {
         }
 
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Drink> Drinks { get; set; }
         public virtual DbSet<Member> Members { get; set; }
@@ -39,6 +40,41 @@ namespace PizzaHubWebApp.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Base).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.SizeId).HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.BaseNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.Base)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Cart_PizzaBases_BaseId_fk");
+
+                entity.HasOne(d => d.Member)
+                    .WithMany()
+                    .HasForeignKey(d => d.MemberId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Cart_Members_MemberId_fk");
+
+                entity.HasOne(d => d.Pizza)
+                    .WithMany()
+                    .HasForeignKey(d => d.PizzaId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Cart_Pizzas_PizzaId_fk");
+
+                entity.HasOne(d => d.Size)
+                    .WithMany()
+                    .HasForeignKey(d => d.SizeId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Cart_Sizes_SizeId_fk");
+            });
 
             modelBuilder.Entity<Category>(entity =>
             {
@@ -77,7 +113,7 @@ namespace PizzaHubWebApp.Models
                 entity.Property(e => e.Country).HasMaxLength(255);
 
                 entity.Property(e => e.Dob)
-                    .HasColumnType("datetime")
+                    .HasColumnType("date")
                     .HasColumnName("DOB");
 
                 entity.Property(e => e.Email)
@@ -90,9 +126,7 @@ namespace PizzaHubWebApp.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(255);
+                entity.Property(e => e.PhoneNumber).HasMaxLength(255);
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
