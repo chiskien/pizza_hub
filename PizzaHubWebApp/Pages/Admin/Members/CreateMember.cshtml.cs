@@ -20,7 +20,7 @@ namespace PizzaHubWebApp.Pages.Admin.Members
         {
         }
 
-        public void OnPost(string email, string pass, DateTime dob, string phone, string address, string city,
+        public void OnPost(string email, string pass, string role, DateTime dob, string phone, string address, string city,
             string country, IFormFile ava)
         {
             var member = _memberDao.GetMemberByEmail(email);
@@ -29,7 +29,15 @@ namespace PizzaHubWebApp.Pages.Admin.Members
                 var m = new Member();
                 m.Email = email;
                 m.Password = pass;
-                m.Dob = dob;
+                if (role == "Member")
+                {
+                    m.Role = false;
+                }
+                else m.Role = true;
+                if(dob > System.Data.SqlTypes.SqlDateTime.MinValue.Value && dob < System.Data.SqlTypes.SqlDateTime.MaxValue.Value)
+                {
+                    m.Dob = dob;
+                }
                 m.PhoneNumber = phone;
                 m.Address = address;
                 m.City = city;

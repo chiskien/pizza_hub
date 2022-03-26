@@ -1,8 +1,8 @@
 use
-master
+    master
 go
 create
-database PizzaHub
+    database PizzaHub
 go
 create table dbo.Categories
 (
@@ -12,7 +12,7 @@ create table dbo.Categories
     constraint Categories_pk
         primary key (CategoryId)
 )
-    go
+go
 
 create table dbo.Drinks
 (
@@ -23,7 +23,7 @@ create table dbo.Drinks
     constraint Drinks_pk
         primary key (DrinkId)
 )
-    go
+go
 
 create table dbo.PizzaBases
 (
@@ -32,7 +32,7 @@ create table dbo.PizzaBases
     constraint PizzaBases_pk
         primary key (BaseId)
 )
-    go
+go
 
 create table dbo.Ranks
 (
@@ -43,7 +43,7 @@ create table dbo.Ranks
     constraint Ranks_pk
         primary key (RankId)
 )
-    go
+go
 
 create table dbo.Members
 (
@@ -52,7 +52,7 @@ create table dbo.Members
     Password    varchar(255) not null,
     Avatar      varchar(255),
     DOB         datetime,
-    PhoneNumber nvarchar(255) not null,
+    PhoneNumber nvarchar(255),
     Address     nvarchar(255),
     City        nvarchar(255),
     Country     nvarchar(255),
@@ -65,7 +65,7 @@ create table dbo.Members
         foreign key (RankId) references dbo.Ranks
             on delete set default
 )
-    go
+go
 
 alter table dbo.Members
     add constraint DF__Members__Point__48CFD27E default 0 for Point
@@ -86,7 +86,7 @@ create table dbo.Sauces
     constraint Sauce_pk
         primary key (SauceId)
 )
-    go
+go
 
 create table dbo.Sizes
 (
@@ -95,7 +95,7 @@ create table dbo.Sizes
     constraint Sizes_pk
         primary key (SizeId)
 )
-    go
+go
 
 create table dbo.Status
 (
@@ -104,7 +104,7 @@ create table dbo.Status
     constraint Status_pk
         primary key (StatusId)
 )
-    go
+go
 
 create table dbo.Orders
 (
@@ -126,7 +126,7 @@ create table dbo.Orders
         foreign key (StatusId) references dbo.Status
             on delete set default
 )
-    go
+go
 
 alter table dbo.Orders
     add constraint DF__Orders__StatusId__4CA06362 default 1 for StatusId
@@ -140,7 +140,7 @@ create table dbo.Pizzas
     Image       varchar(255),
     Description nvarchar(255),
     StatusId    int,
-    Price       money not null,
+    Price       money         not null,
     PizzaName   nvarchar(200) not null,
     constraint Pizzas_pk
         primary key (PizzaId),
@@ -151,7 +151,7 @@ create table dbo.Pizzas
     constraint Pizzas_Status_StatusId_fk
         foreign key (StatusId) references dbo.Status
 )
-    go
+go
 
 create table dbo.OrdersDetail
 (
@@ -179,7 +179,7 @@ create table dbo.OrdersDetail
         foreign key (SizeId) references dbo.Sizes
             on delete cascade
 )
-    go
+go
 
 alter table dbo.OrdersDetail
     add constraint DF__OrdersDet__Quant__4E88ABD4 default 1 for Quantity
@@ -195,7 +195,7 @@ create table dbo.Toppings
     constraint Toppings_pk
         primary key (ToppingId)
 )
-    go
+go
 
 create table dbo.Pizza_Topping_Detail
 (
@@ -208,7 +208,7 @@ create table dbo.Pizza_Topping_Detail
         foreign key (ToppingId) references dbo.Toppings
             on delete cascade
 )
-    go
+go
 create table Cart
 (
     MemberId int
@@ -228,7 +228,8 @@ create table Cart
             references PizzaBases
             on delete cascade,
     Amount   int
-) go
+)
+go
 ----------------------------------------------Category----------------------------------------
 INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
 VALUES (N'Cheese', N'cheese.svg');
@@ -332,6 +333,11 @@ INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, Status
 VALUES (8, 5, N'chicken_deluxe.svg', N'Gà nướng nấm', 1, 129.0000, N' Chicken Deluxe Pizza');
 INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
 VALUES (3, 2, N'bbq_beef.svg', N'Bò BBQ xốt cay Hàn Quốc', 1, 109.0000, N' Korean BBQ Spicy Beef Deluxe Pizza');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (4, 1, N'meat_lovers.svg', N'Pizza Thịt và Xúc xích', 1, 129.0000, N'Pizza Thịt và Xúc xíchh');
+INSERT INTO PizzaHub.dbo.Pizzas (CategoryId, SauceId, Image, Description, StatusId, Price, PizzaName)
+VALUES (4, 1, N'hawaiian.svg', N'Pizza Hawaiian', 1, 89.0000, N'Pizza Hawaiian');
+
 --------------------------------------------Orders--------------------------------------------
 INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, Address, StatusId, Freight, RequiredDate, ShippedDate, Note)
 VALUES (1, N'2022-03-26 00:29:36.000', N'HaNoi', 3, 10.0000, null, null, N'More sauce');

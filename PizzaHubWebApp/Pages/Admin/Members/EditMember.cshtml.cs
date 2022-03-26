@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,14 @@ namespace PizzaHubWebApp.Pages.Admin.Members
     public class EditMember : PageModel
     {
         public Member Member { get; set; }
+        public IEnumerable<Rank> Rank { get; set; }
         private readonly MemberDao _memberDao;
+        private readonly RankDao _rankDao;
 
         public EditMember(PizzaHubContext pizzaHubContext)
         {
             _memberDao = new MemberDao(pizzaHubContext);
+            _rankDao = new RankDao(pizzaHubContext);
         }
 
         public void OnGet(string id)
@@ -24,6 +28,7 @@ namespace PizzaHubWebApp.Pages.Admin.Members
             {
                 var memberId = int.Parse(id);
                 Member = _memberDao.GetMemberById(memberId);
+                Rank = _rankDao.GetAllRanks();
             }
             catch (Exception)
             {
@@ -31,8 +36,8 @@ namespace PizzaHubWebApp.Pages.Admin.Members
             }
         }
 
-        public IActionResult OnPostEdit(int id, string email, string pass, DateTime dob, string phone, string address,
-            string city, string country, IFormFile ava)
+        public IActionResult OnPostEdit(int id, string email, string pass, string role, DateTime dob, string phone, string address,
+            string city, string country, int point, int rank, IFormFile ava)
         {
             try
             {
@@ -46,7 +51,15 @@ namespace PizzaHubWebApp.Pages.Admin.Members
                     }
 
                     member.Password = pass;
-                    member.Dob = dob;
+                    if (role == "Member")
+                    {
+                        member.Role = false;
+                    }
+                    else member.Role = true;
+                    if (dob > System.Data.SqlTypes.SqlDateTime.MinValue.Value && dob < System.Data.SqlTypes.SqlDateTime.MaxValue.Value)
+                    {
+                        member.Dob = dob;
+                    }
                     member.PhoneNumber = phone;
                     member.Address = address;
                     member.City = city;
@@ -65,7 +78,8 @@ namespace PizzaHubWebApp.Pages.Admin.Members
                         {
                             // ignored
                         }
-
+                    member.Point = point;
+                    member.RankId = rank;
                     _memberDao.EditMember(member);
                     ViewData["AddMessage"] = "Add success";
                     return Redirect("/Admin/Members/MemberManagement");

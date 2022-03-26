@@ -39,7 +39,7 @@ namespace PizzaHubWebApp.Pages
                 Response.Redirect("Login");
             }
         }
-        public void OnPostSignUp(string email, string pass)
+        public void OnPostSignUp(string email, string phone, string pass)
         {
             Member member = _memberDao.GetMemberByEmail(email);
             if (member == null)
@@ -47,10 +47,11 @@ namespace PizzaHubWebApp.Pages
                 Member m = new Member();
                 m.Email = email;
                 m.Password = pass;
+                m.PhoneNumber = phone;
                 _memberDao.AddMember(m);
                 HttpContext.Session.SetInt32("member", _memberDao.GetMemberByEmail(email).MemberId);
                 
-                DirectoryInfo d = new DirectoryInfo(System.IO.Path.GetPathRoot(@"..\..\..\")+ "PizzaHubWebApp\\wwwroot\\Assets\\Avatar\\Bust\\");
+                DirectoryInfo d = new DirectoryInfo(System.IO.Path.GetPathRoot(@"..\..\..\")+ "wwwroot\\Assets\\Avatar\\Bust\\");
                 FileInfo[] Files = d.GetFiles("*.svg");
                 Random r = new Random();
                 m.Avatar = Files[r.Next(0, Files.Length)].Name;

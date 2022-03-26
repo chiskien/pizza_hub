@@ -1,6 +1,7 @@
 ﻿@page
 @model PizzaHubWebApp.Pages.Admin.Members.CreateMember
 @{
+    Layout = "Shared/_Layout";
 }
 <style>
     input::-webkit-outer-spin-button,
@@ -9,14 +10,56 @@
         margin: 0;
     }
 </style>
-<form method="post" enctype="multipart/form-data">
-    Email* <input type="email" name="email" required/>
-    Password* <input type="password" name="pass" placeholder="Password" required/>
-    Date Of Birth <input type="date" name="dob"/>
-    Phone <input type="number" name="phone"/>
-    Address <input type="text" name="address"/>
-    City <input type="text" name="city"/>
-    Country <input type="text" name="country"/>
-    Avatar <input type="file" name="ava"/>
-    <input type="submit"/>
-</form>
+<h1 class=" text-center">Create Member</h1>
+<div class="product-wrapper">
+    <form method="post" style="height: -webkit-fill-available" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Email* </label>
+            <input type="email" class="form-control" name="email" required />
+        </div>
+        <div class="form-group">
+            <label>Password* </label>
+            <input type="password" class="form-control" name="pass" required />
+        </div>
+        <div class="form-group">
+            <label>Phone* </label>
+            <input type="number" class="form-control" name="phone" required />
+        </div>
+        <div class="form-group">
+            <label>Role </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="member" value="Member" checked>
+                <label class="form-check-label" for="member">
+                    Member
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="admin" value="Admin" checked>
+                <label class="form-check-label" for="admin">
+                    Admin
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Date Of Birth </label>
+            <input type="date" class="form-control" name="dob" />
+        </div>
+        <div class="form-group">
+            <label>Address </label>
+            <input type="text" class="form-control" name="address" />
+        </div>
+        <div class="form-group">
+            <label>City </label>
+            <input type="text" class="form-control" name="city" />
+        </div>
+        <div class="form-group">
+            <label>Country </label>
+            <input type="text" class="form-control" name="country" />
+        </div>
+        <div class="form-group">
+            <label>Avatar </label>
+            <input type="file" class="form-control" name="ava" />
+        </div>
+        <input type="submit" />
+    </form>
+</div>
