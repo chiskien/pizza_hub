@@ -1,5 +1,5 @@
 body {
-  background-color: #fbfcfc;
+  background-color: #FAF2F2;
 }
 
 .navbar {
@@ -16,19 +16,23 @@ body {
 }
 .hero-section-left {
   width: 50%;
-  height: 100%;
-  padding: 8px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .hero-section-right {
   width: 50%;
-  height: 100%;
-  padding: 8px;
+  height: 500px;
+}
+.hero-section-right:first-child {
+  margin-left: 20px;
 }
 .hero-section .slogan-section {
   text-align: center;
+}
+.hero-section .slogan-section-text {
+  margin-bottom: 40px;
 }
 
 .btn-primary {

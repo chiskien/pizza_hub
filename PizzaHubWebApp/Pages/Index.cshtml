@@ -5,7 +5,7 @@
     <section class="hero-section">
         <div class="hero-section-left">
             <div class="slogan-section">
-                <h2>
+                <h2 class="slogan-section-text">
                     The Best Pizza Brand in The World
                     <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
                     <lord-icon
@@ -43,9 +43,9 @@
                     @foreach (var pizza in Model.Pizzas)
                     {
                         <div class="col-lg-3">
-                            <div class="card shadow  border-dark mb-3 text-center">
+                            <div class="card box-shadow border-bottom border-light mb-3 text-center">
                                 <img class="card-img-top"
-                                     style="border-bottom: 1px solid black"
+                                     style="border-bottom: 0.5 solid grey"
                                      src="~/Assets/Images/Pizza/@pizza.Image"
                                      alt="Card image cap">
                                 <div class="card-body">

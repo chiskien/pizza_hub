@@ -1,7 +1,7 @@
 ﻿@import "variable";
 
 body {
-  background-color: #fbfcfc;
+  background-color: #FAF2F2;
 }
 
 .navbar {
@@ -18,8 +18,7 @@ body {
 
   &-left {
     width: 50%;
-    height: 100%;
-    padding: 8px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,12 +26,19 @@ body {
 
   &-right {
     width: 50%;
-    height: 100%;
-    padding: 8px;
+    height: 500px;
+
+    &:first-child {
+      margin-left: 20px;
+    }
   }
 
   .slogan-section {
     text-align: center;
+
+    &-text {
+      margin-bottom: 40px;
+    }
   }
 }
 
