@@ -1,4 +1,27 @@
-﻿@page
+﻿@page "{id}"
 @model PizzaHubWebApp.Pages.Detail
 
-<p>Fuck the police</p>
+<div class="container-fluid">
+    <section class="detail-section">
+        <div class="detail-section-left">
+            <img src="@Model.PizzaModel.Image" alt="">
+        </div>
+        <div class="detail-section-right">
+            <div class="detail-section">
+                <section>
+                    <h3>@Model.PizzaModel.PizzaName</h3>
+                    <p>@Model.PizzaModel.Description</p>
+                </section>
+                <form method="post">
+                    <div class="form-check">
+                        <label asp-for="CartModel.SizeId">Choose Size:</label>
+                        @foreach (var size in Model.Sizes)
+                        {
+                            <input type="radio" asp-for="CartModel.PizzaId"/>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
