@@ -27,5 +27,21 @@ namespace PizzaHubWebApp.DAO
                 .Single(c => c.CategoryId == categoryId);
             return cat;
         }
+        public Category GetCategoryById2(int categoryId)
+        {
+            Category category = null;
+            category = _pizzaHubContext.Categories.FirstOrDefault(c => c.CategoryId == categoryId);
+            return category;
+        }
+        public void AddCategory(Category category)
+        {
+            _pizzaHubContext.Categories.Add(category);
+            _pizzaHubContext.SaveChanges();
+        }
+        public void EditCategory(Category category)
+        {
+            _pizzaHubContext.Entry<Category>(category).State = EntityState.Modified;
+            _pizzaHubContext.SaveChanges();
+        }
     }
 }

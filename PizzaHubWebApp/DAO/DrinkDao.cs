@@ -20,5 +20,21 @@ namespace PizzaHubWebApp.DAO
             var drinks = _pizzaHubContext.Drinks.ToList();
             return drinks;
         }
+        public Drink GetDrinkById(int id)
+        {
+            Drink drink = null;
+            drink = _pizzaHubContext.Drinks.FirstOrDefault(m => m.DrinkId == id);
+            return drink;
+        }
+        public void AddDrink(Drink drink)
+        {
+            _pizzaHubContext.Drinks.Add(drink);
+            _pizzaHubContext.SaveChanges();
+        }
+        public void EditDrink(Drink drink)
+        {
+            _pizzaHubContext.Entry<Drink>(drink).State = EntityState.Modified;
+            _pizzaHubContext.SaveChanges();
+        }
     }
 }

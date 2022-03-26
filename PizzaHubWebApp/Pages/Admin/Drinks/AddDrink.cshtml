@@ -1,0 +1,23 @@
+﻿@page
+@model PizzaHubWebApp.Pages.Admin.Drinks.AddDrinkModel
+@{
+    Layout = "Shared/_Layout";
+}
+<h1 class=" text-center">Create Drink</h1>
+<div class="product-wrapper">
+    <form method="post" style="height: -webkit-fill-available" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Name* </label>
+            <input type="text" class="form-control" name="name" required />
+        </div>
+        <div class="form-group">
+            <label>Brand </label>
+            <input type="text" class="form-control" name="brand" />
+        </div>
+        <div class="form-group">
+            <label>Image </label>
+            <input type="file" class="form-control" name="image" />
+        </div>
+        <input type="submit" />
+    </form>
+</div>
