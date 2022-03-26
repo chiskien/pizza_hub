@@ -1,8 +1,6 @@
 ﻿@page
 @model IndexModel
-@{
 
-}
 <div class="container-fluid">
     <section class="hero-section">
         <div class="hero-section-left">
@@ -27,19 +25,36 @@
     <div class="product-section-wrapper">
         <div class="product-section-container">
             <div class="categories-section">
-                <ul class="category-list">
+                <h3 class="text-center mb-3">Categories</h3>
+                <div class="category-list">
                     @foreach (var item in Model.Categories)
                     {
-                        <li>@item.CategoryName</li>
-                        <li>
+                        <a class="btn btn-light btn-primary-category">
                             <img height="32x"
                                  src="~/Assets/Images/Category/@item.Image" alt="@item.Image"/>
-                        </li>
+                            @item.CategoryName
+                        </a>
                     }
-                </ul>
+                </div>
             </div>
             <div class="product-section">
-
+                <h3 class="text-center mb-3">Pizzas</h3>
+                <div class="row">
+                    @foreach (var pizza in Model.Pizzas)
+                    {
+                        <div class="col-lg-3">
+                            <div class="card border-dark mb-3 text-center">
+                                <img class="card-img-top" src="~/Assets/Images/Pizza/@pizza.Image"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">@pizza.PizzaName</h4>
+                                    <p class="card-text">@pizza.Price</p>
+                                    <button class="btn btn-primary">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
 

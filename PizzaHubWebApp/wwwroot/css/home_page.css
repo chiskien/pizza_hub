@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 30px 0;
+  margin: 3vh 0 13vh 0;
 }
 .hero-section-left {
   width: 50%;
@@ -44,6 +44,19 @@ body {
 }
 .btn-primary:hover {
   background-image: linear-gradient(135deg, #ff9a9e 100%, #fad0c4 99%, #fad0c4 0%);
+}
+.btn-primary-category {
+  background-color: #FFE2E2;
+}
+
+.product-section {
+  margin: 40px 0;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 /*# sourceMappingURL=home_page.css.map */
