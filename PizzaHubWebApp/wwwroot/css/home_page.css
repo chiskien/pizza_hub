@@ -1,3 +1,44 @@
+body {
+  background-color: #faf1e6;
+}
 
+.hero-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.hero-section-left {
+  width: 50%;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-section-right {
+  width: 50%;
+  height: 100%;
+  padding: 8px;
+}
+.hero-section .slogan-section {
+  text-align: center;
+}
+
+.btn-primary {
+  color: #fff;
+  font-weight: 600;
+  background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  box-shadow: 0px 10px 15px 2px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  vertical-align: bottom;
+  padding: 0.625rem 1.5rem 0.5rem;
+  line-height: 1.5;
+  outline: none;
+}
+.btn-primary:hover {
+  background-image: linear-gradient(135deg, #ff9a9e 100%, #fad0c4 99%, #fad0c4 0%);
+}
 
 /*# sourceMappingURL=home_page.css.map */

@@ -1,5 +1,51 @@
 ﻿@import "variable";
 
-.hero-section {
-
+body {
+  background-color: $back-ground-color;
 }
+
+.hero-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &-left {
+    width: 50%;
+    height: 100%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-right {
+    width: 50%;
+    height: 100%;
+    padding: 8px;
+  }
+
+  .slogan-section {
+    text-align: center;
+  }
+}
+
+
+.btn-primary {
+  color: $link-color;
+  font-weight: 600;
+  background-image: $button-gradient;
+  box-shadow: $button-box-shadow;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  padding: 0.625rem 1.5rem .5rem;
+  line-height: 1.5;
+  outline: none;
+
+  &:hover {
+    background-image: $button-gradient-reverse;
+  }
+}
+
+

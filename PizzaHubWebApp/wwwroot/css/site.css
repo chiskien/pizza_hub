@@ -15,30 +15,6 @@ a.navbar-brand {
 
 
 /* Provide sufficient contrast against white background */
-a {
-    color: #7C4DFF;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #7C4DFF;
-    border: none;
-    box-shadow: 0 8px 8px 2px rgba(0, 0, 0, 0.1);
-}
-
-.btn-ck {
-    color: #fff !important;
-    border: 0;
-    text-transform: uppercase;
-    vertical-align: bottom;
-    padding: 0.625rem 1.5rem .5rem;
-    line-height: 1.5;
-}
-
-.btn-primary:hover {
-    background-color: #6f42c1;
-}
-
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
