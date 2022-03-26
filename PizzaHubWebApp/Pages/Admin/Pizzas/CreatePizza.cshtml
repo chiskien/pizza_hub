@@ -12,6 +12,10 @@
             <input class="form-control" required asp-for="PizzaModel.PizzaName" type="text">
         </div>
         <div class="form-group">
+            <label asp-for="PizzaModel.Price">Pizza Price: </label>
+            <input class="form-control" asp-for="PizzaModel.Price" type="number">
+        </div>
+        <div class="form-group">
             <label asp-for="PizzaModel.CategoryId">
                 Category
             </label>
@@ -39,6 +43,15 @@
             <label asp-for="PizzaModel.Description">Description</label>
             <textarea required asp-for="PizzaModel.Description" class="form-control" type="textarea">
         </textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="PizzaModel.StatusId"></label>
+            <select asp-for="PizzaModel.StatusId" class="form-control">
+                @foreach (var status in Model.Statuses)
+                {
+                    <option value="@status.StatusId">@status.Status1</option>
+                }
+            </select>
         </div>
         <fieldset class="checkbox-group">
             <legend class="checkbox-group-legend">Choose your Toppings: </legend>

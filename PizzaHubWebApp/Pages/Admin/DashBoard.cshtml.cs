@@ -10,27 +10,26 @@ namespace PizzaHubWebApp.Pages.Admin
     {
         private readonly PizzaDao _pizzaDao;
         private readonly CategoryDao _categoryDao;
-        private readonly MemberDao _memberDao;
-        private readonly DrinkDao _drinkDao;
+        private readonly StatusDao _statusDao;
 
         [BindProperty] public int CategoryId { get; set; }
-        public bool Status { get; set; }
 
         public DashBoard(PizzaHubContext context)
         {
+            _statusDao = new StatusDao(context);
             _pizzaDao = new PizzaDao(context);
             _categoryDao = new CategoryDao(context);
-            _drinkDao = new DrinkDao(context);
-            _memberDao = new MemberDao(context);
         }
 
-        public IEnumerable<Models.Category> Categories { get; set; }
-        public IEnumerable<Models.Pizza> Pizzas { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Pizza> Pizzas { get; set; }
+        public IEnumerable<Status> Statuses { get; set; }
 
         public void OnGet()
         {
             Categories = _categoryDao.GetCategories();
             Pizzas = _pizzaDao.GetPizzaList();
+            Statuses = _statusDao.GetAllStatus();
         }
 
         public void OnPost()

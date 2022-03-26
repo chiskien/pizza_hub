@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,11 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
         private readonly CategoryDao _categoryDao;
         private readonly SauceDao _sauceDao;
         private readonly PizzaDao _pizzaDao;
+        private readonly StatusDao _statusDao;
 
         public CreatePizza(PizzaHubContext context)
         {
+            _statusDao = new StatusDao(context);
             _pizzaDao = new PizzaDao(context);
             _sauceDao = new SauceDao(context);
             _categoryDao = new CategoryDao(context);
@@ -24,11 +27,13 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
 
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Sauce> Sauces { get; set; }
+        public IEnumerable<Status> Statuses { get; set; }
 
         public void OnGet()
         {
             Categories = _categoryDao.GetCategories();
             Sauces = _sauceDao.GetAllSauces();
+            Statuses = _statusDao.GetAllStatus();
         }
 
         public IActionResult OnPost(IFormFile pizzaImg)
