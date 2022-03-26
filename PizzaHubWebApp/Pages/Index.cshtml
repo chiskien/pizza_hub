@@ -43,8 +43,10 @@
                     @foreach (var pizza in Model.Pizzas)
                     {
                         <div class="col-lg-3">
-                            <div class="card border-dark mb-3 text-center">
-                                <img class="card-img-top" src="~/Assets/Images/Pizza/@pizza.Image"
+                            <div class="card shadow  border-dark mb-3 text-center">
+                                <img class="card-img-top"
+                                     style="border-bottom: 1px solid black"
+                                     src="~/Assets/Images/Pizza/@pizza.Image"
                                      alt="Card image cap">
                                 <div class="card-body">
                                     <h4 class="card-title">@pizza.PizzaName</h4>
