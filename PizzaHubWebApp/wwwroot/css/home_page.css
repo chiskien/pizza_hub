@@ -1,5 +1,9 @@
 body {
-  background-color: #faf1e6;
+  background-color: #fbfcfc;
+}
+
+.navbar {
+  font-size: 20px;
 }
 
 .hero-section {
@@ -8,6 +12,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 30px 0;
 }
 .hero-section-left {
   width: 50%;
