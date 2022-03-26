@@ -52,7 +52,7 @@ create table dbo.Members
     Password    varchar(255) not null,
     Avatar      varchar(255),
     DOB         datetime,
-    PhoneNumber nvarchar(255) not null,
+    PhoneNumber nvarchar(255),
     Address     nvarchar(255),
     City        nvarchar(255),
     Country     nvarchar(255),
@@ -346,3 +346,4 @@ INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId
 VALUES (1, 3, 4, 2, 1, 3, null, 500.0000);
 INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
 VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
+
