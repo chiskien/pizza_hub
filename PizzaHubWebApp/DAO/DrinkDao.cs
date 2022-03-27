@@ -36,5 +36,10 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Entry<Drink>(drink).State = EntityState.Modified;
             _pizzaHubContext.SaveChanges();
         }
+        public void DeleteDrink(Drink drink)
+        {
+            _pizzaHubContext.Drinks.Remove(drink);
+            _pizzaHubContext.SaveChanges();
+        }
     }
 }

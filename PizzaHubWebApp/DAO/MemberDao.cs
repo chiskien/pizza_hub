@@ -35,7 +35,11 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Entry<Member>(member).State = EntityState.Modified;
             _pizzaHubContext.SaveChanges();
         }
-
+        public void DeleteMember(Member member)
+        {
+            _pizzaHubContext.Members.Remove(member);
+            _pizzaHubContext.SaveChanges();
+        }
         public IEnumerable<Member> GetAllMembers()
         {
             var rankDao = new RankDao(_pizzaHubContext);

@@ -118,11 +118,30 @@
             <div class="product-cell">
                 <div class="">
                     <a href="/Admin/Categories/EditCategory/@category.CategoryId" class="btn">Edit</a>
-                    <form asp-page-handler="Delete" method="post"
-                          style="display: inline-block;">
-                        <input type="text" hidden value="@category.CategoryId">
-                        <input type="submit" value="Delete" class="btn">
-                    </form>
+                    <a href="" class="btn" data-toggle="modal" data-target="#@category.CategoryName@category.CategoryId">Delete</a>
+
+                    <div class="modal fade" id="@category.CategoryName@category.CategoryId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want to delete @category.CategoryName?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <form method="post" asp-page-handler="Delete">
+                                        <input type="hidden" name="id" value="@category.CategoryId" />
+                                        <input type="submit" class="btn btn-primary" value="Yes" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
     </button>
-    <a class="app-content-headerButton btn" asp-page="/Admin/Drinks/DrinkManagement">
+    <a class="app-content-headerButton btn" asp-page="/Admin/Drinks/AddDrink">
         Add new Drink
     </a>
 </div>
@@ -135,10 +135,33 @@
             @*         <span class="status disabled">Out of Stock</span> *@
             @*     } *@
             @* </div> *@
-            <div class="product-cell price">
-                <a href="/Admin/Drinks/EditDrink/@pizza.DrinkId" class="btn">Edit</a>
-                <a href="" class="btn">Delete</a>
+        <div class="product-cell price">
+            <a href="/Admin/Drinks/EditDrink/@pizza.DrinkId" class="btn">Edit</a>
+            <a href="" class="btn" data-toggle="modal" data-target="#@pizza.DrinkName@pizza.DrinkId">Delete</a>
+
+            <div class="modal fade" id="@pizza.DrinkName@pizza.DrinkId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Do you want to delete @pizza.DrinkName?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="id" value="@pizza.DrinkId" />
+                                <input type="submit" class="btn btn-primary" value="Yes"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
         </div>
     }

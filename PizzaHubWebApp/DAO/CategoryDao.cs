@@ -43,5 +43,10 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Entry<Category>(category).State = EntityState.Modified;
             _pizzaHubContext.SaveChanges();
         }
+        public void DeleteCategory(Category category)
+        {
+            _pizzaHubContext.Categories.Remove(category);
+            _pizzaHubContext.SaveChanges();
+        }
     }
 }

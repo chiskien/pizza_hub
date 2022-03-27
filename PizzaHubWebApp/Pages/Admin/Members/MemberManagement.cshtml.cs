@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
@@ -21,5 +22,14 @@ namespace PizzaHubWebApp.Pages.Admin.Members
         }
 
         public IEnumerable<Member> Members { get; set; }
+        public IActionResult OnPostDelete(int id)
+        {
+            var d = _memberDao.GetMemberById(id);
+            if (d != null)
+            {
+                _memberDao.DeleteMember(d);
+            }
+            return Redirect("/Admin/Members/MemberManagement");
+        }
     }
 }
