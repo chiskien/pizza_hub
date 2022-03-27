@@ -80,15 +80,15 @@ body {
 /*----------------------------------------Detail-------------------------------*/
 .detail-section {
   width: 100%;
-  height: auto;
+  height: 600px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 3vh 0 13vh 0;
+  margin: 10vh;
 
   &-right {
     width: 50%;
-    height: 500px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,12 +96,12 @@ body {
 
   &-left {
     width: 50%;
-    height: 500px;
+    height: 100%;
   }
 
   &-information {
     &-text {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
   }
 }

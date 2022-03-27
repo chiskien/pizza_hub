@@ -19,22 +19,26 @@ namespace PizzaHubWebApp.DAO
             var toppings = _pizzaHubContext.Toppings.ToList();
             return toppings;
         }
-        public Topping GetToppingById(int id)
+
+        public Topping GetToppingById(int? id)
         {
             Topping topping = null;
             topping = _pizzaHubContext.Toppings.FirstOrDefault(m => m.ToppingId == id);
             return topping;
         }
+
         public void AddTopping(Topping topping)
         {
             _pizzaHubContext.Toppings.Add(topping);
             _pizzaHubContext.SaveChanges();
         }
+
         public void EditTopping(Topping topping)
         {
             _pizzaHubContext.Entry<Topping>(topping).State = EntityState.Modified;
             _pizzaHubContext.SaveChanges();
         }
+
         public void DeleteTopping(Topping topping)
         {
             _pizzaHubContext.Toppings.Remove(topping);

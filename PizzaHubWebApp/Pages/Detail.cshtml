@@ -13,6 +13,15 @@
                 <section class="detail-section-information-text">
                     <h2>@Model.PizzaModel.PizzaName</h2>
                     <p >@Model.PizzaModel.Description</p>
+                    <div class="category-list">
+                        @foreach (var topping in Model.ToppingByPizza)
+                        {
+                            <a class="btn btn-light">
+                                <img height="32x" src="~/Assets/Images/Ingredients/@topping.Topping.Image" alt=""/>
+                                @topping.Topping.ToppingName
+                            </a>
+                        }
+                    </div>
                 </section>
                 <section class="detail-section-information-text">
                     <form method="post">
