@@ -44,6 +44,17 @@ namespace PizzaHubWebApp.DAO
             return pizza;
         }
 
+        public IEnumerable<Pizza> GetPizzaByName(string name)
+        {
+            var pizza = _pizzaHubContext.Pizzas.Where(p => p.PizzaName.Contains(name.Trim())).ToList();
+            foreach (var p in pizza)
+            {
+                p.Category = _categoryDao.GetCategoryById(p.CategoryId.Value);
+                p.Sauce = _sauceDao.GetSauceById(p.SauceId);
+                p.Status = _statusDao.GetStatusById(p.StatusId);
+            }
+            return pizza;
+        }
         public Pizza GetPizzaByIdNoTracking(int pizzaId)
         {
             var pizza = _pizzaHubContext.Pizzas

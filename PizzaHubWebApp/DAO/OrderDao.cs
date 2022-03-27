@@ -8,12 +8,14 @@ namespace PizzaHubWebApp.DAO
     public class OrderDao
     {
         private readonly StatusDao _statusDao;
+        private readonly MemberDao _memberDao;
         private readonly PizzaHubContext _context;
 
         public OrderDao(PizzaHubContext context)
         {
             _context = context;
             _statusDao = new StatusDao(context);
+            _memberDao = new MemberDao(context);
         }
 
         public IEnumerable<Order> GetAllOrders()
@@ -36,7 +38,11 @@ namespace PizzaHubWebApp.DAO
 
         public Order GetOrderById(int orderId)
         {
-            return _context.Orders.Single(o => o.OrderId == orderId);
+            Order order = null;
+            order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            order.Member = _memberDao.GetMemberById(order.MemberId.Value);
+            order.Status = _statusDao.GetStatusById(order.StatusId);
+            return order;
         }
 
         public Order GetOrderByIdNoTracking(int orderId)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
+using System.Collections.Generic;
 
 namespace PizzaHubWebApp.Pages.Admin.Orders
 {
@@ -18,12 +19,13 @@ namespace PizzaHubWebApp.Pages.Admin.Orders
             _orderDao = new OrderDao(context);
         }
 
-        public OrdersDetail OrdersDetail { get; set; }
+        public IEnumerable<OrdersDetail> OrdersDetail { get; set; }
+        public Order Order { get; set; }
 
         public void OnGet(int id)
         {
-            OrdersDetail = _orderDetailDao.GetOrderDetailByOrderId(id);
-            OrdersDetail.Pizza = _pizzaDao.GetPizzaById(OrdersDetail.PizzaId.Value);
+            OrdersDetail = _orderDetailDao.GetOrdersDetailsByPizzaId(id);
+            Order = _orderDao.GetOrderById(id);
         }
     }
 }

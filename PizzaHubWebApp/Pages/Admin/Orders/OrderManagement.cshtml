@@ -135,8 +135,7 @@
                 <span>@order.Address</span>
             </div>
             <div class="product-cell">
-                <a asp-page="/Admin/Order/OrderDetail"
-                   asp-route-id="@order.OrderId"
+                <a href="/Admin/Orders/OrderDetail/@order.OrderId"
                    class="btn">
                     Detail
                 </a>
