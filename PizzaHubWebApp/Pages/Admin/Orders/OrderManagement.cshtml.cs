@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
@@ -18,7 +19,7 @@ namespace PizzaHubWebApp.Pages.Admin.Orders
 
         public IEnumerable<Order> Orders { get; set; }
         public IEnumerable<Status> Status { get; set; }
-        public int StatusId { get; set; }
+        [BindProperty] public int StatusId { get; set; }
 
         public void OnGet()
         {
@@ -28,6 +29,11 @@ namespace PizzaHubWebApp.Pages.Admin.Orders
 
         public void OnPost()
         {
+            if (StatusId != 0) Orders = _orderDao.GetAllOrderByStatus(StatusId);
+            else
+                Orders = _orderDao.GetAllOrders();
+
+            Status = _statusDao.GetAllStatus();
         }
     }
 }

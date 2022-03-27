@@ -31,6 +31,7 @@
                 <form method="post">
                     <label>Status</label>
                     <select asp-for="StatusId">
+                        <option value="0">All Categories</option>
                         @foreach (var item in Model.Status)
                         {
                             <option value="@item.StatusId">@item.Status1</option>
@@ -40,7 +41,7 @@
                         <button class="filter-button reset">
                             Reset
                         </button>
-                        <button class="filter-button apply">
+                        <button class="filter-button apply" type="submit">
                             Apply
                         </button>
                     </div>
