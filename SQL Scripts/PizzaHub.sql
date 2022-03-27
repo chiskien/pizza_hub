@@ -351,8 +351,46 @@ VALUES (2, N'2022-03-26 00:31:29.000', N'HoaLac', 5, 10.0000, N'2022-03-26 00:31
 INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
 VALUES (1, 3, 4, 2, 1, 3, null, 500.0000);
 INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
-<<<<<<< HEAD
-VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
-=======
 VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
 
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Anchovy', 5, 'anchovy.svg', 20);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Bacon', 3, 'bacon.svg', 20);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Basil', 11, 'basil.svg', 10);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Chili', 7, 'chili.svg', 15);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Mozzarella', 1, 'mozzarella.svg', 12);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Mushroom', 6, 'mushroom.svg', 10);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Olive', 11, 'olive.svg', 9);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Onion', 1, 'onion.svg', 7);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Pepper', 11, 'pepper.svg', 8);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Pepperoni', 2, 'pepperoni.svg', 18);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Prawn', 5, 'prawn.svg', 20);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'Sweetcorn', 11, 'sweetcorn.svg', 10);
+
+INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
+VALUES (N'tomato', 11, 'tomato.svg', 8);
+
+INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
+VALUES (N'Vegetable', N'vegetable.svg');

@@ -27,4 +27,23 @@
       <_ContentIncludedByDefault Remove="Pages\Admin\Pizza\EditPizza.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="ScaffoldingReadMe.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Pages\Shared\_LoginPartial.cshtml" />
+      <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+      <Content Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
+      <Content Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+      <Content Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+      <Content Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Areas\Identity\Pages\Account\Register.cshtml.cs" />
+      <Compile Remove="Areas\Identity\Pages\Account\Login.cshtml.cs" />
+      <Compile Remove="Areas\Identity\IdentityHostingStartup.cs" />
+    </ItemGroup>
+
 </Project>
