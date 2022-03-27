@@ -65,5 +65,11 @@ namespace PizzaHubWebApp.DAO
             _context.Remove(order);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Order> GetAllOrderByStatus(int statusId)
+        {
+            return _context.Orders.Where(s => s.StatusId == statusId)
+                .ToList();
+        }
     }
 }
