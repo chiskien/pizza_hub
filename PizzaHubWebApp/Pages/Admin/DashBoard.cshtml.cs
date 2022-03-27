@@ -40,6 +40,7 @@ namespace PizzaHubWebApp.Pages.Admin
             else
                 Pizzas = _pizzaDao.GetPizzaList();
             Categories = _categoryDao.GetCategories();
+            Statuses = _statusDao.GetAllStatus();
         }
 
         public IActionResult OnPostDelete(int id)
