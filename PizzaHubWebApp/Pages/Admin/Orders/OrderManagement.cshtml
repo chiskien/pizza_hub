@@ -28,23 +28,24 @@
                 </svg>
             </button>
             <div class="filter-menu">
-                <label>Category</label>
-                <select>
-                </select>
-                <label>Status</label>
-                <select>
-                    <option>All Status</option>
-                    <option>Active</option>
-                    <option>Disabled</option>
-                </select>
-                <div class="filter-menu-buttons">
-                    <button class="filter-button reset">
-                        Reset
-                    </button>
-                    <button class="filter-button apply">
-                        Apply
-                    </button>
-                </div>
+                <form method="post">
+                    <label>Status</label>
+                    <select asp-for="StatusId">
+                        <option value="0">All Categories</option>
+                        @foreach (var item in Model.Status)
+                        {
+                            <option value="@item.StatusId">@item.Status1</option>
+                        }
+                    </select>
+                    <div class="filter-menu-buttons">
+                        <button class="filter-button reset">
+                            Reset
+                        </button>
+                        <button class="filter-button apply" type="submit">
+                            Apply
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <button class="action-button list active" title="List View">

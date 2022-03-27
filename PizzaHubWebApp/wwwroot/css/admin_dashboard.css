@@ -629,7 +629,7 @@ body {
   clip-path: inset(100%);
   height: 1px;
   overflow: hidden;
-  position: absolute;
+  position: relative;
   white-space: nowrap;
   width: 1px;
 }
