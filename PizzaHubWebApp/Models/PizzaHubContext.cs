@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -34,7 +34,11 @@ namespace PizzaHubWebApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer("");
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server =(local); database = PizzaHub;uid=sa;pwd=sa;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -126,7 +130,9 @@ namespace PizzaHubWebApp.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PhoneNumber).HasMaxLength(255);
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
@@ -249,17 +255,20 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<PizzaToppingDetail>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.PizzaToppingId)
+                    .HasName("Pizza_Topping_Detail_pk");
 
                 entity.ToTable("Pizza_Topping_Detail");
 
+                entity.Property(e => e.PizzaToppingId).HasColumnName("Pizza_Topping_Id");
+
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.PizzaId)
                     .HasConstraintName("Pizza_Topping_Detail_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Topping)
-                    .WithMany()
+                    .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.ToppingId)
                     .HasConstraintName("Pizza_Topping_Detail_Toppings_ToppingId_fk");
             });
@@ -274,7 +283,10 @@ namespace PizzaHubWebApp.Models
                     .HasColumnName("Rank");
             });
 
-            modelBuilder.Entity<Sauce>(entity => { entity.Property(e => e.SauceName).HasMaxLength(50); });
+            modelBuilder.Entity<Sauce>(entity =>
+            {
+                entity.Property(e => e.SauceName).HasMaxLength(50);
+            });
 
             modelBuilder.Entity<Size>(entity =>
             {
