@@ -21,5 +21,9 @@ namespace PizzaHubWebApp.DAO
                 .ToList();
             return carts;
         }
+
+        public void AddToCart()
+        {
+        }
     }
 }
