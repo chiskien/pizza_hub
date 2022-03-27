@@ -35,5 +35,14 @@ namespace PizzaHubWebApp.Pages.Admin.Orders
 
             Status = _statusDao.GetAllStatus();
         }
+        public IActionResult OnPostDelete(int id)
+        {
+            var d = _orderDao.GetOrderById(id);
+            if (d != null)
+            {
+                _orderDao.DeleteOrder(d);
+            }
+            return Redirect("/Admin/Orders/OrderManagement");
+        }
     }
 }

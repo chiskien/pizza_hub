@@ -22,7 +22,13 @@ namespace PizzaHubWebApp.DAO
         {
             var orderList = _context.Orders.ToList();
             foreach (var order in orderList)
+            {
                 order.Status = _statusDao.GetStatusById(order.StatusId);
+                if (order.MemberId.HasValue)
+                {
+                    order.Member = _memberDao.GetMemberById(order.MemberId.Value);
+                }
+            }
             return orderList;
         }
 
@@ -40,7 +46,10 @@ namespace PizzaHubWebApp.DAO
         {
             Order order = null;
             order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
-            order.Member = _memberDao.GetMemberById(order.MemberId.Value);
+            if (order.MemberId.HasValue)
+            {
+                order.Member = _memberDao.GetMemberById(order.MemberId.Value);
+            }
             order.Status = _statusDao.GetStatusById(order.StatusId);
             return order;
         }
