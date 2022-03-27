@@ -52,8 +52,8 @@
                                     <h4 class="card-title">@pizza.PizzaName</h4>
 
                                     <p class="card-text">@pizza.Price</p>
+                                    <a asp-page="/Detail" asp-route-id="@pizza.PizzaId" class="btn">Detail</a>
                                     <button class="btn btn-primary">Add To Cart</button>
-                                    <a asp-page="/Detail" asp-route-id="@pizza.PizzaId" class="btn stretched-link">Detail</a>
                                 </div>
                             </div>
                         </div>

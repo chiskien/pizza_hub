@@ -4,22 +4,39 @@
 <div class="container-fluid">
     <section class="detail-section">
         <div class="detail-section-left">
-            <img src="@Model.PizzaModel.Image" alt="">
+            <img src="~/Assets/Images/Pizza/@Model.PizzaModel.Image" alt="">
         </div>
         <div class="detail-section-right">
             <div class="detail-section">
                 <section>
-                    <h3>@Model.PizzaModel.PizzaName</h3>
+                    <h2>@Model.PizzaModel.PizzaName</h2>
                     <p>@Model.PizzaModel.Description</p>
                 </section>
                 <form method="post">
-                    <div class="form-check">
-                        <label asp-for="CartModel.SizeId">Choose Size:</label>
-                        @foreach (var size in Model.Sizes)
-                        {
-                            <input type="radio" asp-for="CartModel.PizzaId"/>
-                        }
-                    </div>
+                    <h5>Choose Size:</h5>
+                    @foreach (var size in Model.Sizes)
+                    {
+                        <div class="form-check">
+                            <input type="radio" name="size" id="@size.SizeId"
+                                   value="@size.SizeId"
+                                   class="form-check-input"/>
+                            <label class="form-check-label">@size.Size1</label>
+                        </div>
+                    }
+
+                    <h5 >Choose Base: </h5>
+                    @foreach (var item in Model.Bases)
+                    {
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input"
+                                   name="base" id="@item.BaseId">
+                            <label for="@item.BaseId" class="form-check-label">
+                                @item.Base
+                            </label>
+                        </div>
+                    }
+
+
                 </form>
             </div>
         </div>
