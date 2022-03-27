@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
 using PizzaHubWebApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +26,9 @@ namespace PizzaHubWebApp.Pages
             if (member != null)
             {
                 //HttpContext.Session.SetInt32("member", member.MemberId);
+                var name = email.Split("@");
+                HttpContext.Session.SetString("name", name[0]);
+                HttpContext.Session.SetInt32("memberId", _memberDao.GetMemberByEmail(email).MemberId);
                 ViewData["LoginMessage"] = "Login success";
                 if (member.Role == true)
                     Response.Redirect("Admin/DashBoard");

@@ -33,5 +33,9 @@ namespace PizzaHubWebApp.Pages
             Bases = _pizzaDao.GetAllBase();
             TotalPrice = PizzaModel.Price;
         }
+
+        public void OnPost()
+        {
+        }
     }
 }
