@@ -27,10 +27,6 @@ body {
   &-right {
     width: 50%;
     height: 500px;
-
-    &:first-child {
-      margin-left: 20px;
-    }
   }
 
   .slogan-section {
@@ -71,4 +67,34 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+
+/*----------------------------------------Detail-------------------------------*/
+.detail-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 3vh 0 13vh 0;
+
+  &-right {
+    width: 50%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-left {
+    width: 50%;
+    height: 500px;
+  }
+
+  &-information {
+    &-text {
+      margin-bottom: 40px;
+    }
+  }
 }

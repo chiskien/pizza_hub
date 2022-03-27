@@ -25,9 +25,6 @@ body {
   width: 50%;
   height: 500px;
 }
-.hero-section-right:first-child {
-  margin-left: 20px;
-}
 .hero-section .slogan-section {
   text-align: center;
 }
@@ -61,6 +58,30 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+/*----------------------------------------Detail-------------------------------*/
+.detail-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 3vh 0 13vh 0;
+}
+.detail-section-right {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-section-left {
+  width: 50%;
+  height: 500px;
+}
+.detail-section-information-text {
+  margin-bottom: 40px;
 }
 
 /*# sourceMappingURL=home_page.css.map */

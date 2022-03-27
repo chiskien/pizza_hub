@@ -1,43 +1,51 @@
 ﻿@page "{id}"
 @model PizzaHubWebApp.Pages.Detail
-
+@{
+    Layout = "Shared/_Layout";
+}
 <div class="container-fluid">
     <section class="detail-section">
         <div class="detail-section-left">
             <img src="~/Assets/Images/Pizza/@Model.PizzaModel.Image" alt="">
         </div>
         <div class="detail-section-right">
-            <div class="detail-section">
-                <section>
+            <div class="detail-section-information">
+                <section class="detail-section-information-text">
                     <h2>@Model.PizzaModel.PizzaName</h2>
-                    <p>@Model.PizzaModel.Description</p>
+                    <p >@Model.PizzaModel.Description</p>
                 </section>
-                <form method="post">
-                    <h5>Choose Size:</h5>
-                    @foreach (var size in Model.Sizes)
-                    {
-                        <div class="form-check">
-                            <input type="radio" name="size" id="@size.SizeId"
-                                   value="@size.SizeId"
-                                   class="form-check-input"/>
-                            <label class="form-check-label">@size.Size1</label>
-                        </div>
-                    }
+                <section class="detail-section-information-text">
+                    <form method="post">
+                        <h5>Choose Size:</h5>
+                        @foreach (var size in Model.Sizes)
+                        {
+                            <div class="form-check">
+                                <input type="radio" name="size" id="@size.SizeId"
+                                       value="@size.SizeId"
+                                       class="form-check-input"/>
+                                <label class="form-check-label">
+                                    @size.Size1
+                                </label>
+                            </div>
+                        }
 
-                    <h5 >Choose Base: </h5>
-                    @foreach (var item in Model.Bases)
-                    {
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input"
-                                   name="base" id="@item.BaseId">
-                            <label for="@item.BaseId" class="form-check-label">
-                                @item.Base
-                            </label>
-                        </div>
-                    }
-
-
-                </form>
+                        <h5 >Choose Base: </h5>
+                        @foreach (var item in Model.Bases)
+                        {
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input"
+                                       name="base" id="@item.BaseId">
+                                <label for="@item.BaseId" class="form-check-label">
+                                    @item.Base
+                                </label>
+                            </div>
+                        }
+                        <section class="detail-section-information-text">
+                            <h2>Price: @Model.TotalPrice</h2>
+                        </section>
+                        <a class="btn btn-primary">Add to cart</a>
+                    </form>
+                </section>
             </div>
         </div>
     </section>

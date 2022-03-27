@@ -48,9 +48,8 @@
 </div>
 <img src="~/Assets/Images/Pizza/@Model.PizzaModel.Image" alt="">
 <div class="form-group">
-    <label for="pizzaImg">Image</label>
-    <input name="pizzaImg"
-           id="pizzaImg"
+    <label asp-for="@Model.PizzaModel.Image">Image</label>
+    <input asp-for="@Model.PizzaModel.Image"
            type="file"
            class="form-control-file">
 </div>
@@ -211,6 +210,6 @@
         </label>
     </div>
 </fieldset>
-<button type="submit" class="btn ">Create Pizza</button>
+<button type="submit" class="btn text-center">Update Pizza</button>
 </form>
 </div>

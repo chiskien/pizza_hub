@@ -19,12 +19,14 @@ namespace PizzaHubWebApp.Pages
         [BindProperty] public Cart CartModel { get; set; }
         public IEnumerable<Size> Sizes { get; set; }
         public IEnumerable<PizzaBasis> Bases { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public void OnGet(int id)
         {
             PizzaModel = _pizzaDao.GetPizzaById(id);
             Sizes = _pizzaDao.GetAllSize();
             Bases = _pizzaDao.GetAllBase();
+            TotalPrice = PizzaModel.Price;
         }
     }
 }

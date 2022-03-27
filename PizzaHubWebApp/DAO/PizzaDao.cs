@@ -42,6 +42,14 @@ namespace PizzaHubWebApp.DAO
             return pizza;
         }
 
+        public Pizza GetPizzaByIdNoTracking(int pizzaId)
+        {
+            var pizza = _pizzaHubContext.Pizzas
+                .AsNoTracking()
+                .Single(p => p.PizzaId == pizzaId);
+            return pizza;
+        }
+
 
         public IEnumerable<Pizza> GetPizzasbyCategory(int categoryId)
         {
@@ -66,24 +74,17 @@ namespace PizzaHubWebApp.DAO
 
         public void EditPizza(Pizza pizza)
         {
-            try
+            var existedPizza = GetPizzaByIdNoTracking(pizza.PizzaId);
+            if (existedPizza != null)
             {
-                var existedPizza = GetPizzaById(pizza.PizzaId);
-                if (existedPizza != null)
-                {
-                    _pizzaHubContext.Entry(pizza).State = EntityState.Modified;
-                    _pizzaHubContext.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                _pizzaHubContext.Entry(pizza).State = EntityState.Modified;
+                _pizzaHubContext.SaveChanges();
             }
         }
 
         public void DeletePizza(Pizza pizza)
         {
-            var existedPizza = GetPizzaById(pizza.PizzaId);
+            var existedPizza = GetPizzaByIdNoTracking(pizza.PizzaId);
             if (existedPizza != null)
             {
                 _pizzaHubContext.Pizzas.Remove(pizza);

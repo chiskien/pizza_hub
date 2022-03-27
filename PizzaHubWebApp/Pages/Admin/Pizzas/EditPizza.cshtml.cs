@@ -32,14 +32,15 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
             Statuses = _statusDao.GetAllStatus();
         }
 
-        public IActionResult OnPost(IFormFile pizzaImg)
+        public IActionResult OnPost(Pizza pizzaModel,IFormFile pizzaImg)
         {
             if (pizzaImg != null)
             {
                 try
                 {
                     System.IO.File.Delete(Path.Combine(
-                        Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\", PizzaModel.Image));
+                        Path.GetPathRoot(@"..\..\..\") +
+                        "wwwroot\\Assets\\Images\\Pizza\\", pizzaModel.Image));
                 }
                 catch (Exception)
                 {
@@ -47,16 +48,17 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
                 }
 
                 pizzaImg.CopyTo(new FileStream(
-                    Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
+                    Path.GetPathRoot(@"..\..\..\") +
+                    "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
                     FileMode.Create));
-                PizzaModel.Image = pizzaImg.FileName;
+                pizzaModel.Image = pizzaImg.FileName;
             }
 
-            _pizzaDao.EditPizza(PizzaModel);
+            _pizzaDao.EditPizza(pizzaModel);
             return RedirectToPage("/Admin/DashBoard");
         }
 
-        [BindProperty] public Pizza PizzaModel { get; set; }
+         public Pizza PizzaModel { get; set; }
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Sauce> Sauces { get; set; }
         public IEnumerable<Status> Statuses { get; set; }
