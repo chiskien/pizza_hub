@@ -1,0 +1,32 @@
+﻿@page "{id}"
+@model PizzaHubWebApp.Pages.Admin.Toppings.EditToppingModel
+@{
+    Layout = "Shared/_Layout";
+}
+<h1 class=" text-center">Edit Drink</h1>
+<div class="product-wrapper">
+    <form method="post" asp-page-handler="Edit" style="height: -webkit-fill-available" enctype="multipart/form-data">
+        <input type="text" name="id" value="@Model.Topping.ToppingId" hidden />
+        <div class="form-group">
+            <label>Name* </label>
+            <input type="text" class="form-control" name="name" value="@Model.Topping.ToppingName" required />
+        </div>
+        <div class="form-group">
+            <label for="cate">Category</label>
+            <select class="form-control" name="cate" id="cate">
+                @foreach (var r in Model.Categories)
+                {
+                    <option value="@r.CategoryId">@r.CategoryName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Image </label>
+            <input type="file" class="form-control" name="image" />
+        </div>
+        <input type="submit" />
+    </form>
+</div>
+<script>
+    document.querySelector("#cate").value = '@Model.Topping.CategoryId'
+</script>
