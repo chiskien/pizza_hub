@@ -12,7 +12,9 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="app-icon">
-                <img src="~/Assets/Images/Logo.svg" alt="">
+                <a asp-page="/Index">
+                    <img src="~/Assets/Images/Logo.svg" alt="">
+                </a>
             </div>
         </div>
         <ul class="sidebar-list">
@@ -55,6 +57,16 @@
                         style="width:32px;height:32px">
                     </lord-icon>
                     <span>Categories</span>
+                </a>
+            </li>
+            <li class="sidebar-list-item">
+                <a asp-page="/Admin/Toppings/ToppingManagement">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/aslgozpd.json"
+                        trigger="loop-on-hover"
+                        style="width:32px;height:32px">
+                    </lord-icon>
+                    <span>Toppings</span>
                 </a>
             </li>
             <li class="sidebar-list-item">

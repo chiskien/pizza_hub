@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar  sticky-top  navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">
                 <img src="Assets/Images/Logo.svg" height="120" alt="">
@@ -19,23 +19,32 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                <ul class="navbar-nav flex-grow-1">
-
-                    <li class="nav-item">
+            <div class="navbar-collapse collapse d-sm-inline-flex ">
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
+                    <li class="nav-item ">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Menu">Menu</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ml-2">
                         <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ml-2">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contact</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ml-2">
                         <a class="nav-link text-dark" asp-area="" asp-page="/User/Profile">Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ml-3">
                         <a class="btn btn-primary" asp-area="" asp-page="/Login">Login</a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a class="nav-link" asp-area="" asp-page="/Cart">
+                            <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/webtefou.json"
+                                trigger="loop-on-hover"
+                                style="width:32px;height:32px">
+                            </lord-icon>
+                        </a>
                     </li>
                 </ul>
             </div>

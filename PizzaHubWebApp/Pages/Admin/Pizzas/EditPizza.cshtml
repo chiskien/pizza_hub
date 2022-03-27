@@ -47,9 +47,11 @@
     </select>
 </div>
 <img src="~/Assets/Images/Pizza/@Model.PizzaModel.Image" alt="">
+<input type="text" asp-for="@Model.PizzaModel.Image" hidden>
 <div class="form-group">
     <label asp-for="@Model.PizzaModel.Image">Image</label>
-    <input asp-for="@Model.PizzaModel.Image"
+    <input name="pizzaImg"
+           id="@Model.PizzaModel.Image"
            type="file"
            class="form-control-file">
 </div>

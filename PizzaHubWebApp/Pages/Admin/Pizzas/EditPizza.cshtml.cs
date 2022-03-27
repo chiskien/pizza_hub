@@ -32,33 +32,22 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
             Statuses = _statusDao.GetAllStatus();
         }
 
-        public IActionResult OnPost(Pizza pizzaModel,IFormFile pizzaImg)
+        public IActionResult OnPost(IFormFile pizzaImg)
         {
             if (pizzaImg != null)
             {
-                try
-                {
-                    System.IO.File.Delete(Path.Combine(
-                        Path.GetPathRoot(@"..\..\..\") +
-                        "wwwroot\\Assets\\Images\\Pizza\\", pizzaModel.Image));
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-
                 pizzaImg.CopyTo(new FileStream(
                     Path.GetPathRoot(@"..\..\..\") +
                     "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
                     FileMode.Create));
-                pizzaModel.Image = pizzaImg.FileName;
+                PizzaModel.Image = pizzaImg.FileName;
             }
 
-            _pizzaDao.EditPizza(pizzaModel);
+            _pizzaDao.EditPizza(PizzaModel);
             return RedirectToPage("/Admin/DashBoard");
         }
 
-         public Pizza PizzaModel { get; set; }
+        [BindProperty] public Pizza PizzaModel { get; set; }
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Sauce> Sauces { get; set; }
         public IEnumerable<Status> Statuses { get; set; }

@@ -1,11 +1,18 @@
 ﻿@import "variable";
 
 body {
-  background-color: #FAF2F2;
+  background-color: $background-color;
 }
 
 .navbar {
   font-size: $font-semi-medium;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 60px;
 }
 
 .hero-section {
