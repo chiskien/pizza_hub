@@ -40,10 +40,12 @@
                         }
                     </select>
                     <label>Status</label>
-                    <select>
-                        <option>All Status</option>
-                        <option>Active</option>
-                        <option>Disabled</option>
+                    <select asp-for="StatusId">
+                        <option value="0">All Statuses</option>
+                        @foreach (var status in Model.Statuses)
+                        {
+                            <option value="@status.StatusId">@status.Status1 </option>
+                        }
                     </select>
                     <div class="filter-menu-buttons">
                         <button class="filter-button reset" type="button">
