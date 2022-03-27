@@ -36,6 +36,8 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
         {
             if (pizzaImg != null)
             {
+                System.IO.File.Delete(Path.Combine(
+                    Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Category\\", PizzaModel.Image));
                 pizzaImg.CopyTo(new FileStream(
                     Path.GetPathRoot(@"..\..\..\") +
                     "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,

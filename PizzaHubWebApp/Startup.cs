@@ -22,15 +22,12 @@ namespace PizzaHubWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSession();
-            services.AddMemoryCache();
             var connectionString = Configuration.GetConnectionString("PizzaHub");
             services.AddDbContext<PizzaHubContext>(
                 options => options.UseSqlServer(connectionString)
             );
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-            });
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,8 +43,6 @@ namespace PizzaHubWebApp
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseStaticFiles();
 
             app.UseSession();
 

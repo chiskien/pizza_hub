@@ -13,6 +13,7 @@ namespace PizzaHubWebApp.Pages.Admin
         private readonly StatusDao _statusDao;
 
         [BindProperty] public int CategoryId { get; set; }
+        public int StatusId { get; set; }
 
         public DashBoard(PizzaHubContext context)
         {
