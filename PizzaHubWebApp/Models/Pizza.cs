@@ -9,11 +9,7 @@ namespace PizzaHubWebApp.Models
     {
         public Pizza()
         {
-<<<<<<< HEAD
             OrdersDetails = new HashSet<OrdersDetail>();
-=======
-            OrderDetails = new HashSet<OrderDetail>();
->>>>>>> e34a30b89664f92c851f73bcf276ca6347ec97dd
             PizzaToppingDetails = new HashSet<PizzaToppingDetail>();
         }
 
