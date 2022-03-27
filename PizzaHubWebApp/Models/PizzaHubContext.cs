@@ -177,7 +177,8 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<OrdersDetail>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.OrderDetailId)
+                    .HasName("OrderDetail_pk");
 
                 entity.ToTable("OrdersDetail");
 
@@ -186,31 +187,34 @@ namespace PizzaHubWebApp.Models
                 entity.Property(e => e.TotalPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Base)
-                    .WithMany()
+                    .WithMany(p => p.OrdersDetails)
                     .HasForeignKey(d => d.BaseId)
-                    .HasConstraintName("OrdersDetail_PizzaBases_BaseId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_PizzaBases_BaseId_fk");
 
                 entity.HasOne(d => d.Drink)
-                    .WithMany()
+                    .WithMany(p => p.OrdersDetails)
                     .HasForeignKey(d => d.DrinkId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("OrdersDetail_Drinks_DrinkId_fk");
+                    .HasConstraintName("OrderDetail_Drinks_DrinkId_fk");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.OrdersDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("OrdersDetail_Orders_OrderId_fk");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("OrderDetail_Orders_OrderId_fk");
 
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.OrdersDetails)
                     .HasForeignKey(d => d.PizzaId)
-                    .HasConstraintName("OrdersDetail_Pizzas_PizzaId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Size)
-                    .WithMany()
+                    .WithMany(p => p.OrdersDetails)
                     .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("OrdersDetail_Sizes_SizeId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_Sizes_SizeId_fk");
             });
 
             modelBuilder.Entity<Pizza>(entity =>
@@ -255,21 +259,21 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<PizzaToppingDetail>(entity =>
             {
-                entity.HasKey(e => e.PizzaToppingId)
+                entity.HasKey(e => e.PizzaTopping)
                     .HasName("Pizza_Topping_Detail_pk");
 
                 entity.ToTable("Pizza_Topping_Detail");
 
-                entity.Property(e => e.PizzaToppingId).HasColumnName("Pizza_Topping_Id");
-
                 entity.HasOne(d => d.Pizza)
                     .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.PizzaId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Pizza_Topping_Detail_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Topping)
                     .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.ToppingId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Pizza_Topping_Detail_Toppings_ToppingId_fk");
             });
 

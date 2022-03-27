@@ -7,6 +7,11 @@ namespace PizzaHubWebApp.Models
 {
     public partial class Order
     {
+        public Order()
+        {
+            OrdersDetails = new HashSet<OrdersDetail>();
+        }
+
         public int OrderId { get; set; }
         public int? MemberId { get; set; }
         public DateTime OrderDate { get; set; }
@@ -19,5 +24,6 @@ namespace PizzaHubWebApp.Models
 
         public virtual Member Member { get; set; }
         public virtual Status Status { get; set; }
+        public virtual ICollection<OrdersDetail> OrdersDetails { get; set; }
     }
 }

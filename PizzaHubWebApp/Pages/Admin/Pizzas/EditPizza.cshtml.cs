@@ -39,7 +39,7 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
             SelectedToppings = new List<int>();
             foreach (var i in _pizzaToppingDetailDao.GetToppingByPizzaId(id))
             {
-                SelectedToppings.Add(i.ToppingId);
+                SelectedToppings.Add(i.ToppingId.Value);
             }
             
         }

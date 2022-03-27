@@ -98,7 +98,7 @@ namespace PizzaHubWebApp.DAO
                     foreach(var i in _pizzaToppingDetailDao.GetToppingByPizzaId(pizza.PizzaId))
                     {
                         PizzaToppingDetail pizzaTopping = null;
-                        pizzaTopping = _pizzaHubContext.PizzaToppingDetails.FirstOrDefault(p => p.PizzaToppingId == i.PizzaToppingId);
+                        pizzaTopping = _pizzaHubContext.PizzaToppingDetails.FirstOrDefault(p => p.PizzaTopping == i.PizzaTopping);
                         if(pizzaTopping != null)
                         {
                             _pizzaHubContext.Remove(pizzaTopping);

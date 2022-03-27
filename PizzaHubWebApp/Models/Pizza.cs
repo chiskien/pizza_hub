@@ -9,6 +9,7 @@ namespace PizzaHubWebApp.Models
     {
         public Pizza()
         {
+            OrdersDetails = new HashSet<OrdersDetail>();
             PizzaToppingDetails = new HashSet<PizzaToppingDetail>();
         }
 
@@ -24,6 +25,7 @@ namespace PizzaHubWebApp.Models
         public virtual Category Category { get; set; }
         public virtual Sauce Sauce { get; set; }
         public virtual Status Status { get; set; }
+        public virtual ICollection<OrdersDetail> OrdersDetails { get; set; }
         public virtual ICollection<PizzaToppingDetail> PizzaToppingDetails { get; set; }
     }
 }

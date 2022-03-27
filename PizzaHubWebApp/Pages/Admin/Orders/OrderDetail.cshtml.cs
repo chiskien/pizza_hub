@@ -23,7 +23,7 @@ namespace PizzaHubWebApp.Pages.Admin.Orders
         public void OnGet(int id)
         {
             OrdersDetail = _orderDetailDao.GetOrderDetailByOrderId(id);
-            OrdersDetail.Pizza = _pizzaDao.GetPizzaById(OrdersDetail.PizzaId);
+            OrdersDetail.Pizza = _pizzaDao.GetPizzaById(OrdersDetail.PizzaId.Value);
         }
     }
 }

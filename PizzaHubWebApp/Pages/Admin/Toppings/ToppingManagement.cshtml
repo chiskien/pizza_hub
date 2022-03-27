@@ -141,7 +141,7 @@
                     <span class="cell-label">Topping Name:</span> <b>@pizza.ToppingName</b>
                 </div>
                 <div class="product-cell price">
-                    <span class="cell-label">Category:</span>@if (@pizza.CategoryId.HasValue)@Model.categoryDao.GetCategoryById2(pizza.CategoryId.Value).CategoryName
+                    <span class="cell-label">Category:</span>@if(@pizza.CategoryId.HasValue)@Model.categoryDao.GetCategoryById2(pizza.CategoryId.Value).CategoryName
                 </div>
                 @* <div class="product-cell status-cell"> *@
                 @*     <span class="cell-label">Status:</span> *@
