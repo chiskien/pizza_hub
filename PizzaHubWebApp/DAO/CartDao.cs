@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PizzaHubWebApp.Models;
 
@@ -43,6 +44,20 @@ namespace PizzaHubWebApp.DAO
             };
             _context.Carts.Add(newCart);
             _context.SaveChanges();
+        }
+
+        public void CheckOut(Cart cart, string address, string note)
+        {
+            var order = new Order
+            {
+                Address = address,
+                MemberId = cart.MemberId,
+                StatusId = 3,
+                Note = note,
+                OrderDate = DateTime.Now
+            };
+            var orderDao = new OrderDao(_context);
+            orderDao.AddOrder(order);
         }
     }
 }
