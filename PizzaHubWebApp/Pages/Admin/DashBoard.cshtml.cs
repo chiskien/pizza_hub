@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
@@ -31,6 +32,7 @@ namespace PizzaHubWebApp.Pages.Admin
             Categories = _categoryDao.GetCategories();
             Pizzas = _pizzaDao.GetPizzaList();
             Statuses = _statusDao.GetAllStatus();
+            ViewData["name"] = HttpContext.Session.GetString("name");
         }
 
         public void OnPost()
@@ -49,16 +51,13 @@ namespace PizzaHubWebApp.Pages.Admin
             _pizzaDao.DeletePizza(pizza);
             return RedirectToPage("/Admin/DashBoard");
         }
+
         public IActionResult OnPostSearch(string search)
         {
             if (string.IsNullOrEmpty(search))
-            {
                 Pizzas = _pizzaDao.GetPizzaList();
-            }
             else
-            {
                 Pizzas = _pizzaDao.GetPizzaByName(search);
-            }
             Categories = _categoryDao.GetCategories();
             Statuses = _statusDao.GetAllStatus();
             return Page();

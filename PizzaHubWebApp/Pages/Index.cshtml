@@ -1,6 +1,7 @@
 ﻿@page
 @model IndexModel
 
+
 <div class="container-fluid">
     <section class="hero-section">
         <div class="hero-section-left">
@@ -53,9 +54,13 @@
 
                                     <p class="card-text">@pizza.Price</p>
                                     <a asp-page="/Detail" asp-route-id="@pizza.PizzaId" class="btn">Detail</a>
-                                    <button class="btn btn-primary">
-                                        Add To Cart
-                                    </button>
+
+                                    <form asp-page-handler="AddToCart">
+                                        <input name="id" value="@pizza.PizzaId" hidden>
+                                        <button class="btn btn-primary" type="submit">
+                                            Add To Cart
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

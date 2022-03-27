@@ -15,7 +15,7 @@ namespace PizzaHubWebApp.DAO
         }
 
         //return cart by user
-        public IEnumerable<Cart> GetCartsByMemberId(int memberId)
+        public IEnumerable<Cart> GetCartsByMemberId(int? memberId)
         {
             var carts = _context.Carts
                 .Where(u => u.MemberId == memberId)
@@ -23,7 +23,7 @@ namespace PizzaHubWebApp.DAO
             return carts;
         }
 
-        public void AddToCart(int pizzaId, int memeberId, int amount)
+        public void AddToCart(int pizzaId, int? memeberId, int amount)
         {
             //find if pizza has already in cart
             var carts = GetCartsByMemberId(memeberId);
@@ -42,8 +42,7 @@ namespace PizzaHubWebApp.DAO
                 PizzaId = pizzaId,
                 Amount = amount
             };
-            _context.Carts.Add(newCart);
-            _context.SaveChanges();
+
         }
 
         public void CheckOut(Cart cart, string address, string note)
