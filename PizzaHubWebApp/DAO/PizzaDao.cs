@@ -73,16 +73,14 @@ namespace PizzaHubWebApp.DAO
             _pizzaHubContext.Pizzas.Add(newPizza);
             _pizzaHubContext.SaveChanges();
 
-            if(selected.Count > 0)
-            {
-                foreach(var i in selected)
+            if (selected.Count > 0)
+                foreach (var i in selected)
                 {
-                    PizzaToppingDetail pizzaTopping = new PizzaToppingDetail();
+                    var pizzaTopping = new PizzaToppingDetail();
                     pizzaTopping.PizzaId = newPizza.PizzaId;
                     pizzaTopping.ToppingId = i;
                     _pizzaToppingDetailDao.AddPizzaTopping(pizzaTopping);
                 }
-            }
         }
 
         public void EditPizza(Pizza pizza, List<int> selected)
@@ -95,19 +93,21 @@ namespace PizzaHubWebApp.DAO
 
                 if (selected.Count > 0)
                 {
-                    foreach(var i in _pizzaToppingDetailDao.GetToppingByPizzaId(pizza.PizzaId))
+                    foreach (var i in _pizzaToppingDetailDao.GetToppingByPizzaId(pizza.PizzaId))
                     {
                         PizzaToppingDetail pizzaTopping = null;
-                        pizzaTopping = _pizzaHubContext.PizzaToppingDetails.FirstOrDefault(p => p.PizzaToppingId == i.PizzaToppingId);
-                        if(pizzaTopping != null)
+                        pizzaTopping =
+                            _pizzaHubContext.PizzaToppingDetails.FirstOrDefault(p => p.PizzaTopping == i.PizzaTopping);
+                        if (pizzaTopping != null)
                         {
                             _pizzaHubContext.Remove(pizzaTopping);
                             _pizzaHubContext.SaveChanges();
                         }
                     }
+
                     foreach (var i in selected)
                     {
-                        PizzaToppingDetail pizzaTopping = new PizzaToppingDetail();
+                        var pizzaTopping = new PizzaToppingDetail();
                         pizzaTopping.PizzaId = pizza.PizzaId;
                         pizzaTopping.ToppingId = i;
                         _pizzaToppingDetailDao.AddPizzaTopping(pizzaTopping);

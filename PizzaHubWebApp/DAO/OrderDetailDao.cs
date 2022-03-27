@@ -15,9 +15,7 @@ namespace PizzaHubWebApp.DAO
 
         public OrdersDetail GetOrderDetailByOrderId(int orderId)
         {
-            var orderDetail = _pizzaHubContext.OrdersDetails
-                .Single(o => o.OrderId == orderId);
-            return orderDetail;
+            return null;
         }
     }
 }

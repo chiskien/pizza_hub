@@ -142,10 +142,8 @@
             </div>
             <div class="product-cell price">
                 <span class="cell-label">Category:</span>
-                @if
-                {
-                (@pizza.CategoryId.HasValue)@Model.categoryDao.GetCategoryById2(pizza.CategoryId.Value).CategoryName
-                }
+                @if(@pizza.CategoryId.HasValue)@Model.categoryDao.GetCategoryById2(pizza.CategoryId.Value).CategoryName
+
             </div>
             @* <div class="product-cell status-cell"> *@
             @*     <span class="cell-label">Status:</span> *@
