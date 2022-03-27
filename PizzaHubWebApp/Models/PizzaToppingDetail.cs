@@ -7,9 +7,9 @@ namespace PizzaHubWebApp.Models
 {
     public partial class PizzaToppingDetail
     {
-        public int PizzaId { get; set; }
+        public int PizzaTopping { get; set; }
+        public int? PizzaId { get; set; }
         public int ToppingId { get; set; }
-        public int PizzaToppingId { get; set; }
 
         public virtual Pizza Pizza { get; set; }
         public virtual Topping Topping { get; set; }

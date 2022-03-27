@@ -22,7 +22,7 @@ namespace PizzaHubWebApp.Models
         public virtual DbSet<Drink> Drinks { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrdersDetail> OrdersDetails { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Pizza> Pizzas { get; set; }
         public virtual DbSet<PizzaBasis> PizzaBases { get; set; }
         public virtual DbSet<PizzaToppingDetail> PizzaToppingDetails { get; set; }
@@ -37,7 +37,7 @@ namespace PizzaHubWebApp.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server =(local); database = PizzaHub;uid=sa;pwd=sa;");
+                optionsBuilder.UseSqlServer("server=CHISKIEN\\SQLEXPRESS; database=PizzaHub;uid=sa;pwd=sa;");
             }
         }
 
@@ -130,9 +130,7 @@ namespace PizzaHubWebApp.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(255);
+                entity.Property(e => e.PhoneNumber).HasMaxLength(255);
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
@@ -175,42 +173,43 @@ namespace PizzaHubWebApp.Models
                     .HasConstraintName("Orders_Status_StatusId_fk");
             });
 
-            modelBuilder.Entity<OrdersDetail>(entity =>
+            modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.ToTable("OrdersDetail");
+                entity.ToTable("OrderDetail");
 
                 entity.Property(e => e.Quantity).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TotalPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Base)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.BaseId)
-                    .HasConstraintName("OrdersDetail_PizzaBases_BaseId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_PizzaBases_BaseId_fk");
 
                 entity.HasOne(d => d.Drink)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.DrinkId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("OrdersDetail_Drinks_DrinkId_fk");
+                    .HasConstraintName("OrderDetail_Drinks_DrinkId_fk");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("OrdersDetail_Orders_OrderId_fk");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("OrderDetail_Orders_OrderId_fk");
 
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.PizzaId)
-                    .HasConstraintName("OrdersDetail_Pizzas_PizzaId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Size)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.SizeId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("OrdersDetail_Sizes_SizeId_fk");
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("OrderDetail_Sizes_SizeId_fk");
             });
 
             modelBuilder.Entity<Pizza>(entity =>
@@ -255,21 +254,21 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<PizzaToppingDetail>(entity =>
             {
-                entity.HasKey(e => e.PizzaToppingId)
+                entity.HasKey(e => e.PizzaTopping)
                     .HasName("Pizza_Topping_Detail_pk");
 
                 entity.ToTable("Pizza_Topping_Detail");
 
-                entity.Property(e => e.PizzaToppingId).HasColumnName("Pizza_Topping_Id");
-
                 entity.HasOne(d => d.Pizza)
                     .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.PizzaId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Pizza_Topping_Detail_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Topping)
                     .WithMany(p => p.PizzaToppingDetails)
                     .HasForeignKey(d => d.ToppingId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Pizza_Topping_Detail_Toppings_ToppingId_fk");
             });
 
