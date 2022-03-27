@@ -28,8 +28,8 @@
                 </svg>
             </button>
             <div class="filter-menu">
-                <label>Category</label>
                 <form method="post">
+                    <label>Category</label>
                     <select asp-for="CategoryId">
                         <option value="0">All Categories</option>
                         @foreach (var item in Model.Categories)
