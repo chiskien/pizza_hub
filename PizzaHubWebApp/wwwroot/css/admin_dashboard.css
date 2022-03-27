@@ -597,7 +597,9 @@ body {
   background-color: var(--action-color-hover);
   color: #FFFFFF;
 }
-
+.btn-dark {
+  background-color: #121212;
+}
 /* check box custom */
 .checkbox-group {
   display: flex;

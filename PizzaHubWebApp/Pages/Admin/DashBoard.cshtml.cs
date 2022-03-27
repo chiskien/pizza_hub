@@ -40,5 +40,12 @@ namespace PizzaHubWebApp.Pages.Admin
                 Pizzas = _pizzaDao.GetPizzaList();
             Categories = _categoryDao.GetCategories();
         }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            var pizza = _pizzaDao.GetPizzaById(id);
+            _pizzaDao.DeletePizza(pizza);
+            return RedirectToPage("/Admin/DashBoard");
+        }
     }
 }
