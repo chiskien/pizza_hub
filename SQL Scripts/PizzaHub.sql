@@ -153,38 +153,6 @@ create table dbo.Pizzas
 )
 go
 
-create table dbo.OrdersDetail
-(
-    OrderId    int   not null,
-    PizzaId    int   not null,
-    DrinkId    int,
-    SizeId     int,
-    BaseId     int,
-    Quantity   int default 1,
-    Discount   float,
-    TotalPrice money not null,
-    constraint OrdersDetail_Drinks_DrinkId_fk
-        foreign key (DrinkId) references dbo.Drinks
-            on delete set null,
-    constraint OrdersDetail_Orders_OrderId_fk
-        foreign key (OrderId) references dbo.Orders
-            on delete cascade,
-    constraint OrdersDetail_PizzaBases_BaseId_fk
-        foreign key (BaseId) references dbo.PizzaBases
-            on delete set default,
-    constraint OrdersDetail_Pizzas_PizzaId_fk
-        foreign key (PizzaId) references dbo.Pizzas
-            on delete cascade,
-    constraint OrdersDetail_Sizes_SizeId_fk
-        foreign key (SizeId) references dbo.Sizes
-            on delete cascade
-)
-go
-
-alter table dbo.OrdersDetail
-    add constraint DF__OrdersDet__Quant__4E88ABD4 default 1 for Quantity
-go
-
 create table dbo.Toppings
 (
     ToppingId   int identity,
@@ -195,19 +163,7 @@ create table dbo.Toppings
     constraint Toppings_pk
         primary key (ToppingId)
 )
-go
 
-create table dbo.Pizza_Topping_Detail
-(
-    PizzaId   int not null,
-    ToppingId int not null,
-    constraint Pizza_Topping_Detail_Pizzas_PizzaId_fk
-        foreign key (PizzaId) references dbo.Pizzas
-            on delete cascade,
-    constraint Pizza_Topping_Detail_Toppings_ToppingId_fk
-        foreign key (ToppingId) references dbo.Toppings
-            on delete cascade
-)
 go
 create table Cart
 (
@@ -348,10 +304,6 @@ INSERT INTO PizzaHub.dbo.Orders (MemberId, OrderDate, Address, StatusId, Freight
 VALUES (2, N'2022-03-26 00:31:29.000', N'HoaLac', 5, 10.0000, N'2022-03-26 00:31:44.000', N'2022-03-26 00:31:50.000',
         N'Guest canceled');
 -------------------------------------OrderDetail-----------------------------------------
-INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
-VALUES (1, 3, 4, 2, 1, 3, null, 500.0000);
-INSERT INTO PizzaHub.dbo.OrdersDetail (OrderId, PizzaId, DrinkId, SizeId, BaseId, Quantity, Discount, TotalPrice)
-VALUES (2, 4, null, 3, 2, 2, 0.2, 400.0000);
 
 INSERT INTO PizzaHub.dbo.Toppings(ToppingName, CategoryId, Image, UnitPrice)
 VALUES (N'Anchovy', 5, 'anchovy.svg', 20);
@@ -394,3 +346,51 @@ VALUES (N'tomato', 11, 'tomato.svg', 8);
 
 INSERT INTO PizzaHub.dbo.Categories (CategoryName, Image)
 VALUES (N'Vegetable', N'vegetable.svg');
+
+
+create table OrderDetail
+(
+    OrderDetailId int identity
+        constraint OrderDetail_pk
+            primary key,
+    OrderId       int
+        constraint OrderDetail_Orders_OrderId_fk
+            references Orders
+            on delete cascade,
+    PizzaId       int
+        constraint OrderDetail_Pizzas_PizzaId_fk
+            references Pizzas
+            on delete set null,
+    DrinkId       int
+        constraint OrderDetail_Drinks_DrinkId_fk
+            references Drinks
+            on delete set null,
+    SizeId        int
+        constraint OrderDetail_Sizes_SizeId_fk
+            references Sizes
+            on delete set null,
+    BaseId        int
+        constraint OrderDetail_PizzaBases_BaseId_fk
+            references PizzaBases
+            on delete set null,
+    Quantity      int default 1,
+    Discount      float,
+    TotalPrice    money
+)
+go
+create table Pizza_Topping_Detail
+(
+    PizzaTopping int identity
+        constraint Pizza_Topping_Detail_pk
+            primary key,
+    PizzaId      int
+        constraint Pizza_Topping_Detail_Pizzas_PizzaId_fk
+            references Pizzas
+            on delete cascade,
+    ToppingId    int
+        constraint Pizza_Topping_Detail_Toppings_ToppingId_fk
+            references Toppings
+            on delete cascade
+)
+go
+

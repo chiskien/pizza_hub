@@ -29,5 +29,13 @@
         <_ContentIncludedByDefault Remove="Pages\Admin\Pizza\EditPizza.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Pages\Admin\Orders\EditOrder.cshtml.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Pages\Admin\Orders\EditOrder.cshtml" />
+    </ItemGroup>
+
 
 </Project>
