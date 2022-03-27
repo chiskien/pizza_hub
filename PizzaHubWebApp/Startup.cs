@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using PizzaHubWebApp.Models;
 using System;
+using PizzaHubWebApp.Pages;
 
 namespace PizzaHubWebApp
 {
@@ -26,8 +27,6 @@ namespace PizzaHubWebApp
             services.AddDbContext<PizzaHubContext>(
                 options => options.UseSqlServer(connectionString)
             );
-            services.AddDistributedMemoryCache();
-            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,9 +41,8 @@ namespace PizzaHubWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSession();
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }

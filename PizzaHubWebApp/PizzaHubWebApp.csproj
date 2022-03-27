@@ -14,28 +14,6 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
     </ItemGroup>
-
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Pages\Admin\Category\CategoryManagement.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Category\CreateCategory.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Category\EditCategory.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Member\CreateMember.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Member\EditMember.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Member\MemberManagement.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Order\OrderDetail.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Order\OrderManagement.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Pizza\CreatePizza.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Pizza\Detail.cshtml" />
-        <_ContentIncludedByDefault Remove="Pages\Admin\Pizza\EditPizza.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Pages\Admin\Orders\EditOrder.cshtml.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Pages\Admin\Orders\EditOrder.cshtml" />
-    </ItemGroup>
-
+    
 
 </Project>

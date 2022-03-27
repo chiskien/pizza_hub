@@ -39,6 +39,7 @@ namespace PizzaHubWebApp.Pages
                 Response.Redirect("Login");
             }
         }
+
         public void OnPostSignUp(string email, string phone, string pass)
         {
             var member = _memberDao.GetMemberByEmail(email);
@@ -49,10 +50,10 @@ namespace PizzaHubWebApp.Pages
                 m.Password = pass;
                 m.PhoneNumber = phone;
                 _memberDao.AddMember(m);
-                HttpContext.Session.SetInt32("member", _memberDao.GetMemberByEmail(email).MemberId);        
-                DirectoryInfo d = new DirectoryInfo(System.IO.Path.GetPathRoot(@"..\..\..\")+ "wwwroot\\Assets\\Avatar\\Bust\\");
-                FileInfo[] Files = d.GetFiles("*.svg");
-                Random r = new Random();
+                HttpContext.Session.SetInt32("member", _memberDao.GetMemberByEmail(email).MemberId);
+                var d = new DirectoryInfo(Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\");
+                var Files = d.GetFiles("*.svg");
+                var r = new Random();
                 m.Avatar = Files[r.Next(0, Files.Length)].Name;
                 ViewData["LoginMessage"] = "Sign Up success";
                 Response.Redirect("Index");
