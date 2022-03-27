@@ -74,7 +74,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 10vh;
+  margin: 10vh 0;
 }
 .detail-section-right {
   width: 50%;

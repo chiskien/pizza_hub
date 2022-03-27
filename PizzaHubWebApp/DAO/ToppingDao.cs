@@ -17,6 +17,7 @@ namespace PizzaHubWebApp.DAO
         public IEnumerable<Topping> GetToppings()
         {
             var toppings = _pizzaHubContext.Toppings.ToList();
+
             return toppings;
         }
 
