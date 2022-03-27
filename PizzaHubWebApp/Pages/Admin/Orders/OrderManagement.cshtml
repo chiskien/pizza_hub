@@ -105,40 +105,48 @@
         </div>
         <div class="product-cell">Action</div>
     </div>
-    @foreach (var pizza in Model.Orders)
+    @foreach (var order in Model.Orders)
     {
         <div class="products-row">
             <div class="product-cell">
-                <span>@pizza.OrderId</span>
+                <span>@order.OrderId</span>
             </div>
             <div class="product-cell">
-                <span>@pizza.MemberId</span>
+                <span>@order.MemberId</span>
             </div>
             <div class="product-cell">
-                <span>@pizza.OrderDate.ToShortDateString()</span>
+                <span>@order.OrderDate.ToShortDateString()</span>
             </div>
             <div class="product-cell status-cell">
-                @switch (pizza.Status.Status1)
+                @switch (order.Status.Status1)
                 {
                     case "Canceled":
-                        <span class="status disabled">@pizza.Status.Status1</span>
+                        <span class="status disabled">@order.Status.Status1</span>
                         break;
                     case "Approved":
-                        <span class="status active ">@pizza.Status.Status1</span>
+                        <span class="status active ">@order.Status.Status1</span>
                         break;
                     case "Pending":
-                        <span class="status active">@pizza.Status.Status1</span>
+                        <span class="status active">@order.Status.Status1</span>
                         break;
                 }
             </div>
             <div class="product-cell">
-                <span>@pizza.Address</span>
+                <span>@order.Address</span>
             </div>
             <div class="product-cell">
-                <a asp-page="/Admin/Order/OrderDetail" class="btn">Detail</a>
-                <a asp-page="/Admin/Order/EditOrder" class="btn">Edit</a>
+                <a asp-page="/Admin/Order/OrderDetail"
+                   asp-route-id="@order.OrderId"
+                   class="btn">
+                    Detail
+                </a>
+                <a asp-page="/Admin/Order/EditOrder"
+                   asp-route-id="@order.OrderId"
+                   class="btn">
+                    Edit
+                </a>
                 <form asp-page-handler="Delete" style="display: inline-block">
-                    <input type="text" name="id" hidden value="@pizza.OrderId">
+                    <input type="text" name="id" hidden value="@order.OrderId">
                     <input type="submit" class="btn" value="Delete">
                 </form>
             </div>
