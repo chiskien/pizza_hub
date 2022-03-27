@@ -9,6 +9,7 @@ namespace PizzaHubWebApp.Models
     {
         public Member()
         {
+            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
@@ -26,6 +27,7 @@ namespace PizzaHubWebApp.Models
         public int? RankId { get; set; }
 
         public virtual Rank Rank { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

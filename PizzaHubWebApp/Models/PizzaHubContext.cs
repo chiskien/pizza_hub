@@ -22,7 +22,7 @@ namespace PizzaHubWebApp.Models
         public virtual DbSet<Drink> Drinks { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrdersDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrdersDetail> OrdersDetails { get; set; }
         public virtual DbSet<Pizza> Pizzas { get; set; }
         public virtual DbSet<PizzaBasis> PizzaBases { get; set; }
         public virtual DbSet<PizzaToppingDetail> PizzaToppingDetails { get; set; }
@@ -34,7 +34,11 @@ namespace PizzaHubWebApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer("");
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server =(local); database = PizzaHub;uid=sa;pwd=sa;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,7 +47,8 @@ namespace PizzaHubWebApp.Models
 
             modelBuilder.Entity<Cart>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.MemberId, e.PizzaId })
+                    .HasName("Cart_pk");
 
                 entity.ToTable("Cart");
 
@@ -52,25 +57,23 @@ namespace PizzaHubWebApp.Models
                 entity.Property(e => e.SizeId).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.BaseNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.Base)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Cart_PizzaBases_BaseId_fk");
 
                 entity.HasOne(d => d.Member)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Cart_Members_MemberId_fk");
 
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.PizzaId)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Cart_Pizzas_PizzaId_fk");
 
                 entity.HasOne(d => d.Size)
-                    .WithMany()
+                    .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.SizeId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Cart_Sizes_SizeId_fk");
@@ -98,6 +101,8 @@ namespace PizzaHubWebApp.Models
                 entity.Property(e => e.Image)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("money");
             });
 
             modelBuilder.Entity<Member>(entity =>
@@ -126,7 +131,9 @@ namespace PizzaHubWebApp.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PhoneNumber).HasMaxLength(255);
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Point).HasDefaultValueSql("((0))");
 
@@ -281,7 +288,10 @@ namespace PizzaHubWebApp.Models
                     .HasColumnName("Rank");
             });
 
-            modelBuilder.Entity<Sauce>(entity => { entity.Property(e => e.SauceName).HasMaxLength(50); });
+            modelBuilder.Entity<Sauce>(entity =>
+            {
+                entity.Property(e => e.SauceName).HasMaxLength(50);
+            });
 
             modelBuilder.Entity<Size>(entity =>
             {

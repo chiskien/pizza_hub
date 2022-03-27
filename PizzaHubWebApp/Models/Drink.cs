@@ -16,6 +16,7 @@ namespace PizzaHubWebApp.Models
         public string DrinkName { get; set; }
         public string Brand { get; set; }
         public string Image { get; set; }
+        public decimal Price { get; set; }
 
         public virtual ICollection<OrdersDetail> OrdersDetails { get; set; }
     }

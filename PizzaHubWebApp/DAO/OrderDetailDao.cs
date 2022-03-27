@@ -15,7 +15,7 @@ namespace PizzaHubWebApp.DAO
 
         public IEnumerable<OrdersDetail> GetOrdersDetailsByPizzaId(int id)
         {
-            var ordersDetails = _pizzaHubContext.OrderDetails.Where(o => o.OrderId == id).ToList();
+            var ordersDetails = _pizzaHubContext.OrdersDetails.Where(o => o.OrderId == id).ToList();
             foreach(var o in ordersDetails)
             {
                 o.Order = _pizzaHubContext.Orders.FirstOrDefault(o => o.OrderId == id);

@@ -32,7 +32,7 @@ namespace PizzaHubWebApp.Pages.Admin.Drinks
             }
         }
 
-        public IActionResult OnPostEdit(int id, string name, string brand, IFormFile image)
+        public IActionResult OnPostEdit(int id, string name, string brand, decimal price, IFormFile image)
         {
             try
             {
@@ -41,6 +41,7 @@ namespace PizzaHubWebApp.Pages.Admin.Drinks
                 {
                     drink.DrinkName = name;
                     drink.Brand = brand;
+                    drink.Price = price;
                     if (image != null)
                     {
                         try

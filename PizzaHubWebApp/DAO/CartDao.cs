@@ -38,7 +38,7 @@ namespace PizzaHubWebApp.DAO
 
             var newCart = new Cart
             {
-                MemberId = memeberId,
+                MemberId = memeberId.Value,
                 PizzaId = pizzaId,
                 Amount = amount
             };

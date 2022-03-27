@@ -22,11 +22,12 @@ namespace PizzaHubWebApp.Pages.Admin.Drinks
         public void OnGet()
         {
         }
-        public void OnPost(string name, string brand, IFormFile image)
+        public void OnPost(string name, string brand, decimal price, IFormFile image)
         {
             var e = new Drink();
             e.DrinkName = name;
             e.Brand = brand;
+            e.Price = price;
             if (image != null)
             {
                 image.CopyTo(new FileStream(

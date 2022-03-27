@@ -7,8 +7,8 @@ namespace PizzaHubWebApp.Models
 {
     public partial class Cart
     {
-        public int? MemberId { get; set; }
-        public int? PizzaId { get; set; }
+        public int MemberId { get; set; }
+        public int PizzaId { get; set; }
         public int? SizeId { get; set; }
         public int? Base { get; set; }
         public int? Amount { get; set; }
