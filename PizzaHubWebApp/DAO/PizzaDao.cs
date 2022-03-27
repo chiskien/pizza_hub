@@ -38,7 +38,6 @@ namespace PizzaHubWebApp.DAO
         public Pizza GetPizzaById(int pizzaId)
         {
             var pizza = _pizzaHubContext.Pizzas
-                .AsNoTracking()
                 .Single(p => p.PizzaId == pizzaId);
             return pizza;
         }
@@ -79,26 +78,27 @@ namespace PizzaHubWebApp.DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
         }
 
         public void DeletePizza(Pizza pizza)
         {
-            try
+            var existedPizza = GetPizzaById(pizza.PizzaId);
+            if (existedPizza != null)
             {
-                var existedPizza = GetPizzaById(pizza.PizzaId);
-                if (existedPizza != null)
-                {
-                    _pizzaHubContext.Pizzas.Remove(pizza);
-                    _pizzaHubContext.SaveChanges();
-                }
+                _pizzaHubContext.Pizzas.Remove(pizza);
+                _pizzaHubContext.SaveChanges();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+        }
+
+        public IEnumerable<Size> GetAllSize()
+        {
+            return _pizzaHubContext.Sizes.ToList();
+        }
+
+        public IEnumerable<PizzaBasis> GetAllBase()
+        {
+            return _pizzaHubContext.PizzaBases.ToList();
         }
     }
 }

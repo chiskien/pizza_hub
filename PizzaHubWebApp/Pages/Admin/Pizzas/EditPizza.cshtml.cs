@@ -36,6 +36,16 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
         {
             if (pizzaImg != null)
             {
+                try
+                {
+                    System.IO.File.Delete(Path.Combine(
+                        Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\", PizzaModel.Image));
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+
                 pizzaImg.CopyTo(new FileStream(
                     Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Images\\Pizza\\" + pizzaImg.FileName,
                     FileMode.Create));
@@ -43,7 +53,6 @@ namespace PizzaHubWebApp.Pages.Admin.Pizzas
             }
 
             _pizzaDao.EditPizza(PizzaModel);
-
             return RedirectToPage("/Admin/DashBoard");
         }
 

@@ -1,4 +1,44 @@
-﻿@page
+﻿@page "{id}"
 @model PizzaHubWebApp.Pages.Detail
 
-<p>Fuck the police</p>
+<div class="container-fluid">
+    <section class="detail-section">
+        <div class="detail-section-left">
+            <img src="~/Assets/Images/Pizza/@Model.PizzaModel.Image" alt="">
+        </div>
+        <div class="detail-section-right">
+            <div class="detail-section">
+                <section>
+                    <h2>@Model.PizzaModel.PizzaName</h2>
+                    <p>@Model.PizzaModel.Description</p>
+                </section>
+                <form method="post">
+                    <h5>Choose Size:</h5>
+                    @foreach (var size in Model.Sizes)
+                    {
+                        <div class="form-check">
+                            <input type="radio" name="size" id="@size.SizeId"
+                                   value="@size.SizeId"
+                                   class="form-check-input"/>
+                            <label class="form-check-label">@size.Size1</label>
+                        </div>
+                    }
+
+                    <h5 >Choose Base: </h5>
+                    @foreach (var item in Model.Bases)
+                    {
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input"
+                                   name="base" id="@item.BaseId">
+                            <label for="@item.BaseId" class="form-check-label">
+                                @item.Base
+                            </label>
+                        </div>
+                    }
+
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
