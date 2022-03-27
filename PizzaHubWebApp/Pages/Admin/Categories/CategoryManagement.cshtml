@@ -117,8 +117,7 @@
             </div>
             <div class="product-cell">
                 <div class="">
-                    <a asp-page="/Admin/Pizza/Detail" class="btn">Detail</a>
-                    <a asp-page="/Admin/Pizza/EditPizza" class="btn">Edit</a>
+                    <a href="/Admin/Categories/EditCategory/@category.CategoryId" class="btn">Edit</a>
                     <form asp-page-handler="Delete" method="post"
                           style="display: inline-block;">
                         <input type="text" hidden value="@category.CategoryId">

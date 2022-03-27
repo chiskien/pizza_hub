@@ -65,19 +65,21 @@ namespace PizzaHubWebApp.Pages.Admin.Members
                     member.City = city;
                     member.Country = country;
                     if (ava != null)
+                    {
                         try
                         {
                             System.IO.File.Delete(Path.Combine(
                                 Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\", member.Avatar));
-                            ava.CopyTo(new FileStream(
-                                Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\" + ava.FileName,
-                                FileMode.Create));
-                            member.Avatar = ava.FileName;
                         }
                         catch (Exception)
                         {
                             // ignored
                         }
+                        ava.CopyTo(new FileStream(
+                                    Path.GetPathRoot(@"..\..\..\") + "wwwroot\\Assets\\Avatar\\Bust\\" + ava.FileName,
+                                    FileMode.Create));
+                        member.Avatar = ava.FileName;
+                    }
                     member.Point = point;
                     member.RankId = rank;
                     _memberDao.EditMember(member);
