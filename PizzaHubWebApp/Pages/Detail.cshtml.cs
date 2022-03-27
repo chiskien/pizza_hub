@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaHubWebApp.DAO;
@@ -34,8 +35,19 @@ namespace PizzaHubWebApp.Pages
             TotalPrice = PizzaModel.Price;
         }
 
-        public void OnPost()
+        public IActionResult OnPostCheckout(int id, int size, int pizzabase, int quantity)
         {
+            PizzaModel = _pizzaDao.GetPizzaById(id);
+            Sizes = _pizzaDao.GetAllSize();
+            Bases = _pizzaDao.GetAllBase();
+            TotalPrice = PizzaModel.Price;
+
+            ToppingByPizza = _pizzaToppingDetailDao.GetToppingByPizzaId(id);
+            HttpContext.Session.SetInt32("pizza", id);
+            HttpContext.Session.SetInt32("size", size);
+            HttpContext.Session.SetInt32("pizzabase", pizzabase);
+            HttpContext.Session.SetInt32("quantity", quantity);
+            return RedirectToPage("Cart");
         }
     }
 }

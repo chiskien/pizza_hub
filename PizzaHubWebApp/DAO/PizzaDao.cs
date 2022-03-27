@@ -41,6 +41,7 @@ namespace PizzaHubWebApp.DAO
         {
             var pizza = _pizzaHubContext.Pizzas
                 .Single(p => p.PizzaId == pizzaId);
+            pizza.Category = _categoryDao.GetCategoryById(pizza.CategoryId.Value);
             return pizza;
         }
 

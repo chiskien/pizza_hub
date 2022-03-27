@@ -25,7 +25,7 @@ namespace PizzaHubWebApp
             services.AddDbContext<PizzaHubContext>(
                 options => options.UseSqlServer(connectionString)
             );
-            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(30); });
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(90); });
             services.AddMemoryCache();
             services.AddRazorPages();
         }

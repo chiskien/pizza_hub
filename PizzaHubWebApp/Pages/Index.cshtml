@@ -1,6 +1,6 @@
 ﻿@page
 @model IndexModel
-
+@using Microsoft.AspNetCore.Http;
 
 <div class="container-fluid">
     <section class="hero-section">
@@ -9,11 +9,10 @@
                 <h2 class="slogan-section-text">
                     The Best Pizza Brand in The World
                     <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
-                    <lord-icon
-                        src="https://cdn.lordicon.com/ocvcrrch.json"
-                        trigger="loop"
-                        colors="primary:#f4a09c"
-                        style="width:40px;height:40px">
+                    <lord-icon src="https://cdn.lordicon.com/ocvcrrch.json"
+                               trigger="loop"
+                               colors="primary:#f4a09c"
+                               style="width:40px;height:40px">
                     </lord-icon>
                 </h2>
                 <button class="btn btn-primary">Order now</button>
@@ -32,7 +31,7 @@
                     {
                         <a class="btn btn-light btn-primary-category">
                             <img height="32x"
-                                 src="~/Assets/Images/Category/@item.Image" alt="@item.Image"/>
+                                 src="~/Assets/Images/Category/@item.Image" alt="@item.Image" />
                             @item.CategoryName
                         </a>
                     }
@@ -55,12 +54,9 @@
                                     <p class="card-text">@pizza.Price</p>
                                     <a asp-page="/Detail" asp-route-id="@pizza.PizzaId" class="btn">Detail</a>
 
-                                    <form asp-page-handler="AddToCart">
-                                        <input name="id" value="@pizza.PizzaId" hidden>
-                                        <button class="btn btn-primary" type="submit">
-                                            Add To Cart
-                                        </button>
-                                    </form>
+                                    <a class="btn btn-primary" href="Cart/@pizza.PizzaId" class="btn">
+                                        Add To Cart
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -70,3 +66,7 @@
         </div>
     </div>
 </div>
+@if (HttpContext.Session.GetInt32("member").HasValue)
+{
+    <script>document.getElementById("loginButton").style.display = "none";</script>
+}

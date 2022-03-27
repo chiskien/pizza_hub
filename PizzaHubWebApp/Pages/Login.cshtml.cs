@@ -25,7 +25,7 @@ namespace PizzaHubWebApp.Pages
             var member = _memberDao.GetMemberLogin(email, pass);
             if (member != null)
             {
-                //HttpContext.Session.SetInt32("member", member.MemberId);
+                HttpContext.Session.SetInt32("member", member.MemberId);
                 var name = email.Split("@");
                 HttpContext.Session.SetString("name", name[0]);
                 HttpContext.Session.SetInt32("memberId", _memberDao.GetMemberByEmail(email).MemberId);
@@ -33,7 +33,7 @@ namespace PizzaHubWebApp.Pages
                 if (member.Role == true)
                     Response.Redirect("Admin/DashBoard");
                 else
-                    Response.Redirect("/Index");
+                    Response.Redirect("Index");
             }
             else
             {

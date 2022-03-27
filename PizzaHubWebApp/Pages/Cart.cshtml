@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model PizzaHubWebApp.Pages.Cart
 
 @{
@@ -16,12 +16,15 @@
     </thead>
     <tbody>
     <tr>
-        <td>Pizza Name</td>
-        <td>Category</td>
-        <td>Quantity</td>
-        <td>Price</td>
+        <td>@Model.Pizza.PizzaName</td>
+        <td>@Model.Pizza.Category.CategoryName</td>
+        <td>@Model.Quantity</td>
+        <td>@Model.TotalPrice</td>
     </tr>
     </tbody>
 </table>
-<p>Total: </p>
-<a asp-page="CheckOut" asp-route-id="@Model" class="btn btn-primary"></a>
+<form method="post">
+    Address: <input type="text" name="address" required /><br />
+    Note: <input type="text" name="note" /><br />
+    <input type="submit" class="btn btn-primary" value="Checkout" />
+</form>

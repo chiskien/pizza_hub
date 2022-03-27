@@ -56,7 +56,7 @@ namespace PizzaHubWebApp.DAO
                 OrderDate = DateTime.Now
             };
             var orderDao = new OrderDao(_context);
-            orderDao.AddOrder(order);
+            //orderDao.AddOrder(order);
         }
     }
 }

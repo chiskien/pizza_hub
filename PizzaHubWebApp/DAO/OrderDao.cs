@@ -59,9 +59,11 @@ namespace PizzaHubWebApp.DAO
             return _context.Orders.AsNoTracking().Single(o => o.OrderId == orderId);
         }
 
-        public void AddOrder(Order order)
+        public void AddOrder(Order order, OrdersDetail ordersDetail)
         {
             _context.Orders.Add(order);
+            order.OrderId = order.OrderId;
+            _context.OrdersDetails.Add(ordersDetail);
             _context.SaveChanges();
         }
 
