@@ -24,6 +24,10 @@
     </tbody>
 </table>
 <form method="post">
+    <input type="hidden" name="id" value="@Model.Pizza.PizzaId" />
+    <input type="hidden" name="size" value="@Model.Size" />
+    <input type="hidden" name="pizzabase" value="@Model.Pizzabase" />
+    <input type="hidden" name="quantity" value="@Model.Quantity" />
     Address: <input type="text" name="address" required /><br />
     Note: <input type="text" name="note" /><br />
     <input type="submit" class="btn btn-primary" value="Checkout" />

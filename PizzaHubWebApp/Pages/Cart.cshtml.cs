@@ -30,7 +30,7 @@ namespace PizzaHubWebApp.Pages
             Quantity = HttpContext.Session.GetInt32("quantity").Value;
             TotalPrice = Quantity * Pizza.Price;
         }
-        public IActionResult OnPost(string address, string note)
+        public IActionResult OnPost(int id, int size, int pizzabase, int quantity, string address, string note)
         {
             Order o = new Order();
             if (HttpContext.Session.GetInt32("member").HasValue)
@@ -41,11 +41,12 @@ namespace PizzaHubWebApp.Pages
             o.Address = address;
             o.Freight = 10;
             o.Note = note;
+            o.StatusId = 3;
             OrdersDetail ordersDetail = new OrdersDetail();
-            ordersDetail.PizzaId = Pizza.PizzaId;
-            ordersDetail.SizeId = Size;
-            ordersDetail.BaseId = Pizzabase;
-            ordersDetail.Quantity = Quantity;
+            ordersDetail.PizzaId = id;
+            ordersDetail.SizeId = size;
+            ordersDetail.BaseId = pizzabase;
+            ordersDetail.Quantity = quantity;
             _orderDao.AddOrder(o, ordersDetail);
             return RedirectToPage("Checkout");
         }

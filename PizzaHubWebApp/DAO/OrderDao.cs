@@ -64,7 +64,6 @@ namespace PizzaHubWebApp.DAO
             _context.Orders.Add(order);
             order.OrderId = order.OrderId;
             _context.OrdersDetails.Add(ordersDetail);
-            _context.SaveChanges();
         }
 
         public void UpdateOrder(Order order)
