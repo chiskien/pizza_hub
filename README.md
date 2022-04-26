@@ -1,2 +1,9 @@
 # HotSauce and Ketchup
-A small Pizza Hub that helps customize topping and order online
+A Pizza store that helps customize topping and order online 
+
+## Tech stacks:
+- C# 
+- ASP.NET Core (Razor Pages)
+- Entity Framework
+- SQL Server
+- Sass 
