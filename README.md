@@ -19,5 +19,5 @@ A Pizza store that helps customize topping and order online
 
 ## Overview
 
-[Home](/assets/pizza.png "Home Page")
-[Admin](/assets/hub.png "Admin")
+[Home](/assets/pizza.png)
+[Admin](/assets/hub.png)
