@@ -18,5 +18,5 @@ A Pizza store that helps customize topping and order online
 
 ## Overview
 
-<img src="/assets/pizza.png" alt="MarineGEO circle logo"
- style="height: 50%; width:50%;"/>
+<img src="/assets/pizza.png" style="object-fit: contain;"/>
+<img src="/assets/hub.png" style="object-fit: contain;">
