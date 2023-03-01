@@ -16,8 +16,7 @@ A Pizza store that helps customize topping and order online
 - SQL Server 2019 or above
 - Visual Studio 2022
 
-
 ## Overview
 
-[Home](/assets/pizza.png)
-[Admin](/assets/hub.png)
+<img src="/assets/pizza.png" alt="MarineGEO circle logo"
+ style="height: 50%; width:50%;"/>
